@@ -53,7 +53,7 @@ public class ParkingLotTest {
             parkingLot.park("A");
             parkingLot.park("B");
             parkingLot.park("C");
-            boolean result=parkingLot.parkingLotIsFull();
+            boolean result=parkingLot.getAirportSecurityInformed();
             Assert.assertTrue(result);
         }catch(Exception e){
             e.printStackTrace();

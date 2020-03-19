@@ -30,4 +30,11 @@ public class ParkingLot {
         }
         return false;
     }
+
+    public boolean getAirportSecurityInformed() {
+        this.parkingLotIsFull();
+        if(airportSecurity.getInformed())
+            return true;
+        return false;
+    }
 }
