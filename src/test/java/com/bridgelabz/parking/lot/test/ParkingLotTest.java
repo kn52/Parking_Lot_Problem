@@ -1,5 +1,6 @@
 package com.bridgelabz.parking.lot.test;
 
+import com.bridgelabz.parking.lot.AirportSecurity;
 import com.bridgelabz.parking.lot.ParkingLot;
 import org.junit.Assert;
 import org.junit.Before;
@@ -35,6 +36,19 @@ public class ParkingLotTest {
 
     @Test
     public void whenParkingLot_IsFull_ShouldReturnTrue() {
+        try{
+            parkingLot.park("A");
+            parkingLot.park("B");
+            parkingLot.park("C");
+            boolean result=parkingLot.parkingLotIsFull();
+            Assert.assertTrue(result);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void whenParkingLot_IsFull_InformedToAirportSecurity_ShouldReturnTrue() {
         try{
             parkingLot.park("A");
             parkingLot.park("B");

@@ -1,8 +1,9 @@
 package com.bridgelabz.parking.lot;
 
 public class ParkingLot {
-    private static final int FULL_SIZE = 100;
+    private static final int FULL_SIZE = 3;
     Vehicle vehicleData;
+
     public ParkingLot() {
         vehicleData =new Vehicle();
     }
@@ -14,14 +15,16 @@ public class ParkingLot {
 
     public boolean unPark(String name) {
         if(vehicleData.get(name)) {
+            vehicleData.remove(name);
             return true;
         }
         return false;
     }
 
     public boolean parkingLotIsFull() {
-        if(vehicleData.getSize()==FULL_SIZE)
+        if(vehicleData.getSize()==FULL_SIZE){
             return true;
+        }
         return false;
     }
 }

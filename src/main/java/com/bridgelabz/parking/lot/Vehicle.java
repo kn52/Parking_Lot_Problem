@@ -21,4 +21,8 @@ public class Vehicle {
     public int getSize() {
         return vehicle.size();
     }
+
+    public void remove(String name) {
+        vehicle.remove(name);
+    }
 }
