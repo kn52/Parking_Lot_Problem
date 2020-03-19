@@ -22,5 +22,13 @@ public class ParkingLotTest {
         }
     }
 
-
+    @Test
+    public void whenGivenVehicleUnParked_ShouldReturnTrue() {
+        try{
+            boolean result=parkingLot.unPark();
+            Assert.assertTrue(result);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 }
