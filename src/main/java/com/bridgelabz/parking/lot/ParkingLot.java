@@ -1,20 +1,27 @@
 package com.bridgelabz.parking.lot;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ParkingLot {
-    Vehicle vehicle;
+    private static final int FULL_SIZE = 100;
+    Vehicle vehicleData;
     public ParkingLot() {
-        vehicle=new Vehicle();
+        vehicleData =new Vehicle();
     }
 
-    public boolean park(Vehicle vehicle) {
-        vehicle.addVehicle(vehicle);
+    public boolean park(String name) {
+        vehicleData.addVehicle(name);
         return true;
     }
 
-    public boolean unPark() {
-        return true;
+    public boolean unPark(String name) {
+        if(vehicleData.get(name)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean parkingLotIsFull() {
+        if(vehicleData.getSize()==FULL_SIZE)
+            return true;
+        return false;
     }
 }

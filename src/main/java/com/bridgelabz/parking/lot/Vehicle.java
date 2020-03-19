@@ -4,16 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Vehicle {
-    private String vehicle = null;
-    public List vehicleData=new ArrayList();
-    public Vehicle() {
-    }
-    public Vehicle(String vehicle) {
-        this.vehicle=vehicle;
+    public String name = null;
+    public List<String> vehicle =new ArrayList();
+
+    public void addVehicle(String name)
+    {
+        vehicle.add(name);
     }
 
+    public boolean get(String name) {
+        if(vehicle.contains(name))
+            return true;
+        return false;
+    }
 
-    public void addVehicle(Vehicle vehicle) {
-        vehicleData.add(vehicle);
+    public int getSize() {
+        return vehicle.size();
     }
 }

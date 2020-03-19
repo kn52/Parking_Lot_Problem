@@ -1,7 +1,6 @@
 package com.bridgelabz.parking.lot.test;
 
 import com.bridgelabz.parking.lot.ParkingLot;
-import com.bridgelabz.parking.lot.Vehicle;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +15,7 @@ public class ParkingLotTest {
     @Test
     public void whenGivenVehicleParked_ShouldReturnTrue() {
         try{
-            boolean result=parkingLot.park(new Vehicle("A"));
+            boolean result=parkingLot.park("A");
             Assert.assertTrue(result);
         }catch(Exception e){
             e.printStackTrace();
@@ -26,10 +25,26 @@ public class ParkingLotTest {
     @Test
     public void whenGivenVehicleUnParked_ShouldReturnTrue() {
         try{
-            boolean result=parkingLot.unPark();
+            parkingLot.park("A");
+            boolean result=parkingLot.unPark("A");
             Assert.assertTrue(result);
         }catch(Exception e){
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void whenParkingLot_IsFull_ShouldReturnTrue() {
+        try{
+            parkingLot.park("A");
+            parkingLot.park("B");
+            parkingLot.park("C");
+            boolean result=parkingLot.parkingLotIsFull();
+            Assert.assertTrue(result);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
 }
