@@ -3,9 +3,11 @@ package com.bridgelabz.parking.lot;
 public class ParkingLot {
     private static final int FULL_SIZE = 3;
     Vehicle vehicleData;
+    AirportSecurity airportSecurity;
 
     public ParkingLot() {
         vehicleData =new Vehicle();
+        airportSecurity=new AirportSecurity();
     }
 
     public boolean park(String name) {
@@ -23,6 +25,7 @@ public class ParkingLot {
 
     public boolean parkingLotIsFull() {
         if(vehicleData.getSize()==FULL_SIZE){
+            airportSecurity.setinformed();
             return true;
         }
         return false;
