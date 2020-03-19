@@ -1,6 +1,7 @@
 package com.bridgelabz.parking.lot.test;
 
 import com.bridgelabz.parking.lot.ParkingLot;
+import com.bridgelabz.parking.lot.Vehicle;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +16,7 @@ public class ParkingLotTest {
     @Test
     public void whenGivenVehicleParked_ShouldReturnTrue() {
         try{
-            boolean result=parkingLot.park();
+            boolean result=parkingLot.park(new Vehicle("A"));
             Assert.assertTrue(result);
         }catch(Exception e){
             e.printStackTrace();
