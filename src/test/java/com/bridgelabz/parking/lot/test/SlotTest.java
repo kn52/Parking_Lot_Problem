@@ -18,7 +18,7 @@ public class SlotTest {
     @Test
     public void whengiven_VehicleParked_InSlot() {
         slot.setVehicleSlot(vehicle,1);
-        int i=slot.getVehicleSlot(vehicle);
+        int i=slot.getSlot(vehicle);
         Assert.assertEquals(1,i);
     }
 

@@ -7,6 +7,14 @@ public class Slot {
 
     public Slot() { }
 
+    public int getSlot(Object vehicle) {
+        return slot;
+    }
+
+    public Object getVehicle() {
+        return vehicle;
+    }
+
     public void setSlot(int totalSlot) {
         this.totalSlot=totalSlot;
     }
@@ -15,9 +23,5 @@ public class Slot {
     public void setVehicleSlot(Object vehicle, int slot) {
         this.vehicle=vehicle;
         this.slot=slot;
-    }
-
-    public int getVehicleSlot(Object vehicle) {
-        return slot;
     }
 }

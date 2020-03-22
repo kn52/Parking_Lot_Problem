@@ -5,6 +5,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.stream.Stream;
+
 public class ParkingLotTest {
 
     ParkingLot parkingLot;
@@ -88,7 +90,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void WhengivenParkingLot_ShouldParked_InSlot() {
+    public void whengivenParkingLot_ShouldParked_InSlot() {
         Slot slot=new Slot();
         slot.setSlot(1);
         Object vehicle1=new Object();
@@ -99,5 +101,12 @@ public class ParkingLotTest {
         } catch (ParkingLotException e) { e.printStackTrace();  }
     }
 
-
+    @Test
+    public void whengivenParkingVehicle_ShouldReturn_ParkingSlot() {
+        parkingLot.park(vehicle,1);
+        try {
+            int slotNumber=parkingLot.getVehicleSlot(vehicle);
+            Assert.assertEquals(1,slotNumber);
+        } catch (ParkingLotException e) { e.printStackTrace();  }
+    }
 }

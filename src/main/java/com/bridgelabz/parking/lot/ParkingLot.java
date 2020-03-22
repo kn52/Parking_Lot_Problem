@@ -9,7 +9,7 @@ public class ParkingLot {
     private int actualCapacity;
     private List vehicle;
     private  List<ParkingLotObserver> observers;
-    private List<Slot> slot;
+    private Slot slot;
 
     public ParkingLot() {
     }
@@ -20,7 +20,7 @@ public class ParkingLot {
         this.vehicle=new ArrayList();
         this.currentCapacity=0;
         this.actualCapacity=capacity;
-        this.slot=new ArrayList<>();
+        slot=new Slot();
     }
 
     public void park(Object vehicle) {
@@ -38,7 +38,7 @@ public class ParkingLot {
 
     public void park(Object vehicle, int number) {
         this.park(vehicle);
-        slot.get(number).getVehicleSlot(vehicle);
+        slot.setVehicleSlot(vehicle,number);
         this.currentCapacity++;
     }
 
@@ -72,4 +72,7 @@ public class ParkingLot {
         this.actualCapacity=capacity;
     }
 
+    public int getVehicleSlot(Object vehicle) {
+        return slot.getSlot(vehicle);
+    }
 }
