@@ -1,64 +1,29 @@
 package com.bridgelabz.parking.lot.test;
 
-import com.bridgelabz.parking.lot.AirportSecurity;
 import com.bridgelabz.parking.lot.ParkingLot;
+import com.bridgelabz.parking.lot.ParkingLotException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 public class ParkingLotTest {
+
     ParkingLot parkingLot;
+    Object vehicle;
     @Before
     public void setUp() throws Exception {
-        parkingLot=new ParkingLot();
+        parkingLot=new ParkingLot(1);
+        vehicle=new Object();
     }
 
     @Test
-    public void whenGivenVehicleParked_ShouldReturnTrue() {
+    public void WhengivenVehicleParked_ShouldReturn_True(){
         try{
-            boolean result=parkingLot.park("A");
+            parkingLot.park(vehicle);
+            boolean result=parkingLot.isVehicleParked(vehicle);
             Assert.assertTrue(result);
-        }catch(Exception e){
+        }catch (ParkingLotException e){
             e.printStackTrace();
         }
     }
-
-    @Test
-    public void whenGivenVehicleUnParked_ShouldReturnTrue() {
-        try{
-            parkingLot.park("A");
-            boolean result=parkingLot.unPark("A");
-            Assert.assertTrue(result);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    public void whenParkingLot_IsFull_ShouldReturnTrue() {
-        try{
-            parkingLot.park("A");
-            parkingLot.park("B");
-            parkingLot.park("C");
-            boolean result=parkingLot.parkingLotIsFull();
-            Assert.assertTrue(result);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    public void whenParkingLot_IsFull_InformedToAirportSecurity_ShouldReturnTrue() {
-        try{
-            parkingLot.park("A");
-            parkingLot.park("B");
-            parkingLot.park("C");
-            boolean result=parkingLot.getAirportSecurityInformed();
-            Assert.assertTrue(result);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-    }
-
-
 }

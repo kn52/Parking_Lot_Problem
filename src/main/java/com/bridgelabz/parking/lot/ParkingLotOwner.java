@@ -1,7 +1,6 @@
 package com.bridgelabz.parking.lot;
 
-public class AirportSecurity implements ParkingLotObserver {
-
+public class ParkingLotOwner implements ParkingLotObserver {
     private boolean isCapacityFull;
 
     @Override

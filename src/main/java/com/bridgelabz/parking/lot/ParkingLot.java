@@ -1,40 +1,66 @@
 package com.bridgelabz.parking.lot;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ParkingLot {
-    private static final int FULL_SIZE = 3;
-    Vehicle vehicleData;
-    AirportSecurity airportSecurity;
+
+    private int currentCapacity;
+    private int actualCapacity;
+    private List vehicle;
+    private  List<ParkingLotObserver> observers;
 
     public ParkingLot() {
-        vehicleData =new Vehicle();
-        airportSecurity=new AirportSecurity();
+    }
+    
+    public ParkingLot(int capacity)
+    {
+        this.observers=new ArrayList();
+        this.vehicle=new ArrayList();
+        this.currentCapacity=0;
+        this.actualCapacity=capacity;
     }
 
-    public boolean park(String name) {
-        vehicleData.addVehicle(name);
-        return true;
+    public void park(Object vehicle) {
+        if(!this.vehicle.contains(vehicle))
+            this.vehicle.add(vehicle);
+        if(this.currentCapacity==this.actualCapacity) {
+            for(ParkingLotObserver observer : observers)
+            {
+                observer.capacityIsFull();
+            }
+            throw new ParkingLotException("Parking is full", ParkingLotException.ExceptionType.NO_PARKING);
+        }
+        this.currentCapacity++;
     }
 
-    public boolean unPark(String name) {
-        if(vehicleData.get(name)) {
-            vehicleData.remove(name);
+    public boolean unPark(Object vehicle) {
+        if(this.vehicle == null)
+            return false;
+        if(this.vehicle.contains(vehicle)){
+            this.vehicle.remove(vehicle);
+            for(ParkingLotObserver observer : observers)
+            {
+                observer.capacityIsEmpty();
+            }
             return true;
         }
         return false;
     }
 
-    public boolean parkingLotIsFull() {
-        if(vehicleData.getSize()==FULL_SIZE){
-            airportSecurity.setinformed();
-            return true;
-        }
+
+
+    public boolean isVehicleParked(Object vehicle) {
+        if(this.vehicle.contains(vehicle))
+            return  true;
         return false;
     }
 
-    public boolean getAirportSecurityInformed() {
-        this.parkingLotIsFull();
-        if(airportSecurity.getInformed())
-            return true;
-        return false;
+    public void registerObserver(ParkingLotObserver observer) {
+        this.observers.add(observer);
+    }
+
+    public void setCapacity(int capacity) {
+        this.actualCapacity=capacity;
     }
 }
