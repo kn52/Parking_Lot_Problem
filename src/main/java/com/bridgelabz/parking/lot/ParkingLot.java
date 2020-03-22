@@ -9,6 +9,7 @@ public class ParkingLot {
     private int actualCapacity;
     private List vehicle;
     private  List<ParkingLotObserver> observers;
+    private ParkingLotOwner owner;
 
     public ParkingLot() {
     }
@@ -29,6 +30,7 @@ public class ParkingLot {
             {
                 observer.capacityIsFull();
             }
+            owner.capacityIsFull();
             throw new ParkingLotException("Parking is full", ParkingLotException.ExceptionType.NO_PARKING);
         }
         this.currentCapacity++;
@@ -62,5 +64,9 @@ public class ParkingLot {
 
     public void setCapacity(int capacity) {
         this.actualCapacity=capacity;
+    }
+
+    public void registerOwner(ParkingLotOwner owner) {
+        this.owner=owner;
     }
 }

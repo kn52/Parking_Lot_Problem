@@ -2,6 +2,7 @@ package com.bridgelabz.parking.lot.test;
 
 import com.bridgelabz.parking.lot.ParkingLot;
 import com.bridgelabz.parking.lot.ParkingLotException;
+import com.bridgelabz.parking.lot.ParkingLotOwner;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -46,6 +47,19 @@ public class ParkingLotTest {
             Assert.assertTrue(result);
         } catch (ParkingLotException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void WhengivenParkingLot_IsFull_ShouldReturn_InFormOwner() {
+        ParkingLotOwner owner=new ParkingLotOwner();
+        parkingLot.registerOwner(owner);
+        try {
+            parkingLot.park(vehicle);
+            parkingLot.unPark(new Object());
+        } catch (ParkingLotException e) {
+            boolean result=owner.isCapacityFull();
+            Assert.assertTrue(result);
         }
     }
 
