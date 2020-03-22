@@ -26,4 +26,15 @@ public class ParkingLotTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void WhengivenVehicleunParked_ShouldReturn_True(){
+        try{
+            parkingLot.park(vehicle);
+            boolean result=parkingLot.unPark(vehicle);
+            Assert.assertTrue(result);
+        }catch (ParkingLotException e){
+            e.printStackTrace();
+        }
+    }
 }
