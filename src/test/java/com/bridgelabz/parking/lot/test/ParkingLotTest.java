@@ -52,7 +52,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void WhengivenParkingLot_IsFull_ShouldReturn_InFormOwner() {
+    public void WhengivenParkingLot_IsFull_Should_InformFormOwner() {
         ParkingLotOwner owner=new ParkingLotOwner();
         parkingLot.registerObserver(owner);
         try {
@@ -65,7 +65,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void WhengivenParkingLot_IsFull_ShouldReturn_InAirportSecurity() {
+    public void WhengivenParkingLot_IsFull_Should_InformAirportSecurity() {
         AirportSecurity airportSecurity=new AirportSecurity();
         parkingLot.registerObserver(airportSecurity);
         try {
@@ -74,6 +74,21 @@ public class ParkingLotTest {
         } catch (ParkingLotException e) {
             boolean result=airportSecurity.isCapacityFull();
             Assert.assertTrue(result);
+        }
+    }
+
+    @Test
+    public void WhengivenParkingLot_IsFull_AgainAvailable_Should_InformOwner_ReturnFalse() {
+        ParkingLotOwner owner=new ParkingLotOwner();
+        parkingLot.registerObserver(owner);
+        try {
+            parkingLot.park(vehicle);
+            parkingLot.unPark(new Object());
+            parkingLot.unPark(vehicle);
+            boolean result=owner.isCapacityFull();
+            Assert.assertFalse(result);
+        } catch (ParkingLotException e) {
+
         }
     }
 }
