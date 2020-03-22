@@ -10,12 +10,14 @@ public class ParkingLot {
     private List vehicle;
     private  List<ParkingLotObserver> observers;
     private Slot slot;
+    private ParkingLotOwner owner;
 
     public ParkingLot() {
     }
     
     public ParkingLot(int capacity)
     {
+        this.owner=new ParkingLotOwner();
         this.observers=new ArrayList();
         this.vehicle=new ArrayList();
         this.currentCapacity=0;
@@ -39,6 +41,8 @@ public class ParkingLot {
     public void park(Object vehicle, int number) {
         this.park(vehicle);
         slot.setVehicleSlot(vehicle,number);
+        if(number == owner.slotNumber)
+            owner.slotOccupied();
         this.currentCapacity++;
     }
 

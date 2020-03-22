@@ -5,8 +5,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.stream.Stream;
-
 public class ParkingLotTest {
 
     ParkingLot parkingLot;
@@ -106,6 +104,19 @@ public class ParkingLotTest {
         parkingLot.park(vehicle,1);
         try {
             int slotNumber=parkingLot.getVehicleSlot(vehicle);
+            Assert.assertEquals(1,slotNumber);
+        } catch (ParkingLotException e) { e.printStackTrace();  }
+    }
+
+    @Test
+    public void whengivenVehicleParkedONOwnersSlot_ShouldReturn_True() {
+        ParkingLotOwner owner=new ParkingLotOwner();
+        parkingLot.registerObserver(owner);
+        owner.setSlot(1);
+        parkingLot.park(vehicle,1);
+        try {
+            int slotNumber=parkingLot.getVehicleSlot(vehicle);
+            boolean result=owner.getSlotStatus();
             Assert.assertEquals(1,slotNumber);
         } catch (ParkingLotException e) { e.printStackTrace();  }
     }
