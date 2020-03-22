@@ -9,6 +9,7 @@ public class ParkingLot {
     private int actualCapacity;
     private List vehicle;
     private  List<ParkingLotObserver> observers;
+    private List<Slot> slot;
 
     public ParkingLot() {
     }
@@ -19,6 +20,7 @@ public class ParkingLot {
         this.vehicle=new ArrayList();
         this.currentCapacity=0;
         this.actualCapacity=capacity;
+        this.slot=new ArrayList<>();
     }
 
     public void park(Object vehicle) {
@@ -31,6 +33,12 @@ public class ParkingLot {
             }
             throw new ParkingLotException("Parking is full", ParkingLotException.ExceptionType.NO_PARKING);
         }
+        this.currentCapacity++;
+    }
+
+    public void park(Object vehicle, int number) {
+        this.park(vehicle);
+        slot.get(number).getVehicleSlot(vehicle);
         this.currentCapacity++;
     }
 
@@ -63,4 +71,5 @@ public class ParkingLot {
     public void setCapacity(int capacity) {
         this.actualCapacity=capacity;
     }
+
 }

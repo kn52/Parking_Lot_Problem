@@ -1,9 +1,6 @@
 package com.bridgelabz.parking.lot.test;
 
-import com.bridgelabz.parking.lot.AirportSecurity;
-import com.bridgelabz.parking.lot.ParkingLot;
-import com.bridgelabz.parking.lot.ParkingLotException;
-import com.bridgelabz.parking.lot.ParkingLotOwner;
+import com.bridgelabz.parking.lot.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -87,8 +84,20 @@ public class ParkingLotTest {
             parkingLot.unPark(vehicle);
             boolean result=owner.isCapacityFull();
             Assert.assertFalse(result);
-        } catch (ParkingLotException e) {
-
-        }
+        } catch (ParkingLotException e) { e.printStackTrace();  }
     }
+
+    @Test
+    public void WhengivenParkingLot_ShouldParked_InSlot() {
+        Slot slot=new Slot();
+        slot.setSlot(1);
+        Object vehicle1=new Object();
+        parkingLot.setCapacity(2);
+        try {
+            parkingLot.park(vehicle);
+            slot.setVehicleSlot(vehicle1,2);
+        } catch (ParkingLotException e) { e.printStackTrace();  }
+    }
+
+
 }
