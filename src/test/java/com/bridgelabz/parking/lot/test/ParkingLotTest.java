@@ -1,5 +1,6 @@
 package com.bridgelabz.parking.lot.test;
 
+import com.bridgelabz.parking.lot.AirportSecurity;
 import com.bridgelabz.parking.lot.ParkingLot;
 import com.bridgelabz.parking.lot.ParkingLotException;
 import com.bridgelabz.parking.lot.ParkingLotOwner;
@@ -59,6 +60,19 @@ public class ParkingLotTest {
             parkingLot.unPark(new Object());
         } catch (ParkingLotException e) {
             boolean result=owner.isCapacityFull();
+            Assert.assertTrue(result);
+        }
+    }
+
+    @Test
+    public void WhengivenParkingLot_IsFull_ShouldReturn_InAirportSecurity() {
+        AirportSecurity airportSecurity=new AirportSecurity();
+        parkingLot.registerAirportySecurity(airportSecurity);
+        try {
+            parkingLot.park(vehicle);
+            parkingLot.unPark(new Object());
+        } catch (ParkingLotException e) {
+            boolean result=airportSecurity.isCapacityFull();
             Assert.assertTrue(result);
         }
     }

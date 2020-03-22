@@ -10,6 +10,7 @@ public class ParkingLot {
     private List vehicle;
     private  List<ParkingLotObserver> observers;
     private ParkingLotOwner owner;
+    private AirportSecurity airportSecurity;
 
     public ParkingLot() {
     }
@@ -68,5 +69,9 @@ public class ParkingLot {
 
     public void registerOwner(ParkingLotOwner owner) {
         this.owner=owner;
+    }
+
+    public void registerAirportySecurity(AirportSecurity airportSecurity) {
+        this.airportSecurity=airportSecurity;
     }
 }
