@@ -28,13 +28,25 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void WhengivenVehicleunParked_ShouldReturn_True(){
+    public void WhengivenVehicle_AlreadyParked_ShouldReturn_False(){
         try{
             parkingLot.park(vehicle);
-            boolean result=parkingLot.unPark(vehicle);
-            Assert.assertTrue(result);
+            parkingLot.park(new Object());
+
         }catch (ParkingLotException e){
+            Assert.assertEquals("Parking is full",e.getMessage());
+        }
+    }
+
+    @Test
+    public void WhengivenVehicleunParked_ShouldReturn_True() {
+        try {
+            parkingLot.park(vehicle);
+            boolean result = parkingLot.unPark(vehicle);
+            Assert.assertTrue(result);
+        } catch (ParkingLotException e) {
             e.printStackTrace();
         }
     }
+
 }
