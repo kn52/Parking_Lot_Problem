@@ -54,7 +54,7 @@ public class ParkingLotTest {
     @Test
     public void WhengivenParkingLot_IsFull_ShouldReturn_InFormOwner() {
         ParkingLotOwner owner=new ParkingLotOwner();
-        parkingLot.registerOwner(owner);
+        parkingLot.registerObserver(owner);
         try {
             parkingLot.park(vehicle);
             parkingLot.unPark(new Object());
@@ -67,7 +67,7 @@ public class ParkingLotTest {
     @Test
     public void WhengivenParkingLot_IsFull_ShouldReturn_InAirportSecurity() {
         AirportSecurity airportSecurity=new AirportSecurity();
-        parkingLot.registerAirportySecurity(airportSecurity);
+        parkingLot.registerObserver(airportSecurity);
         try {
             parkingLot.park(vehicle);
             parkingLot.unPark(new Object());
@@ -76,5 +76,4 @@ public class ParkingLotTest {
             Assert.assertTrue(result);
         }
     }
-
 }
