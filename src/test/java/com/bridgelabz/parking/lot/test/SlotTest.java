@@ -11,13 +11,12 @@ public class SlotTest {
     @Before
     public void setUp() throws Exception {
        slot=new Slot();
-       slot.setSlot(1);
        vehicle=new Object();
     }
 
     @Test
     public void whengiven_VehicleParked_InSlot() {
-        slot.setVehicleSlot(vehicle,1);
+        slot.setVehicleSlot(vehicle,1,"ASD");
         int i=slot.getSlot(vehicle);
         Assert.assertEquals(1,i);
     }

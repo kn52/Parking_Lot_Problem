@@ -7,67 +7,71 @@ import java.util.Map;
 
 public class ParkingLot {
 
-    private int currentCapacity;
-    private int actualCapacity;
-    private List vehicle;
-    private  List<ParkingLotObserver> observers;
-    private Slot slot;
+    public static List<Slot> vehicles;
+    private int capacity;
     private ParkingLotOwner owner;
-    public static Map<Integer,Object> slots;
+    private List<ParkingLotObserver> observers;
+    public int FULL_SIZE=1;
 
     public ParkingLot() {
-    }
-    
-    public ParkingLot(int capacity)
-    {
-        this.owner=new ParkingLotOwner();
-        this.observers=new ArrayList();
-        this.vehicle=new ArrayList();
-        this.currentCapacity=0;
-        this.actualCapacity=capacity;
-        slots=new HashMap();
-        slot=new Slot();
+        this.capacity=0;
+        owner=new ParkingLotOwner();
+        this.observers=new ArrayList<>();
+        vehicles=new ArrayList<>();
     }
 
     public void park(Object vehicle) {
-        if(!this.vehicle.contains(vehicle))
-            this.vehicle.add(vehicle);
-        if(this.currentCapacity==this.actualCapacity) {
-            for(ParkingLotObserver observer : observers)
-            {
+        Slot slotSystem=new Slot(vehicle);
+        if(this.capacity == FULL_SIZE) {
+            for (ParkingLotObserver observer : observers) {
                 observer.capacityIsFull();
             }
             throw new ParkingLotException("Parking is full", ParkingLotException.ExceptionType.NO_PARKING);
         }
-        this.currentCapacity++;
-    }
-
-    public void park(Object vehicle, int number) {
-        this.park(vehicle);
-        slot.setVehicleSlot(vehicle,number);
-        slots.put(number,vehicle);
-        if(number == owner.slotNumber)
-            owner.slotOccupied();
-        this.currentCapacity++;
-    }
-
-    public boolean unPark(Object vehicle) {
-        if(this.vehicle == null)
-            return false;
-        if(this.vehicle.contains(vehicle)){
-            this.vehicle.remove(vehicle);
-            for(ParkingLotObserver observer : observers)
-            {
-                observer.capacityIsEmpty();
-            }
-            return true;
+        if(!this.vehicles.contains(slotSystem)){
+            this.vehicles.add(slotSystem);
+            this.capacity++;
         }
-        return false;
+    }
+
+    public void park(Object vehicle, int slot, String name) {
+        Slot slotSystem=new Slot(vehicle,slot,name);
+        for (ParkingLotObserver observer : observers) {
+            if(observer instanceof ParkingLotOwner)
+                ((ParkingLotOwner) observer).slotOccupied();
+        }
+        if(this.capacity == FULL_SIZE) {
+            for (ParkingLotObserver observer : observers) {
+                observer.capacityIsFull();
+            }
+            throw new ParkingLotException("Parking is full", ParkingLotException.ExceptionType.NO_PARKING);
+        }
+        if(!this.vehicles.contains(slotSystem)){
+            this.vehicles.add(slotSystem);
+            this.capacity++;
+        }
     }
 
     public boolean isVehicleParked(Object vehicle) {
-        if(this.vehicle.contains(vehicle))
-            return  true;
+        boolean result=this.vehicles.stream()
+                .filter(x-> x.getVehicle() == vehicle).findFirst().isPresent();
+        if(result)
+            return true;
+        return false;
+    }
+
+    public boolean unPark(Object vehicle) {
+        boolean result=this.vehicles.stream()
+                .filter(x-> x.getVehicle() == vehicle).findFirst().isPresent();
+        if(result)
+        {
+            this.vehicles.remove(vehicle);
+            for (ParkingLotObserver observer : observers) {
+                observer.capacityIsEmpty();
+            }
+            this.capacity--;
+            return true;
+        }
         return false;
     }
 
@@ -76,17 +80,12 @@ public class ParkingLot {
     }
 
     public void setCapacity(int capacity) {
-        this.actualCapacity=capacity;
+        this.FULL_SIZE=capacity;
     }
 
     public int getVehicleSlot(Object vehicle) {
-        return slot.getSlot(vehicle);
-    }
-
-    public void park(DriverType type,int number) {
-    }
-
-    public Map<Integer, Object> getSlots() {
-        return slots;
+        int slotNumber=this.vehicles.stream()
+                .filter(x-> x.getVehicle() == vehicle).findFirst().get().getVehicleSlot();
+        return slotNumber;
     }
 }

@@ -7,11 +7,12 @@ import org.junit.Test;
 
 public class ParkingLotTest {
 
-    ParkingLot parkingLot;
+    private ParkingLot parkingLot;
     Object vehicle;
+
     @Before
-    public void setUp() throws Exception {
-        parkingLot=new ParkingLot(1);
+    public void setUp() {
+        parkingLot =new ParkingLot();
         vehicle=new Object();
     }
 
@@ -19,7 +20,7 @@ public class ParkingLotTest {
     public void WhengivenVehicleParked_ShouldReturn_True(){
         try{
             parkingLot.park(vehicle);
-            boolean result=parkingLot.isVehicleParked(vehicle);
+            boolean result= parkingLot.isVehicleParked(vehicle);
             Assert.assertTrue(result);
         }catch (ParkingLotException e){
             e.printStackTrace();
@@ -31,7 +32,6 @@ public class ParkingLotTest {
         try{
             parkingLot.park(vehicle);
             parkingLot.park(new Object());
-
         }catch (ParkingLotException e){
             Assert.assertEquals("Parking is full",e.getMessage());
         }
@@ -89,21 +89,17 @@ public class ParkingLotTest {
 
     @Test
     public void whengivenParkingLot_ShouldParked_InSlot() {
-        Slot slot=new Slot();
-        slot.setSlot(1);
-        Object vehicle1=new Object();
         parkingLot.setCapacity(2);
         try {
-            parkingLot.park(vehicle);
-            slot.setVehicleSlot(vehicle1,2);
+            parkingLot.park(vehicle,2,"asd");
         } catch (ParkingLotException e) { e.printStackTrace();  }
     }
 
     @Test
     public void whengivenParkingVehicle_ShouldReturn_ParkingSlot() {
-        parkingLot.park(vehicle,1);
+        parkingLot.park(vehicle,1,"asd");
         try {
-            int slotNumber=parkingLot.getVehicleSlot(vehicle);
+            int slotNumber= parkingLot.getVehicleSlot(vehicle);
             Assert.assertEquals(1,slotNumber);
         } catch (ParkingLotException e) { e.printStackTrace();  }
     }
@@ -113,12 +109,11 @@ public class ParkingLotTest {
         ParkingLotOwner owner=new ParkingLotOwner();
         parkingLot.registerObserver(owner);
         owner.setSlot(1);
-        parkingLot.park(vehicle,1);
+        parkingLot.park(vehicle,1,"asd");
         try {
-            int slotNumber=parkingLot.getVehicleSlot(vehicle);
             boolean result=owner.getSlotStatus();
-            Assert.assertEquals(1,slotNumber);
-            } catch (ParkingLotException e) { e.printStackTrace();  }
+            Assert.assertTrue(result);
+        } catch (ParkingLotException e) { e.printStackTrace();  }
     }
 
     @Test
@@ -127,10 +122,10 @@ public class ParkingLotTest {
         Object vehicle1=new Object();
         ParkingLotStrategy parkingLotStrategy=new ParkingLotStrategy();
         try {
-            parkingLot.park(vehicle1,2);
+            parkingLot.park(vehicle1,2,"asd");
             int slotNumber=parkingLotStrategy.getVehicleSlot(DriverType.HANDICAP);
             Assert.assertEquals(0,slotNumber);
-            } catch (ParkingLotException e) {
+        } catch (ParkingLotException e) {
         }
     }
 }
