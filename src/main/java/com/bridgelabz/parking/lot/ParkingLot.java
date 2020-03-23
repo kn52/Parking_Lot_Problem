@@ -1,7 +1,10 @@
 package com.bridgelabz.parking.lot;
 
+import org.apache.commons.collections.map.HashedMap;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ParkingLot {
 
@@ -11,6 +14,7 @@ public class ParkingLot {
     private  List<ParkingLotObserver> observers;
     private Slot slot;
     private ParkingLotOwner owner;
+    private List<Boolean> slots;
 
     public ParkingLot() {
     }
@@ -22,6 +26,7 @@ public class ParkingLot {
         this.vehicle=new ArrayList();
         this.currentCapacity=0;
         this.actualCapacity=capacity;
+        slots=new ArrayList<>();
         slot=new Slot();
     }
 
@@ -41,6 +46,7 @@ public class ParkingLot {
     public void park(Object vehicle, int number) {
         this.park(vehicle);
         slot.setVehicleSlot(vehicle,number);
+        slots.set(number,true);
         if(number == owner.slotNumber)
             owner.slotOccupied();
         this.currentCapacity++;
@@ -60,8 +66,6 @@ public class ParkingLot {
         return false;
     }
 
-
-
     public boolean isVehicleParked(Object vehicle) {
         if(this.vehicle.contains(vehicle))
             return  true;
@@ -78,5 +82,8 @@ public class ParkingLot {
 
     public int getVehicleSlot(Object vehicle) {
         return slot.getSlot(vehicle);
+    }
+
+    public void park(DriverType type,int number) {
     }
 }

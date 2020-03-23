@@ -25,7 +25,6 @@ public class ParkingLotOwner implements ParkingLotObserver {
 
     public void setSlot(int slotNumber) {
         this.slotNumber=slotNumber;
-        slotIsFull=true;
     }
 
     public boolean getSlotStatus() {

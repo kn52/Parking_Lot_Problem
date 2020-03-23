@@ -120,4 +120,16 @@ public class ParkingLotTest {
             Assert.assertEquals(1,slotNumber);
         } catch (ParkingLotException e) { e.printStackTrace();  }
     }
+
+    @Test
+    public void givenVehicleWithHandicappedDriver_ShouldParkVehicleAtNearestFreeSpace() {
+        parkingLot.setCapacity(3);
+        Object vehicle1=new Object();
+        parkingLot.park(vehicle1);
+        try {
+                parkingLot.park(vehicle,2);
+                int slot=parkingLotStatergy.getVehicleSlot(DriverType.HANDICAP);
+            } catch (ParkingLotException e) {
+        }
+    }
 }
