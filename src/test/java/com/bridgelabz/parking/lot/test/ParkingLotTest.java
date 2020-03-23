@@ -118,17 +118,18 @@ public class ParkingLotTest {
             int slotNumber=parkingLot.getVehicleSlot(vehicle);
             boolean result=owner.getSlotStatus();
             Assert.assertEquals(1,slotNumber);
-        } catch (ParkingLotException e) { e.printStackTrace();  }
+            } catch (ParkingLotException e) { e.printStackTrace();  }
     }
 
     @Test
     public void givenVehicleWithHandicappedDriver_ShouldParkVehicleAtNearestFreeSpace() {
         parkingLot.setCapacity(3);
         Object vehicle1=new Object();
-        parkingLot.park(vehicle1);
+        ParkingLotStrategy parkingLotStrategy=new ParkingLotStrategy();
         try {
-                parkingLot.park(vehicle,2);
-                int slot=parkingLotStatergy.getVehicleSlot(DriverType.HANDICAP);
+            parkingLot.park(vehicle1,2);
+            int slotNumber=parkingLotStrategy.getVehicleSlot(DriverType.HANDICAP);
+            Assert.assertEquals(0,slotNumber);
             } catch (ParkingLotException e) {
         }
     }
