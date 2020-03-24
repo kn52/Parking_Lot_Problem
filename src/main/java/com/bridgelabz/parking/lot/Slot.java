@@ -1,8 +1,10 @@
 package com.bridgelabz.parking.lot;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Slot {
+    private LocalDateTime time;
     private String attendant;
     private int slot;
     private Object vehicle;
@@ -15,6 +17,7 @@ public class Slot {
         this.vehicle=vehicle;
         this.slot=slot;
         this.attendant=attendant;
+        this.time= LocalDateTime.now();
     }
 
     public Slot() { }

@@ -3,6 +3,7 @@ package com.bridgelabz.parking.lot;
 public class ParkingLotOwner implements ParkingLotObserver {
     private boolean isCapacityFull;
     public int slotNumber;
+    public double time;
     private boolean slotIsFull=false;
 
     @Override
