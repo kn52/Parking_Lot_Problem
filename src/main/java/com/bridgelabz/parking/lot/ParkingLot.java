@@ -20,20 +20,6 @@ public class ParkingLot {
         vehicles=new ArrayList<>();
     }
 
-    public void park(Object vehicle) {
-        Slot slotSystem=new Slot(vehicle);
-        if(this.capacity == FULL_SIZE) {
-            for (ParkingLotObserver observer : observers) {
-                observer.capacityIsFull();
-            }
-            throw new ParkingLotException("Parking is full", ParkingLotException.ExceptionType.NO_PARKING);
-        }
-        if(!this.vehicles.contains(slotSystem)){
-            this.vehicles.add(slotSystem);
-            this.capacity++;
-        }
-    }
-
     public void park(Object vehicle, int slot, String name) {
         Slot slotSystem=new Slot(vehicle,slot,name);
         for (ParkingLotObserver observer : observers) {

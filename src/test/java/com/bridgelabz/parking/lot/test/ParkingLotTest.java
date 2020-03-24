@@ -19,7 +19,7 @@ public class ParkingLotTest {
     @Test
     public void WhengivenVehicleParked_ShouldReturn_True(){
         try{
-            parkingLot.park(vehicle);
+            parkingLot.park(vehicle,1,"asd");
             boolean result= parkingLot.isVehicleParked(vehicle);
             Assert.assertTrue(result);
         }catch (ParkingLotException e){
@@ -30,8 +30,8 @@ public class ParkingLotTest {
     @Test
     public void WhengivenVehicle_AlreadyParked_ShouldReturn_False(){
         try{
-            parkingLot.park(vehicle);
-            parkingLot.park(new Object());
+            parkingLot.park(vehicle,1,"asd");
+            parkingLot.park(vehicle,1,"asd");
         }catch (ParkingLotException e){
             Assert.assertEquals("Parking is full",e.getMessage());
         }
@@ -40,7 +40,7 @@ public class ParkingLotTest {
     @Test
     public void WhengivenVehicleunParked_ShouldReturn_True() {
         try {
-            parkingLot.park(vehicle);
+            parkingLot.park(vehicle,1,"asd");
             boolean result = parkingLot.unPark(vehicle);
             Assert.assertTrue(result);
         } catch (ParkingLotException e) {
@@ -53,8 +53,8 @@ public class ParkingLotTest {
         ParkingLotOwner owner=new ParkingLotOwner();
         parkingLot.registerObserver(owner);
         try {
-            parkingLot.park(vehicle);
-            parkingLot.unPark(new Object());
+            parkingLot.park(vehicle,1,"asd");
+            parkingLot.park(new Object(),1,"asd");
         } catch (ParkingLotException e) {
             boolean result=owner.isCapacityFull();
             Assert.assertTrue(result);
@@ -66,8 +66,8 @@ public class ParkingLotTest {
         AirportSecurity airportSecurity=new AirportSecurity();
         parkingLot.registerObserver(airportSecurity);
         try {
-            parkingLot.park(vehicle);
-            parkingLot.unPark(new Object());
+            parkingLot.park(vehicle,1,"asd");
+            parkingLot.park(new Object(),1,"asd");
         } catch (ParkingLotException e) {
             boolean result=airportSecurity.isCapacityFull();
             Assert.assertTrue(result);
@@ -79,8 +79,7 @@ public class ParkingLotTest {
         ParkingLotOwner owner=new ParkingLotOwner();
         parkingLot.registerObserver(owner);
         try {
-            parkingLot.park(vehicle);
-            parkingLot.unPark(new Object());
+            parkingLot.park(vehicle,1,"asd");
             parkingLot.unPark(vehicle);
             boolean result=owner.isCapacityFull();
             Assert.assertFalse(result);
