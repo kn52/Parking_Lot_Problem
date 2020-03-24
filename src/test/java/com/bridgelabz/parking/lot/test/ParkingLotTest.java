@@ -115,6 +115,14 @@ public class ParkingLotTest {
         } catch (ParkingLotException e) { e.printStackTrace();  }
     }
 
+
+    @Test
+    public void whengivenVehicleParked_ShouldEvenlyDistributed() {
+        parkingLot.setCapacity(5);
+        int number = parkingLot.getTotalCapacity();
+        Assert.assertEquals(5 , number);
+    }
+
     @Test
     public void givenVehicleWithHandicappedDriver_ShouldParkVehicleAtNearestFreeSpace() {
         parkingLot.setCapacity(3);

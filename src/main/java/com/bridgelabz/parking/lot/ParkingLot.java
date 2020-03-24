@@ -66,6 +66,9 @@ public class ParkingLot {
     public void setCapacity(int capacity) {
         this.FULL_SIZE=capacity;
     }
+    public int getTotalCapacity() {
+        return this.FULL_SIZE;
+    }
 
     public int getVehicleSlot(Object vehicle) {
         int slotNumber=this.vehicles.stream()
