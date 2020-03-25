@@ -2,6 +2,7 @@ package com.bridgelabz.parking.lot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class ParkingLot {
 
@@ -19,7 +20,7 @@ public class ParkingLot {
     }
 
     public void park(Object vehicle, DriverType type, String name) {
-        int slotnumber=1;
+        int slotnumber=this.getSlotNumber();
         Slot slot=new Slot(vehicle,type,1,name);
         for (ParkingLotObserver observer : observers) {
             if(observer instanceof ParkingLotOwner)
@@ -35,6 +36,20 @@ public class ParkingLot {
             this.vehicles.add(slot);
             this.capacity++;
         }
+    }
+
+    private int getSlotNumber() {
+        int size=this.getTotalCapacity();
+        this.initialize(size);
+        for(int i=0;i<size;i++){
+            if(this.vehicles.get(i)== null)
+                return i;
+        }
+        return 1;
+    }
+
+    private void initialize(int size){
+        IntStream.range(0,size).forEach(lot->this.vehicles.add(new Slot(null)));
     }
 
     public boolean isVehicleParked(Object vehicle) {

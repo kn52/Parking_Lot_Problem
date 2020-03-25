@@ -131,7 +131,7 @@ public class ParkingLotTest {
         try {
             parkingLot.park(vehicle1,DriverType.NORMAL,"asd");
             int slotNumber=parkingLotStrategy.getVehicleSlot(DriverType.HANDICAP);
-            Assert.assertEquals(0,slotNumber);
+            Assert.assertEquals(1,slotNumber);
         } catch (ParkingLotException e) {
         }
     }
