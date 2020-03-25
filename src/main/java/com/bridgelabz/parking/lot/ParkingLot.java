@@ -17,12 +17,12 @@ public class ParkingLot {
         owner=new ParkingLotOwner();
         this.observers=new ArrayList<>();
         vehicles=new ArrayList<>();
-        this.initialize(this.FULL_SIZE);
+        this.initializeParkingLot(this.FULL_SIZE);
     }
 
     public void park(Object vehicle, DriverType type, String name) {
         int slotnumber=this.getSlotNumber();
-        Slot slot=new Slot(vehicle,type,1,name);
+        Slot slot=new Slot(vehicle,type,slotnumber,name);
         for (ParkingLotObserver observer : observers) {
             if(observer instanceof ParkingLotOwner)
                 ((ParkingLotOwner) observer).slotOccupied();
@@ -40,17 +40,12 @@ public class ParkingLot {
     }
 
     private int getSlotNumber() {
-        int size=this.getTotalCapacity();
-        int index=0;
-        for(int i=0;i<size;i++) {
-            if (this.vehicles.get(i) == null)
-                index=i;break;
-        }
-        return index;
+        return this.vehicles.stream()
+                .filter(x-> x.getVehicle() == null).findFirst().get().getVehicleSlot();
     }
 
-    private void initialize(int size){
-        IntStream.range(0,size).forEach(lot->this.vehicles.add(new Slot(null)));
+    private void initializeParkingLot(int size) {
+        IntStream.range(0,size).forEach(lot->this.vehicles.add(new Slot()));
     }
 
     public boolean isVehicleParked(Object vehicle) {
@@ -82,15 +77,14 @@ public class ParkingLot {
 
     public void setCapacity(int capacity) {
         this.FULL_SIZE=capacity;
-        this.initialize(this.FULL_SIZE);
+        this.initializeParkingLot(this.FULL_SIZE);
     }
     public int getTotalCapacity() {
         return this.FULL_SIZE;
     }
 
     public int getVehicleSlot(Object vehicle) {
-        int slotNumber=this.vehicles.stream()
+        return this.vehicles.stream()
                 .filter(x-> x.getVehicle() == vehicle).findFirst().get().getVehicleSlot();
-        return slotNumber;
     }
 }

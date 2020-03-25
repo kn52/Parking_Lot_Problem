@@ -99,7 +99,7 @@ public class ParkingLotTest {
         parkingLot.park(vehicle,DriverType.NORMAL,"asd");
         try {
             int slotNumber= parkingLot.getVehicleSlot(vehicle);
-            Assert.assertEquals(1,slotNumber);
+            Assert.assertEquals(0,slotNumber);
         } catch (ParkingLotException e) { e.printStackTrace();  }
     }
 
