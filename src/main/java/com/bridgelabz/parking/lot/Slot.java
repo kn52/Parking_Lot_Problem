@@ -4,9 +4,9 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Slot {
-    private Enum type;
-    private LocalDateTime time;
-    private String attendant;
+    private Enum driverType;
+    private LocalDateTime parkingTime;
+    private String attendantName;
     private int slot;
     private Object vehicle;
 
@@ -14,12 +14,12 @@ public class Slot {
         this.vehicle=vehicle;
     }
 
-    public Slot(Object vehicle, Enum type,int slot, String attendant) {
+    public Slot(Object vehicle, Enum driverType, int slot, String attendantName) {
         this.vehicle=vehicle;
-        this.type=type;
+        this.driverType = driverType;
         this.slot=slot;
-        this.attendant=attendant;
-        this.time= LocalDateTime.now();
+        this.attendantName = attendantName;
+        this.parkingTime = LocalDateTime.now();
     }
 
     public Slot() { }
@@ -38,7 +38,7 @@ public class Slot {
         if (o == null || getClass() != o.getClass()) return false;
         Slot that = (Slot) o;
         return slot == that.slot &&
-                Objects.equals(attendant, that.attendant) &&
+                Objects.equals(attendantName, that.attendantName) &&
                 Objects.equals(vehicle, that.vehicle);
     }
 
@@ -49,7 +49,7 @@ public class Slot {
     public void setVehicleSlot(Object vehicle, int slot, String attendant) {
         this.vehicle=vehicle;
         this.slot=slot;
-        this.attendant=attendant;
+        this.attendantName =attendant;
     }
 
     public int getSlot(Object vehicle) {
