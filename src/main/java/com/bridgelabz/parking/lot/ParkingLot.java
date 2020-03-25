@@ -17,6 +17,7 @@ public class ParkingLot {
         owner=new ParkingLotOwner();
         this.observers=new ArrayList<>();
         vehicles=new ArrayList<>();
+        this.initialize(this.FULL_SIZE);
     }
 
     public void park(Object vehicle, DriverType type, String name) {
@@ -40,12 +41,12 @@ public class ParkingLot {
 
     private int getSlotNumber() {
         int size=this.getTotalCapacity();
-        this.initialize(size);
-        for(int i=0;i<size;i++){
-            if(this.vehicles.get(i)== null)
-                return i;
+        int index=0;
+        for(int i=0;i<size;i++) {
+            if (this.vehicles.get(i) == null)
+                index=i;break;
         }
-        return 1;
+        return index;
     }
 
     private void initialize(int size){
@@ -81,6 +82,7 @@ public class ParkingLot {
 
     public void setCapacity(int capacity) {
         this.FULL_SIZE=capacity;
+        this.initialize(this.FULL_SIZE);
     }
     public int getTotalCapacity() {
         return this.FULL_SIZE;
