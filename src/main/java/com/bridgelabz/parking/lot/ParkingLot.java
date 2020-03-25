@@ -18,8 +18,9 @@ public class ParkingLot {
         vehicles=new ArrayList<>();
     }
 
-    public void park(Object vehicle, int slot, String name) {
-        Slot slotSystem=new Slot(vehicle,slot,name);
+    public void park(Object vehicle, DriverType type, String name) {
+        int slotnumber=1;
+        Slot slot=new Slot(vehicle,type,1,name);
         for (ParkingLotObserver observer : observers) {
             if(observer instanceof ParkingLotOwner)
                 ((ParkingLotOwner) observer).slotOccupied();
@@ -30,8 +31,8 @@ public class ParkingLot {
             }
             throw new ParkingLotException("Parking is full", ParkingLotException.ExceptionType.NO_PARKING);
         }
-        if(!this.vehicles.contains(slotSystem)){
-            this.vehicles.add(slotSystem);
+        if(!this.vehicles.contains(slot)){
+            this.vehicles.add(slot);
             this.capacity++;
         }
     }

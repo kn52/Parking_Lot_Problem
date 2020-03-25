@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Slot {
+    private Enum type;
     private LocalDateTime time;
     private String attendant;
     private int slot;
@@ -13,8 +14,9 @@ public class Slot {
         this.vehicle=vehicle;
     }
 
-    public Slot(Object vehicle, int slot, String attendant) {
+    public Slot(Object vehicle, Enum type,int slot, String attendant) {
         this.vehicle=vehicle;
+        this.type=type;
         this.slot=slot;
         this.attendant=attendant;
         this.time= LocalDateTime.now();

@@ -19,7 +19,7 @@ public class ParkingLotTest {
     @Test
     public void WhengivenVehicleParked_ShouldReturn_True(){
         try{
-            parkingLot.park(vehicle,1,"asd");
+            parkingLot.park(vehicle,DriverType.NORMAL,"asd");
             boolean result= parkingLot.isVehicleParked(vehicle);
             Assert.assertTrue(result);
         }catch (ParkingLotException e){
@@ -30,8 +30,8 @@ public class ParkingLotTest {
     @Test
     public void WhengivenVehicle_AlreadyParked_ShouldReturn_False(){
         try{
-            parkingLot.park(vehicle,1,"asd");
-            parkingLot.park(vehicle,1,"asd");
+            parkingLot.park(vehicle,DriverType.NORMAL,"asd");
+            parkingLot.park(vehicle,DriverType.NORMAL,"asd");
         }catch (ParkingLotException e){
             Assert.assertEquals("Parking is full",e.getMessage());
         }
@@ -40,7 +40,7 @@ public class ParkingLotTest {
     @Test
     public void WhengivenVehicleunParked_ShouldReturn_True() {
         try {
-            parkingLot.park(vehicle,1,"asd");
+            parkingLot.park(vehicle,DriverType.NORMAL,"asd");
             boolean result = parkingLot.unPark(vehicle);
             Assert.assertTrue(result);
         } catch (ParkingLotException e) {
@@ -53,8 +53,8 @@ public class ParkingLotTest {
         ParkingLotOwner owner=new ParkingLotOwner();
         parkingLot.registerObserver(owner);
         try {
-            parkingLot.park(vehicle,1,"asd");
-            parkingLot.park(new Object(),1,"asd");
+            parkingLot.park(vehicle,DriverType.NORMAL,"asd");
+            parkingLot.park(new Object(),DriverType.NORMAL,"asd");
         } catch (ParkingLotException e) {
             boolean result=owner.isCapacityFull();
             Assert.assertTrue(result);
@@ -66,8 +66,8 @@ public class ParkingLotTest {
         AirportSecurity airportSecurity=new AirportSecurity();
         parkingLot.registerObserver(airportSecurity);
         try {
-            parkingLot.park(vehicle,1,"asd");
-            parkingLot.park(new Object(),1,"asd");
+            parkingLot.park(vehicle,DriverType.NORMAL,"asd");
+            parkingLot.park(new Object(),DriverType.NORMAL,"asd");
         } catch (ParkingLotException e) {
             boolean result=airportSecurity.isCapacityFull();
             Assert.assertTrue(result);
@@ -79,7 +79,7 @@ public class ParkingLotTest {
         ParkingLotOwner owner=new ParkingLotOwner();
         parkingLot.registerObserver(owner);
         try {
-            parkingLot.park(vehicle,1,"asd");
+            parkingLot.park(vehicle,DriverType.NORMAL,"asd");
             parkingLot.unPark(vehicle);
             boolean result=owner.isCapacityFull();
             Assert.assertFalse(result);
@@ -90,13 +90,13 @@ public class ParkingLotTest {
     public void whengivenParkingLot_ShouldParked_InSlot() {
         parkingLot.setCapacity(2);
         try {
-            parkingLot.park(vehicle,2,"asd");
+            parkingLot.park(vehicle,DriverType.NORMAL,"asd");
         } catch (ParkingLotException e) { e.printStackTrace();  }
     }
 
     @Test
     public void whengivenParkingVehicle_ShouldReturn_ParkingSlot() {
-        parkingLot.park(vehicle,1,"asd");
+        parkingLot.park(vehicle,DriverType.NORMAL,"asd");
         try {
             int slotNumber= parkingLot.getVehicleSlot(vehicle);
             Assert.assertEquals(1,slotNumber);
@@ -108,7 +108,7 @@ public class ParkingLotTest {
         ParkingLotOwner owner=new ParkingLotOwner();
         parkingLot.registerObserver(owner);
         owner.setSlot(1);
-        parkingLot.park(vehicle,1,"asd");
+        parkingLot.park(vehicle,DriverType.NORMAL,"asd");
         try {
             boolean result=owner.getSlotStatus();
             Assert.assertTrue(result);
@@ -129,7 +129,7 @@ public class ParkingLotTest {
         Object vehicle1=new Object();
         ParkingLotStrategy parkingLotStrategy=new ParkingLotStrategy();
         try {
-            parkingLot.park(vehicle1,2,"asd");
+            parkingLot.park(vehicle1,DriverType.NORMAL,"asd");
             int slotNumber=parkingLotStrategy.getVehicleSlot(DriverType.HANDICAP);
             Assert.assertEquals(0,slotNumber);
         } catch (ParkingLotException e) {
