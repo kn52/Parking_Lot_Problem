@@ -41,4 +41,13 @@ public class ParkingLotMockitoTest {
         int slot=parkingLotStrategy.getVehicleSlot(DriverType.HANDICAP);
         Assert.assertEquals(11,slot);
     }
+
+    @Test
+    public void whenGettingTotal_Empty_Capacity_SHouldReturn_Wrong(){
+        ParkingLot parkingLot1=new ParkingLot();
+        parkingLot1.setCapacity(3);
+        when(parkingLot.getEmptySlots()).thenReturn(12);
+        int emptySlots=parkingLot.getEmptySlots();
+        Assert.assertEquals(12,emptySlots);
+    }
 }

@@ -84,4 +84,8 @@ public class ParkingLot {
         return this.vehicles.stream()
                 .filter(x-> x.getVehicle() == vehicle).findFirst().get().getVehicleSlot();
     }
+
+    public int getEmptySlots() {
+        return this.PARKING_LOT_SIZE-this.noOfFullSlots;
+    }
 }
