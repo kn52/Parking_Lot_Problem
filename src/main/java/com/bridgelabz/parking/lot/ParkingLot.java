@@ -21,7 +21,7 @@ public class ParkingLot {
     }
 
     public void park(Object vehicle, DriverType type, String name) {
-        int slotnumber=this.getSlotNumber();
+        int slotnumber=this.getVehicleSlotNumber(type);
         Slot slot=new Slot(vehicle,type,slotnumber,name);
         for (ParkingLotObserver observer : observers) {
             if(observer instanceof ParkingLotOwner)
@@ -39,23 +39,6 @@ public class ParkingLot {
         }
     }
 
-    private int getSlotNumber() {
-        return this.vehicles.stream()
-                .filter(x-> x.getVehicle() == null).findFirst().get().getVehicleSlot();
-    }
-
-    private void initializeParkingLot(int size) {
-        IntStream.range(0,size).forEach(lot->this.vehicles.add(new Slot()));
-    }
-
-    public boolean isVehicleParked(Object vehicle) {
-        boolean result=this.vehicles.stream()
-                .filter(x-> x.getVehicle() == vehicle).findFirst().isPresent();
-        if(result)
-            return true;
-        return false;
-    }
-
     public boolean unPark(Object vehicle) {
         boolean result=this.vehicles.stream()
                 .filter(x-> x.getVehicle() == vehicle).findFirst().isPresent();
@@ -69,6 +52,22 @@ public class ParkingLot {
             return true;
         }
         return false;
+    }
+
+    public boolean isVehicleParked(Object vehicle) {
+        boolean result=this.vehicles.stream()
+                .filter(x-> x.getVehicle() == vehicle).findFirst().isPresent();
+        if(result)
+            return true;
+        return false;
+    }
+
+    private void initializeParkingLot(int size) {
+        IntStream.range(0,size).forEach(lot->this.vehicles.add(new Slot()));
+    }
+
+    private int getVehicleSlotNumber(DriverType type) {
+        return new ParkingLotStrategy().getVehicleSlot(type);
     }
 
     public void registerObserver(ParkingLotObserver observer) {
