@@ -47,6 +47,18 @@ public class ParkingLotMockitoTest {
     }
 
     @Test
+    public void whengivenAlreadyParkedVehicle_WhenUnParked_ShouldReturn_False() {
+        parkingLot.parkVehicle(vehicle,DriverType.NORMAL,"asd");
+        try {
+            when(parkingLot.isVehicleParked(any())).thenReturn(false);
+            boolean isUnParked=parkingLot.isVehicleParked(vehicle);
+            Assert.assertFalse(isUnParked);
+        }catch (ParkingLotException e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
     public void whengivenVehicleunParked_ShouldReturn_False() {
         try{
             parkingLot.parkVehicle(vehicle,DriverType.NORMAL,"asd");

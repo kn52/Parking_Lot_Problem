@@ -6,7 +6,6 @@ import java.util.stream.IntStream;
 
 public class ParkingLot {
 
-
     public static List<Slot> vehicles;
     private int noOfFullSlots;
     private List<ParkingLotObserver> observers;
