@@ -58,6 +58,18 @@ public class ParkingLotMockitoTest {
         }
     }
 
+    @Test
+    public void whengivenVehicleunParked_Throw_Exception() {
+        try{
+            parkingLot.parkVehicle(vehicle,DriverType.NORMAL,"asd");
+            when(parkingLot.unParkVehicle(any()))
+                    .thenThrow(new ParkingLotException("Parking lot is empty",ParkingLotException.ExceptionType.EMPTY_PARKING_LOT));
+            boolean isUnParked=parkingLot.unParkVehicle(vehicle);
+            Assert.assertFalse(isUnParked);
+        }catch (ParkingLotException e){
+            Assert.assertEquals("Parking lot is empty",e.getMessage());
+        }
+    }
 
     @Test
     public void whengivenDriver_IsHandicap_ShouldReturn_Eleven() {
