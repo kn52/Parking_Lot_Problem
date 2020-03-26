@@ -72,6 +72,17 @@ public class ParkingLotMockitoTest {
     }
 
     @Test
+    public void whengivenParkingVehicle_Should_Thow_Exception() {
+        parkingLot.parkVehicle(vehicle,DriverType.NORMAL,"asd");
+        try {
+            when(parkingLot.getSlotNumberByVehicle(any()))
+                    .thenThrow(new ParkingLotException("No such slot found in parking lot", ParkingLotException.ExceptionType.NO_SLOT_FOUND));parkingLot.getSlotNumberByVehicle(vehicle);
+        } catch (ParkingLotException e) {
+            Assert.assertEquals("No such slot found in parking lot",e.getMessage());
+        }
+    }
+
+    @Test
     public void whengivenDriver_IsHandicap_ShouldReturn_Eleven() {
         ParkingLot parkingLot1=new ParkingLot();
         parkingLot1.setCapacity(10);
