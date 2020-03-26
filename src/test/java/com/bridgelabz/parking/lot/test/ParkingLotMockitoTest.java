@@ -30,7 +30,7 @@ public class ParkingLotMockitoTest {
     }
 
     @Test
-    public void whengivenDriver_IsHandicap_ShouldReturn_One() {
+    public void whengivenDriver_IsHandicap_ShouldReturn_Eleven() {
         ParkingLot parkingLot1=new ParkingLot();
         parkingLot1.setCapacity(10);
         Object vehicle1=new Object();
@@ -39,6 +39,20 @@ public class ParkingLotMockitoTest {
         parkingLot1.parkVehicle(vehicle2,DriverType.NORMAL,"asd");
         when(parkingLotStrategy.getVehicleSlot(DriverType.HANDICAP)).thenReturn(11);
         int slot=parkingLotStrategy.getVehicleSlot(DriverType.HANDICAP);
+        Assert.assertEquals(11,slot);
+    }
+
+    @Test
+    public void whengivenDriver_IsHandicapWith_setParkingStatergy_ShouldReturn_Eleven() {
+        ParkingLot parkingLot1=new ParkingLot();
+        parkingLot1.setCapacity(10);
+        Object vehicle1=new Object();
+        Object vehicle2=new Object();
+        parkingLot1.parkVehicle(vehicle1,DriverType.NORMAL,"asd");
+        parkingLot1.parkVehicle(vehicle2,DriverType.NORMAL,"asd");
+        parkingLot1.setParkingStrategy(parkingLotStrategy);
+        when(parkingLotStrategy.getVehicleSlot(DriverType.HANDICAP)).thenReturn(11);
+        int slot=parkingLot1.getSlotNumber(DriverType.HANDICAP, parkingLotStrategy);
         Assert.assertEquals(11,slot);
     }
 

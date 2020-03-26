@@ -119,6 +119,9 @@ public class ParkingLotTest {
     @Test
     public void whengivenVehicleParked_ShouldEvenlyDistributed() {
         parkingLot.setCapacity(5);
+        Object vehicle1=new Object();
+	    parkingLot.parkVehicle(vehicle1,DriverType.NORMAL,"asd");
+	    parkingLot.parkVehicle(vehicle,DriverType.NORMAL,"asd");
         int totalCapacity = parkingLot.getTotalCapacity();
         Assert.assertEquals(5 , totalCapacity);
     }
