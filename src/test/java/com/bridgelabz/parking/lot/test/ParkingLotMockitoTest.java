@@ -25,8 +25,12 @@ public class ParkingLotMockitoTest {
     @Test
     public void testMockito_On_getCapacity() {
         when(parkingLot.getTotalCapacity()).thenReturn(10);
-        int n=parkingLot.getTotalCapacity();
-        Assert.assertEquals(10,n);
+        int n = parkingLot.getTotalCapacity();
+        Assert.assertEquals(10, n);
+    }
+
+    @Test
+    public void name() {
     }
 
     @Test
@@ -41,6 +45,7 @@ public class ParkingLotMockitoTest {
         int slot=parkingLotStrategy.getVehicleSlot(DriverType.HANDICAP);
         Assert.assertEquals(11,slot);
     }
+
 
     @Test
     public void whengivenDriver_IsHandicapWith_setParkingStatergy_ShouldReturn_Eleven() {
@@ -57,7 +62,7 @@ public class ParkingLotMockitoTest {
     }
 
     @Test
-    public void whenGettingTotal_Empty_Capacity_SHouldReturn_Wrong(){
+    public void whenGettingTotal_Empty_Capacity_ShouldReturn_Wrong(){
         ParkingLot parkingLot1=new ParkingLot();
         parkingLot1.setCapacity(3);
         when(parkingLot.getEmptySlots()).thenReturn(12);

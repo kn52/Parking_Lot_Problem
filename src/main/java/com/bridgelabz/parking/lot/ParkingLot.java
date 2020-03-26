@@ -27,6 +27,8 @@ public class ParkingLot {
         for (ParkingLotObserver observer : observers) {
             if(observer instanceof ParkingLotOwner)
                 ((ParkingLotOwner) observer).slotOccupied();
+            else
+                observer.capacityIsFull();
         }
         if(this.noOfFullSlots == PARKING_LOT_SIZE) {
             for (ParkingLotObserver observer : observers) {
@@ -69,7 +71,7 @@ public class ParkingLot {
 
     public int getSlotNumber(DriverType type, ParkingLotStrategy parkingStrategy) {
         return parkingStrategy.getVehicleSlot(type);
-}
+    }
 
     public void registerObserver(ParkingLotObserver observer) {
         this.observers.add(observer);
