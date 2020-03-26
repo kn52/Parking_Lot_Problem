@@ -2,8 +2,7 @@ package com.bridgelabz.parking.lot;
 
 public class ParkingLotOwner implements ParkingLotObserver {
     private boolean isCapacityFull;
-    public int slotNumber;
-    public double time;
+    public static int slotNumber=-1;
     private boolean slotIsFull=false;
 
     @Override
@@ -16,17 +15,13 @@ public class ParkingLotOwner implements ParkingLotObserver {
         this.isCapacityFull=false;
     }
 
-    public void slotOccupied() {
-        this.slotIsFull=true;
-    }
+    public void slotOccupied() { this.slotIsFull=true; }
 
     public boolean isCapacityFull() {
         return this.isCapacityFull;
     }
 
-    public void setSlot(int slotNumber) {
-        this.slotNumber=slotNumber;
-    }
+    public void setSlot(int slotNumber) { this.slotNumber=slotNumber; }
 
     public boolean getSlotStatus() {
         return slotIsFull;

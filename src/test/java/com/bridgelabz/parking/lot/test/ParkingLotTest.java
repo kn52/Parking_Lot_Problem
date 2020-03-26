@@ -107,7 +107,7 @@ public class ParkingLotTest {
     public void whengivenVehicleParkedONOwnersSlot_ShouldReturn_True() {
         ParkingLotOwner owner=new ParkingLotOwner();
         parkingLot.registerObserver(owner);
-        owner.setSlot(1);
+        owner.setSlot(0);
         parkingLot.parkVehicle(vehicle,DriverType.NORMAL,"asd");
         try {
             boolean slotStatus=owner.getSlotStatus();

@@ -14,7 +14,5 @@ public class AirportSecurity implements ParkingLotObserver {
         this.isCapacityFull=false;
     }
 
-    public boolean isCapacityFull() {
-        return this.isCapacityFull;
-    }
+    public boolean isCapacityFull() { return this.isCapacityFull; }
 }
