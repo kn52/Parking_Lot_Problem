@@ -35,15 +35,29 @@ public class ParkingLotMockitoTest {
     }
 
     @Test
-    public void whengivenVehicleParkedThow_Exception() {
+    public void whengivenVehicleParkedThrow_Exception() {
         try{
-            doThrow(new ParkingLotException("Parking is full", ParkingLotException.ExceptionType.NO_PARKING))
+            parkingLot.parkVehicle(vehicle,DriverType.NORMAL,"asd");
+            doThrow(new ParkingLotException("Parking is Empty", ParkingLotException.ExceptionType.EMPTY_PARKING_LOT))
                     .when(parkingLot).parkVehicle(any(),any(DriverType.class),anyString());
-            parkingLot.parkVehicle(new Object(),DriverType.NORMAL,"asd");
+            parkingLot.parkVehicle(new Object(),DriverType.HANDICAP,"asd");
         }catch (ParkingLotException e){
-            Assert.assertEquals("Parking is full",e.getMessage());
+            Assert.assertEquals("Parking is Empty",e.getMessage());
         }
     }
+
+    @Test
+    public void whengivenVehicleunParked_ShouldReturn_False() {
+        try{
+            parkingLot.parkVehicle(vehicle,DriverType.NORMAL,"asd");
+            when(parkingLot.unParkVehicle(any())).thenReturn(false);
+            boolean isUnParked=parkingLot.unParkVehicle(vehicle);
+            Assert.assertFalse(isUnParked);
+        }catch (ParkingLotException e){
+            e.printStackTrace();
+        }
+    }
+
 
     @Test
     public void whengivenDriver_IsHandicap_ShouldReturn_Eleven() {
