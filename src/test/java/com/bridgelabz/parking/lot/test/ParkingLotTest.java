@@ -8,11 +8,13 @@ import org.junit.Test;
 public class ParkingLotTest {
 
     private ParkingLot parkingLot;
+    parkLt pt;
     Object vehicle;
 
     @Before
     public void setUp() {
         parkingLot =new ParkingLot();
+        pt=new parkLt();
         vehicle=new Object();
     }
 
@@ -81,7 +83,7 @@ public class ParkingLotTest {
         try {
             parkingLot.parkVehicle(vehicle,DriverType.NORMAL,"asd");
             parkingLot.unParkVehicle(vehicle);
-            boolean isAvailable=owner.isCapacityFull();
+            boolean isAvailable=owner.getSlotStatus();
             Assert.assertFalse(isAvailable);
         } catch (ParkingLotException e) { e.printStackTrace();  }
     }
@@ -104,13 +106,13 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void whengivenVehicleParkedONOwnersSlot_ShouldReturn_True() {
+    public void whengivenVehicleParkedOnOwnersSlot_ShouldReturn_True() {
         ParkingLotOwner owner=new ParkingLotOwner();
         parkingLot.registerObserver(owner);
-        owner.setSlot(0);
+        owner.setOwnerSlot(0);
         parkingLot.parkVehicle(vehicle,DriverType.NORMAL,"asd");
         try {
-            boolean slotStatus=owner.getSlotStatus();
+            boolean slotStatus=owner.getOwnerSlotStatus();
             Assert.assertTrue(slotStatus);
         } catch (ParkingLotException e) { e.printStackTrace();  }
     }
@@ -128,13 +130,23 @@ public class ParkingLotTest {
 
     @Test
     public void givenVehicleWithHandicappedDriver_ShouldParkVehicleAtNearestFreeSpace() {
-        parkingLot.setCapacity(3);
+        pt.setCapacity(2);
+        ParkingLot p1=new ParkingLot();
+        p1.setCapacity(10);
+        ParkingLot p2=new ParkingLot();
+        p2.setCapacity(20);
         Object vehicle1=new Object();
-        ParkingLotStrategy parkingLotStrategy=new ParkingLotStrategy();
+        pt.addLot(p1);
+        pt.addLot(p2);
+        pt.parkVehicle(vehicle, DriverType.NORMAL,"asd");
+        pt.parkVehicle(new Object(), DriverType.NORMAL,"asd");
+        pt.parkVehicle(new Object(), DriverType.NORMAL,"asd");
+        pt.parkVehicle(new Object(), DriverType.NORMAL,"asd");
+        pt.parkVehicle(new Object(), DriverType.NORMAL,"asd");
+        pt.parkVehicle(vehicle1, DriverType.NORMAL,"asd");
         try {
-            parkingLot.parkVehicle(vehicle1,DriverType.NORMAL,"asd");
-            int slotNumber=parkingLotStrategy.getVehicleSlot(DriverType.HANDICAP);
-            Assert.assertEquals(1,slotNumber);
+            boolean isParked=pt.isVehiclePark(vehicle1);
+            Assert.assertTrue(isParked);
         } catch (ParkingLotException e) {  }
     }
 }
