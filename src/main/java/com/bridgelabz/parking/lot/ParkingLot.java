@@ -22,7 +22,7 @@ public class ParkingLot {
 
     public void parkVehicle(Object vehicle, DriverType type, String name) {
         int slotnumber=this.getSlotNumber(type,parkingStrategy);
-        ParkingLot parkingLot=new parkLt().getParkingLot();
+        ParkingLot parkingLot=new MultipleLots().getParkingLot();
         SlotDetails slot=new SlotDetails(vehicle,type,slotnumber,name);
         if(slotnumber == ParkingLotOwner.slotNumber)
             observers.stream().filter(observer->observer instanceof ParkingLotOwner).map(ParkingLotOwner.class::cast).findFirst().get().slotOccupied();

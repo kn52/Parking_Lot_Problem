@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class parkLt {
+public class MultipleLots {
 
     private int lotCapacity=1;
     private List<ParkingLot> parkingLots;
 
-    public parkLt(int lotCapacity) {
+    public MultipleLots(int lotCapacity) {
         this.lotCapacity = lotCapacity;
         this.parkingLots = new ArrayList<>();
     }
 
-    public parkLt() {
+    public MultipleLots() {
         this.parkingLots = new ArrayList<>();
     }
 
