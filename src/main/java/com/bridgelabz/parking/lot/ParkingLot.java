@@ -15,23 +15,23 @@ public class ParkingLot {
     public ParkingLot() {
         this.noOfFullSlots =0;
         this.observers=new ArrayList<>();
-        parkingLotList =new ArrayList<>();
+        this.parkingLotList =new ArrayList<>();
         parkingStrategy=new ParkingLotStrategy();
         this.initializeParkingLot(this.PARKING_LOT_SIZE);
     }
 
     public void parkVehicle(Object vehicle, DriverType type, String name) {
-        int slotnumber=this.getSlotNumber(type,parkingStrategy);
-        ParkingLot parkingLot=new MultipleLots().getParkingLot();
-        SlotDetails slot=new SlotDetails(vehicle,type,slotnumber,name);
-        if(slotnumber == ParkingLotOwner.slotNumber)
-            observers.stream().filter(observer->observer instanceof ParkingLotOwner).map(ParkingLotOwner.class::cast).findFirst().get().slotOccupied();
-        if(this.noOfFullSlots == PARKING_LOT_SIZE) {
+        if(this.noOfFullSlots == this.PARKING_LOT_SIZE) {
             observers.stream().forEach(observer->observer.capacityIsFull());
             throw new ParkingLotException("Parking is full", ParkingLotException.ExceptionType.NO_PARKING);
         }
+        int slotnumber=this.getSlotNumber(type,parkingStrategy);
+        SlotDetails slot=new SlotDetails(vehicle,type,slotnumber,name);
+        if(slotnumber == ParkingLotOwner.slotNumber)
+            observers.stream().filter(observer->observer instanceof ParkingLotOwner)
+                    .map(ParkingLotOwner.class::cast).findFirst().get().slotOccupied();
         if(!this.parkingLotList.contains(slot)){
-            this.parkingLotList.add(slot);
+            this.parkingLotList.set(slotnumber,slot);
             this.noOfFullSlots++;
         }
     }
@@ -56,7 +56,7 @@ public class ParkingLot {
     }
 
     private void initializeParkingLot(int size) {
-        IntStream.range(0,size).forEach(lot->this.parkingLotList.add(new SlotDetails()));
+        IntStream.range(0,size).forEach(lot->this.parkingLotList.add(new SlotDetails(null)));
     }
 
     public int getSlotNumber(DriverType type, ParkingLotStrategy parkingStrategy) {

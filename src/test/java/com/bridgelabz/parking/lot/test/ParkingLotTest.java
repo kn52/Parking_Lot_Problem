@@ -8,13 +8,13 @@ import org.junit.Test;
 public class ParkingLotTest {
 
     private ParkingLot parkingLot;
-    MultipleLots multipleLots;
+    MultiLevelParkingLot multiLevelParkingLot;
     Object vehicle;
 
     @Before
     public void setUp() {
         parkingLot =new ParkingLot();
-        multipleLots =new MultipleLots();
+        multiLevelParkingLot =new MultiLevelParkingLot();
         vehicle=new Object();
     }
 
@@ -130,22 +130,22 @@ public class ParkingLotTest {
 
     @Test
     public void givenVehicleWithHandicappedDriver_ShouldParkVehicleAtNearestFreeSpace() {
-        multipleLots.setCapacity(2);
-        ParkingLot p1=new ParkingLot();
-        p1.setCapacity(10);
-        ParkingLot p2=new ParkingLot();
-        p2.setCapacity(20);
+        multiLevelParkingLot.setCapacity(2);
+        ParkingLot parkingLot1=new ParkingLot();
+        parkingLot1.setCapacity(10);
+        ParkingLot parkingLot2=new ParkingLot();
+        parkingLot2.setCapacity(20);
         Object vehicle1=new Object();
-        multipleLots.addLot(p1);
-        multipleLots.addLot(p2);
-        multipleLots.parkVehicle(vehicle, DriverType.NORMAL,"asd");
-        multipleLots.parkVehicle(new Object(), DriverType.NORMAL,"asd");
-        multipleLots.parkVehicle(new Object(), DriverType.NORMAL,"asd");
-        multipleLots.parkVehicle(new Object(), DriverType.NORMAL,"asd");
-        multipleLots.parkVehicle(new Object(), DriverType.NORMAL,"asd");
-        multipleLots.parkVehicle(vehicle1, DriverType.NORMAL,"asd");
+        multiLevelParkingLot.addLot(parkingLot1);
+        multiLevelParkingLot.addLot(parkingLot2);
+        multiLevelParkingLot.parkVehicle(vehicle, DriverType.NORMAL,"asd");
+        multiLevelParkingLot.parkVehicle(new Object(), DriverType.NORMAL,"asd");
+        multiLevelParkingLot.parkVehicle(new Object(), DriverType.NORMAL,"asd");
+        multiLevelParkingLot.parkVehicle(new Object(), DriverType.NORMAL,"asd");
+        multiLevelParkingLot.parkVehicle(new Object(), DriverType.NORMAL,"asd");
+        multiLevelParkingLot.parkVehicle(vehicle1, DriverType.NORMAL,"asd");
         try {
-            boolean isParked= multipleLots.isVehiclePark(vehicle1);
+            boolean isParked= multiLevelParkingLot.isVehiclePark(vehicle1);
             Assert.assertTrue(isParked);
         } catch (ParkingLotException e) {  }
     }

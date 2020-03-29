@@ -2,19 +2,18 @@ package com.bridgelabz.parking.lot;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
-public class MultipleLots {
+public class MultiLevelParkingLot {
 
     private int lotCapacity=1;
-    private List<ParkingLot> parkingLots;
+    public static List<ParkingLot> parkingLots;
 
-    public MultipleLots(int lotCapacity) {
+    public MultiLevelParkingLot(int lotCapacity) {
         this.lotCapacity = lotCapacity;
         this.parkingLots = new ArrayList<>();
     }
 
-    public MultipleLots() {
+    public MultiLevelParkingLot() {
         this.parkingLots = new ArrayList<>();
     }
 
@@ -41,7 +40,7 @@ public class MultipleLots {
                     return object;
             }
         }
-        return null;
+        throw new ParkingLotException("No empty slot found", ParkingLotException.ExceptionType.NO_SLOT_AVAILABLE);
     }
 
     public boolean isVehiclePark(Object vehicle) {
@@ -64,5 +63,13 @@ public class MultipleLots {
 
     public void setCapacity(int lotcapacity) {
         this.lotCapacity=lotcapacity;
+    }
+
+    public int getvehicleSlot(Object vehicle) {
+        int slot=-1;
+        for (int i=0;i<parkingLots.size();i++){
+            slot=this.parkingLots.get(i).getSlotNumberByVehicle(vehicle);
+        }
+        return slot;
     }
 }

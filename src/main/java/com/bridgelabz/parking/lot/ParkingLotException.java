@@ -2,7 +2,7 @@ package com.bridgelabz.parking.lot;
 
 public class ParkingLotException extends RuntimeException {
     public enum ExceptionType{
-        NO_SUCH_DRIVER, NO_SLOT_AVAILABLE, EMPTY_PARKING_LOT, NO_SUCH_VEHICLE, NO_SLOT_FOUND, NO_PARKING
+        NO_SUCH_DRIVER, NO_SLOT_AVAILABLE, NO_SUCH_VEHICLE, NO_PARKING
     }
 
     public ExceptionType type;

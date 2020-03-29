@@ -1,9 +1,6 @@
 package com.bridgelabz.parking.lot.test;
 
-import com.bridgelabz.parking.lot.DriverType;
-import com.bridgelabz.parking.lot.ParkingLot;
-import com.bridgelabz.parking.lot.ParkingLotException;
-import com.bridgelabz.parking.lot.ParkingLotStrategy;
+import com.bridgelabz.parking.lot.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

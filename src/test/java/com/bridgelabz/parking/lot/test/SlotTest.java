@@ -3,19 +3,19 @@ package com.bridgelabz.parking.lot.test;
 import com.bridgelabz.parking.lot.DriverType;
 import com.bridgelabz.parking.lot.ParkingLot;
 import com.bridgelabz.parking.lot.SlotDetails;
-import com.bridgelabz.parking.lot.MultipleLots;
+import com.bridgelabz.parking.lot.MultiLevelParkingLot;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 public class SlotTest {
     SlotDetails slot;
-    MultipleLots pt;
+    MultiLevelParkingLot pt;
     Object vehicle;
     @Before
     public void setUp() throws Exception {
        slot=new SlotDetails();
-       pt=new MultipleLots();
+       pt=new MultiLevelParkingLot();
        vehicle=new Object();
     }
 
