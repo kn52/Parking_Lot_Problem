@@ -9,7 +9,7 @@ import java.util.List;
 public class MultiLevelParkingLot {
 
     private int lotCapacity=1;
-    public static List<ParkingLot> parkingLots;
+    public List<ParkingLot> parkingLots;
     private ParkingLot parkingLotStrategy;
 
     public MultiLevelParkingLot(int lotCapacity) {
@@ -38,13 +38,13 @@ public class MultiLevelParkingLot {
 
     public ParkingLot getParkingLot() {
         for (int i=0;i<parkingLots.size();i++){
-            ParkingLot object=this.parkingLots.get(i);
-            for(int j=0;j<object.getTotalCapacity();j++){
-                if(object.getEmptySlots()>0)
-                    return object;
+            ParkingLot lot=this.parkingLots.get(i);
+            for(int j=0;j<lot.getTotalCapacity();j++){
+                if(lot.getEmptySlots()>0)
+                    return lot;
             }
         }
-        throw new ParkingLotException("No empty slot found", ParkingLotException.ExceptionType.NO_SLOT_AVAILABLE);
+        throw new ParkingLotException("No parking lot found", ParkingLotException.ExceptionType.NO_PARKING_LOT_AVAILABLE);
     }
 
     public boolean isVehiclePark(Object vehicle) {
