@@ -1,4 +1,4 @@
-package com.bridgelabz.parking.lot;
+package com.bridgelabz.parking.lot.observer;
 
 public interface ParkingLotObserver {
     void capacityIsFull();

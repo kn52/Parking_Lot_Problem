@@ -1,4 +1,6 @@
-package com.bridgelabz.parking.lot;
+package com.bridgelabz.parking.lot.strategy;
+
+import com.bridgelabz.parking.lot.exception.ParkingLotException;
 
 public class ParkingLotStrategy {
     public int getVehicleSlot(DriverType type) {

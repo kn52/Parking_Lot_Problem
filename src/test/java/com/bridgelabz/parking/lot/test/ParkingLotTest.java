@@ -1,6 +1,11 @@
 package com.bridgelabz.parking.lot.test;
 
-import com.bridgelabz.parking.lot.*;
+import com.bridgelabz.parking.lot.details.MultiLevelParkingLot;
+import com.bridgelabz.parking.lot.details.ParkingLot;
+import com.bridgelabz.parking.lot.exception.ParkingLotException;
+import com.bridgelabz.parking.lot.observer.AirportSecurity;
+import com.bridgelabz.parking.lot.observer.ParkingLotOwner;
+import com.bridgelabz.parking.lot.strategy.DriverType;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +26,7 @@ public class ParkingLotTest {
     @Test
     public void WhengivenVehicleParked_ShouldReturn_True(){
         try{
-            parkingLot.parkVehicle(vehicle,DriverType.NORMAL,"asd");
+            parkingLot.parkVehicle(vehicle, DriverType.NORMAL,"asd");
             boolean isParked= parkingLot.isVehicleParked(vehicle);
             Assert.assertTrue(isParked);
         }catch (ParkingLotException e){

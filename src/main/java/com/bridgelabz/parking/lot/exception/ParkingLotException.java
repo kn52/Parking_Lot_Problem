@@ -1,4 +1,4 @@
-package com.bridgelabz.parking.lot;
+package com.bridgelabz.parking.lot.exception;
 
 public class ParkingLotException extends RuntimeException {
     public enum ExceptionType{

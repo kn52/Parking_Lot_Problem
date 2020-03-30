@@ -1,4 +1,7 @@
-package com.bridgelabz.parking.lot;
+package com.bridgelabz.parking.lot.details;
+
+import com.bridgelabz.parking.lot.exception.ParkingLotException;
+import com.bridgelabz.parking.lot.strategy.DriverType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +10,7 @@ public class MultiLevelParkingLot {
 
     private int lotCapacity=1;
     public static List<ParkingLot> parkingLots;
+    private ParkingLot parkingLotStrategy;
 
     public MultiLevelParkingLot(int lotCapacity) {
         this.lotCapacity = lotCapacity;
@@ -71,5 +75,9 @@ public class MultiLevelParkingLot {
             slot=this.parkingLots.get(i).getSlotNumberByVehicle(vehicle);
         }
         return slot;
+    }
+
+    public void setParkingStrategy(ParkingLot parkingLotStrategy) {
+        this.parkingLotStrategy=parkingLotStrategy;
     }
 }

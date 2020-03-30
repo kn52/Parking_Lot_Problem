@@ -1,9 +1,9 @@
 package com.bridgelabz.parking.lot.test;
 
-import com.bridgelabz.parking.lot.DriverType;
-import com.bridgelabz.parking.lot.ParkingLot;
-import com.bridgelabz.parking.lot.SlotDetails;
-import com.bridgelabz.parking.lot.MultiLevelParkingLot;
+import com.bridgelabz.parking.lot.strategy.DriverType;
+import com.bridgelabz.parking.lot.details.ParkingLot;
+import com.bridgelabz.parking.lot.details.SlotDetails;
+import com.bridgelabz.parking.lot.details.MultiLevelParkingLot;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
