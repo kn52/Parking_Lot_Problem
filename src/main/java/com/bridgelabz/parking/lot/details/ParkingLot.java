@@ -1,6 +1,7 @@
 package com.bridgelabz.parking.lot.details;
 
 import com.bridgelabz.parking.lot.exception.ParkingLotException;
+import com.bridgelabz.parking.lot.observer.ParkingLotInformer;
 import com.bridgelabz.parking.lot.observer.ParkingLotObserver;
 import com.bridgelabz.parking.lot.observer.ParkingLotOwner;
 import com.bridgelabz.parking.lot.strategy.DriverType;
@@ -14,13 +15,13 @@ public class ParkingLot {
 
     public static List<SlotDetails> parkingLotList;
     private int noOfFullSlots;
-    private List<ParkingLotObserver> observers;
+    private ParkingLotInformer observers;
     private int PARKING_LOT_SIZE =1;
     private ParkingLotStrategy parkingStrategy;
 
     public ParkingLot() {
         this.noOfFullSlots =0;
-        this.observers=new ArrayList<>();
+        observers=new ParkingLotInformer();
         this.parkingLotList =new ArrayList<>();
         parkingStrategy=new ParkingLotStrategy();
         this.initializeParkingLot(this.PARKING_LOT_SIZE);
@@ -28,14 +29,13 @@ public class ParkingLot {
 
     public void parkVehicle(Object vehicle, DriverType type, String name) {
         if(this.noOfFullSlots == this.PARKING_LOT_SIZE) {
-            observers.stream().forEach(observer->observer.capacityIsFull());
+            observers.InformObserversNoEmptySlotsAvailable();
             throw new ParkingLotException("Parking is full", ParkingLotException.ExceptionType.NO_PARKING);
         }
         int slotnumber=this.getSlotNumber(type,parkingStrategy);
         SlotDetails slot=new SlotDetails(vehicle,type,slotnumber,name);
         if(slotnumber == ParkingLotOwner.slotNumber)
-            observers.stream().filter(observer->observer instanceof ParkingLotOwner)
-                    .map(ParkingLotOwner.class::cast).findFirst().get().slotOccupied();
+            observers.InformOwner();
         if(!this.parkingLotList.contains(slot)){
             this.parkingLotList.set(slotnumber,slot);
             this.noOfFullSlots++;
@@ -47,7 +47,7 @@ public class ParkingLot {
         if(result)
         {
             this.parkingLotList.remove(vehicle);
-            observers.stream().forEach(observer->observer.capacityIsEmpty());
+            observers.InformObserversEmptySlotsAvailable();
             this.noOfFullSlots--;
             return true;
         }
@@ -70,7 +70,7 @@ public class ParkingLot {
     }
 
     public void registerObserver(ParkingLotObserver observer) {
-        this.observers.add(observer);
+        observers.addObserver(observer);
     }
 
     public void setCapacity(int capacity) {

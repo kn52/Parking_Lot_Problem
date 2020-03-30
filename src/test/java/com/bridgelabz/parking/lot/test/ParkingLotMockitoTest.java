@@ -61,17 +61,17 @@ public class ParkingLotMockitoTest {
     @Test
     public void whengivenDriver_IsHandicapWith_setParkingStrategy_ThrowException() {
         parkingLot.setCapacity(10);
-        Object vehicle1=new Object();
-        Object vehicle2=new Object();
-        try{
-            parkingLot.parkVehicle(vehicle1,DriverType.NORMAL,"asd");
-            parkingLot.parkVehicle(vehicle2,DriverType.NORMAL,"asd");
+        Object vehicle1 = new Object();
+        Object vehicle2 = new Object();
+        try {
+            parkingLot.parkVehicle(vehicle1, DriverType.NORMAL, "asd");
+            parkingLot.parkVehicle(vehicle2, DriverType.NORMAL, "asd");
             parkingLot.setParkingStrategy(parkingLotStrategy);
             when(parkingLotStrategy.getVehicleSlot(DriverType.HANDICAP))
                     .thenThrow(new ParkingLotException("No empty slot found", ParkingLotException.ExceptionType.NO_SLOT_AVAILABLE));
-        }catch(Exception e){
+        } catch (Exception e) {
             parkingLot.getSlotNumber(DriverType.HANDICAP, parkingLotStrategy);
-            Assert.assertEquals("No empty slot found",e.getMessage());
+            Assert.assertEquals("No empty slot found", e.getMessage());
         }
     }
 }
