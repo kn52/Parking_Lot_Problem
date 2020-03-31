@@ -1,6 +1,7 @@
 package com.bridgelabz.parking.lot.strategy;
 
 public enum DriverType {
+
     HANDICAP {
         @Override
         public IParkingStrategy getParkingStrategy(){
