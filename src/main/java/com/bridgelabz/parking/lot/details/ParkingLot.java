@@ -2,7 +2,7 @@ package com.bridgelabz.parking.lot.details;
 
 import com.bridgelabz.parking.lot.exception.ParkingLotException;
 import com.bridgelabz.parking.lot.observer.ParkingLotInformer;
-import com.bridgelabz.parking.lot.observer.ParkingLotObserver;
+import com.bridgelabz.parking.lot.observer.IParkingLotObserver;
 import com.bridgelabz.parking.lot.observer.ParkingLotOwner;
 import com.bridgelabz.parking.lot.strategy.DriverType;
 import com.bridgelabz.parking.lot.strategy.ParkingLotStrategy;
@@ -29,9 +29,8 @@ public class ParkingLot {
 
     public void parkVehicle(Object vehicle, DriverType type, String name) {
         this.getEmptySlots();
-        if(this.isVehicleParked(vehicle)){
-            throw new ParkingLotException("Already Parked", ParkingLotException.ExceptionType.NO_SLOT_AVAILABLE);
-        }
+        if(this.isVehicleParked(vehicle))
+            throw new ParkingLotException("Already Parked", ParkingLotException.ExceptionType.ALREADY_PARKED);
         int slotnumber=this.getSlotNumber(type,parkingStrategy);
         SlotDetails slot=new SlotDetails(vehicle,type,slotnumber,name);
         this.parkingLotList.set(slotnumber,slot);
@@ -39,8 +38,7 @@ public class ParkingLot {
     }
 
     public boolean unParkVehicle(Object vehicle) {
-        boolean result=this.parkingLotList.stream().filter(x-> x.getVehicle() == vehicle).findFirst().isPresent();
-        if(result)
+        if(this.parkingLotList.stream().filter(x-> x.getVehicle() == vehicle).findFirst().isPresent())
         {
             this.parkingLotList.remove(vehicle);
             observers.InformObserversEmptySlotsAvailable();
@@ -65,7 +63,7 @@ public class ParkingLot {
         return slotnumber;
     }
 
-    public void registerObserver(ParkingLotObserver observer) {
+    public void registerObserver(IParkingLotObserver observer) {
         observers.addObserver(observer);
     }
 

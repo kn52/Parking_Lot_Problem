@@ -1,6 +1,6 @@
 package com.bridgelabz.parking.lot.observer;
 
-public interface ParkingLotObserver {
+public interface IParkingLotObserver {
     void capacityIsFull();
     void capacityIsEmpty();
 }

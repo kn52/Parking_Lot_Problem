@@ -3,7 +3,7 @@ package com.bridgelabz.parking.lot.strategy;
 import com.bridgelabz.parking.lot.details.ParkingLot;
 import com.bridgelabz.parking.lot.exception.ParkingLotException;
 
-public class Normal {
+public class Normal implements IParkingStrategy{
     public int getVehicleSlot() {
         for(int i = 0; i< ParkingLot.parkingLotList.size(); i++)
             if (ParkingLot.parkingLotList.get(i).getVehicle() == null)

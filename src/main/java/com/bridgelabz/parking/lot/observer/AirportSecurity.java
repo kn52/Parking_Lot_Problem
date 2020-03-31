@@ -1,6 +1,6 @@
 package com.bridgelabz.parking.lot.observer;
 
-public class AirportSecurity implements ParkingLotObserver {
+public class AirportSecurity implements IParkingLotObserver {
 
     private boolean isCapacityFull;
 

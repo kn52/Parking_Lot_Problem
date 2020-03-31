@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ParkingLotInformer {
-    List<ParkingLotObserver> observerList;
+    List<IParkingLotObserver> observerList;
 
     public ParkingLotInformer() {
         this.observerList=new ArrayList<>();
     }
 
-    public void addObserver(ParkingLotObserver observer) {
+    public void addObserver(IParkingLotObserver observer) {
         this.observerList.add(observer);
     }
 
