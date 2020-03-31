@@ -5,7 +5,7 @@ import com.bridgelabz.parking.lot.exception.ParkingLotException;
 
 import java.util.List;
 
-public class Handicap implements IParkingStrategy {
+public class HandicapDriver implements IParkingStrategy {
 
     @Override
     public ParkingLot getParkingLot(List<ParkingLot> parkingLots){

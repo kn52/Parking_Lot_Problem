@@ -5,13 +5,19 @@ public enum DriverType {
     HANDICAP {
         @Override
         public IParkingStrategy getParkingStrategy(){
-            return new Handicap();
+            return new HandicapDriver();
         }
     }
     ,NORMAL{
         @Override
         public IParkingStrategy getParkingStrategy(){
-            return new Handicap();
+            return new NormalDriver();
+        }
+    },
+    LARGE{
+        @Override
+        public IParkingStrategy getParkingStrategy(){
+            return new LargeVehicleDriver();
         }
     };
     public abstract IParkingStrategy getParkingStrategy();

@@ -5,7 +5,7 @@ import com.bridgelabz.parking.lot.exception.ParkingLotException;
 
 import java.util.List;
 
-public class Normal implements IParkingStrategy{
+public class NormalDriver implements IParkingStrategy{
 
     @Override
     public ParkingLot getParkingLot(List<ParkingLot> parkingLots){
