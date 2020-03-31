@@ -16,7 +16,7 @@ public class SlotDetails {
     public SlotDetails(Object vehicle, Enum driverType, int slot, String attendantName) {
         this.vehicle=vehicle;
         this.driverType = driverType;
-        this.slot=slot;
+        this.slot = slot;
         this.attendantName = attendantName;
         this.parkingTime = LocalDateTime.now();
     }

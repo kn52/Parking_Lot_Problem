@@ -19,7 +19,7 @@ public class ParkingLotTest {
     @Before
     public void setUp() {
         parkingLot =new ParkingLot();
-        multiLevelParkingLot =new MultiLevelParkingLot();
+        multiLevelParkingLot=new MultiLevelParkingLot();
         vehicle=new Object();
     }
 
@@ -40,7 +40,7 @@ public class ParkingLotTest {
             parkingLot.parkVehicle(vehicle,DriverType.NORMAL,"asd");
             parkingLot.parkVehicle(vehicle,DriverType.NORMAL,"asd");
         }catch (ParkingLotException e){
-            Assert.assertEquals("Parking is full",e.getMessage());
+            Assert.assertEquals("Already Parked",e.getMessage());
         }
     }
 
@@ -137,18 +137,18 @@ public class ParkingLotTest {
     public void givenVehicleWithHandicappedDriver_ShouldParkVehicleAtNearestFreeSpace() {
         multiLevelParkingLot.setCapacity(2);
         ParkingLot parkingLot1=new ParkingLot();
-        parkingLot1.setCapacity(10);
+        parkingLot1.setCapacity(3);
         ParkingLot parkingLot2=new ParkingLot();
         parkingLot2.setCapacity(20);
         Object vehicle1=new Object();
         multiLevelParkingLot.addLot(parkingLot1);
         multiLevelParkingLot.addLot(parkingLot2);
-        multiLevelParkingLot.parkVehicle(vehicle, DriverType.NORMAL,"asd");
+        multiLevelParkingLot.parkVehicle(vehicle, DriverType.HANDICAP,"asd");
         multiLevelParkingLot.parkVehicle(new Object(), DriverType.NORMAL,"asd");
         multiLevelParkingLot.parkVehicle(new Object(), DriverType.NORMAL,"asd");
         multiLevelParkingLot.parkVehicle(new Object(), DriverType.NORMAL,"asd");
         multiLevelParkingLot.parkVehicle(new Object(), DriverType.NORMAL,"asd");
-        multiLevelParkingLot.parkVehicle(vehicle1, DriverType.NORMAL,"asd");
+        multiLevelParkingLot.parkVehicle(vehicle1, DriverType.HANDICAP,"asd");
         try {
             boolean isParked= multiLevelParkingLot.isVehiclePark(vehicle1);
             Assert.assertTrue(isParked);

@@ -28,18 +28,14 @@ public class ParkingLot {
     }
 
     public void parkVehicle(Object vehicle, DriverType type, String name) {
-        if(this.noOfFullSlots == this.PARKING_LOT_SIZE) {
-            observers.InformObserversNoEmptySlotsAvailable();
-            throw new ParkingLotException("Parking is full", ParkingLotException.ExceptionType.NO_PARKING);
+        this.getEmptySlots();
+        if(this.isVehicleParked(vehicle)){
+            throw new ParkingLotException("Already Parked", ParkingLotException.ExceptionType.NO_SLOT_AVAILABLE);
         }
         int slotnumber=this.getSlotNumber(type,parkingStrategy);
         SlotDetails slot=new SlotDetails(vehicle,type,slotnumber,name);
-        if(slotnumber == ParkingLotOwner.slotNumber)
-            observers.InformOwner();
-        if(!this.parkingLotList.contains(slot)){
-            this.parkingLotList.set(slotnumber,slot);
-            this.noOfFullSlots++;
-        }
+        this.parkingLotList.set(slotnumber,slot);
+        this.noOfFullSlots++;
     }
 
     public boolean unParkVehicle(Object vehicle) {
@@ -55,10 +51,7 @@ public class ParkingLot {
     }
 
     public boolean isVehicleParked(Object vehicle) {
-        boolean result=this.parkingLotList.stream().filter(x-> x.getVehicle() == vehicle).findFirst().isPresent();
-        if(result)
-            return true;
-        return false;
+        return this.parkingLotList.stream().filter(x-> x.getVehicle() == vehicle).findFirst().isPresent();
     }
 
     private void initializeParkingLot(int size) {
@@ -66,7 +59,10 @@ public class ParkingLot {
     }
 
     public int getSlotNumber(DriverType type, ParkingLotStrategy parkingStrategy) {
-        return parkingStrategy.getVehicleSlot(type);
+        int slotnumber=parkingStrategy.getVehicleSlot(type);
+        if(slotnumber == ParkingLotOwner.slotNumber)
+            observers.InformOwner();
+        return slotnumber;
     }
 
     public void registerObserver(ParkingLotObserver observer) {
@@ -86,6 +82,8 @@ public class ParkingLot {
     }
 
     public int getEmptySlots() {
+        if((this.PARKING_LOT_SIZE-this.noOfFullSlots)==0)
+            observers.InformObserversNoEmptySlotsAvailable();
         return this.PARKING_LOT_SIZE-this.noOfFullSlots;
     }
 

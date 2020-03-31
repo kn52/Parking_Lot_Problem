@@ -5,11 +5,9 @@ import com.bridgelabz.parking.lot.exception.ParkingLotException;
 
 public class Handicap {
     public int getVehicleSlot() {
-        for(int i = 0; i< ParkingLot.parkingLotList.size(); i++) {
-            Object vehicle = ParkingLot.parkingLotList.get(i).getVehicle();
-            if (vehicle == null)
+      for(int i = 0; i< ParkingLot.parkingLotList.size(); i++)
+            if (ParkingLot.parkingLotList.get(i).getVehicle() == null)
                 return i;
-        }
-        throw new ParkingLotException("NO Slot Available", ParkingLotException.ExceptionType.NO_SLOT_AVAILABLE);
+        throw new ParkingLotException("No Slot Available", ParkingLotException.ExceptionType.NO_SLOT_AVAILABLE);
     }
 }

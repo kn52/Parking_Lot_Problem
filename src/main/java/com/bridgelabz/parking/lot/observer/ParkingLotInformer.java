@@ -15,15 +15,15 @@ public class ParkingLotInformer {
     }
 
     public void InformObserversEmptySlotsAvailable() {
-        observerList.stream().forEach(observer->observer.capacityIsEmpty());
+        this.observerList.stream().forEach(observer->observer.capacityIsEmpty());
     }
 
     public void InformOwner() {
-        observerList.stream().filter(observer->observer instanceof ParkingLotOwner)
+        this.observerList.stream().filter(observer->observer instanceof ParkingLotOwner)
                 .map(ParkingLotOwner.class::cast).findFirst().get().slotOccupied();
     }
 
     public void InformObserversNoEmptySlotsAvailable() {
-        observerList.stream().forEach(observer->observer.capacityIsFull());
+        this.observerList.stream().forEach(observer->observer.capacityIsFull());
     }
 }

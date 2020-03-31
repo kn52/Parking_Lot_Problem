@@ -10,7 +10,6 @@ public class MultiLevelParkingLot {
 
     private int lotCapacity=1;
     public List<ParkingLot> parkingLots;
-    private ParkingLot parkingLotStrategy;
 
     public MultiLevelParkingLot(int lotCapacity) {
         this.lotCapacity = lotCapacity;
@@ -75,9 +74,5 @@ public class MultiLevelParkingLot {
             slot=this.parkingLots.get(i).getSlotNumberByVehicle(vehicle);
         }
         return slot;
-    }
-
-    public void setParkingStrategy(ParkingLot parkingLotStrategy) {
-        this.parkingLotStrategy=parkingLotStrategy;
     }
 }
