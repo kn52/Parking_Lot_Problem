@@ -36,14 +36,8 @@ public class MultiLevelParkingLot {
     }
 
     public ParkingLot getParkingLot() {
-        for (int i=0;i<parkingLots.size();i++){
-            ParkingLot lot=this.parkingLots.get(i);
-            for(int j=0;j<lot.getTotalCapacity();j++){
-                if(lot.getEmptySlots()>0)
-                    return lot;
-            }
-        }
-        throw new ParkingLotException("No parking lot found", ParkingLotException.ExceptionType.NO_PARKING_LOT_AVAILABLE);
+        return this.parkingLots.stream().filter(lots->lots.getEmptySlots()>0).findFirst()
+                .orElseThrow(()-> new ParkingLotException("No parking lot found", ParkingLotException.ExceptionType.NO_PARKING_LOT_AVAILABLE));
     }
 
     public boolean isVehiclePark(Object vehicle) {
