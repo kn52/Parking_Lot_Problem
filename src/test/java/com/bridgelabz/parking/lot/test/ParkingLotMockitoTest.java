@@ -12,6 +12,7 @@ import org.junit.Test;
 import static org.mockito.Mockito.*;
 
 public class ParkingLotMockitoTest {
+
     ParkingLot parkingLot;
     ParkingLotStrategy parkingLotStrategy;
     MultiLevelParkingLot multiLevelParkingLot;
@@ -33,8 +34,8 @@ public class ParkingLotMockitoTest {
         try{
             parkingLot.parkVehicle(vehicle1, DriverType.NORMAL,"asd");
             parkingLot.parkVehicle(vehicle2,DriverType.NORMAL,"asd");
-            when(parkingLotStrategy.getVehicleSlot(DriverType.HANDICAP)).thenReturn(9);
-            int slot=parkingLotStrategy.getVehicleSlot(DriverType.HANDICAP);
+            when(parkingLotStrategy.getVehicleSlot()).thenReturn(9);
+            int slot=parkingLotStrategy.getVehicleSlot();
             Assert.assertEquals(9,slot);
         }catch (ParkingLotException e){
             e.printStackTrace();
@@ -50,8 +51,8 @@ public class ParkingLotMockitoTest {
             parkingLot.parkVehicle(vehicle1,DriverType.NORMAL,"asd");
             parkingLot.parkVehicle(vehicle2,DriverType.NORMAL,"asd");
             parkingLot.setParkingStrategy(parkingLotStrategy);
-            when(parkingLotStrategy.getVehicleSlot(DriverType.HANDICAP)).thenReturn(9);
-            int slot=parkingLot.getSlotNumber(DriverType.HANDICAP, parkingLotStrategy);
+            when(parkingLotStrategy.getVehicleSlot()).thenReturn(9);
+            int slot=parkingLot.getSlotNumber(parkingLotStrategy);
             Assert.assertEquals(9,slot);
         }catch (ParkingLotException e){
             e.printStackTrace();
@@ -67,10 +68,10 @@ public class ParkingLotMockitoTest {
             parkingLot.parkVehicle(vehicle1, DriverType.NORMAL, "asd");
             parkingLot.parkVehicle(vehicle2, DriverType.NORMAL, "asd");
             parkingLot.setParkingStrategy(parkingLotStrategy);
-            when(parkingLotStrategy.getVehicleSlot(DriverType.HANDICAP))
+            when(parkingLotStrategy.getVehicleSlot())
                     .thenThrow(new ParkingLotException("No empty slot found", ParkingLotException.ExceptionType.NO_SLOT_AVAILABLE));
         } catch (Exception e) {
-            parkingLot.getSlotNumber(DriverType.HANDICAP, parkingLotStrategy);
+            parkingLot.getSlotNumber(parkingLotStrategy);
             Assert.assertEquals("No empty slot found", e.getMessage());
         }
     }

@@ -31,7 +31,7 @@ public class ParkingLot {
         this.getEmptySlots();
         if(this.isVehicleParked(vehicle))
             throw new ParkingLotException("Already Parked", ParkingLotException.ExceptionType.ALREADY_PARKED);
-        int slotnumber=this.getSlotNumber(type,parkingStrategy);
+        int slotnumber=this.getSlotNumber(parkingStrategy);
         SlotDetails slot=new SlotDetails(vehicle,type,slotnumber,name);
         this.parkingLotList.set(slotnumber,slot);
         this.noOfFullSlots++;
@@ -56,8 +56,8 @@ public class ParkingLot {
         IntStream.range(0,size).forEach(lot->this.parkingLotList.add(new SlotDetails(null)));
     }
 
-    public int getSlotNumber(DriverType type, ParkingLotStrategy parkingStrategy) {
-        int slotnumber=parkingStrategy.getVehicleSlot(type);
+    public int getSlotNumber(ParkingLotStrategy parkingStrategy) {
+        int slotnumber=parkingStrategy.getVehicleSlot();
         if(slotnumber == ParkingLotOwner.slotNumber)
             observers.InformOwner();
         return slotnumber;

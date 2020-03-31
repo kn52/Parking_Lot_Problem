@@ -1,6 +1,7 @@
 package com.bridgelabz.parking.lot.observer;
 
 public class ParkingLotOwner implements IParkingLotObserver {
+
     private boolean isCapacityFull;
     public static int slotNumber=-1;
     private boolean slotIsFull=false;

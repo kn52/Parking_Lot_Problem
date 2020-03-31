@@ -1,13 +1,14 @@
 package com.bridgelabz.parking.lot.strategy;
 
+import com.bridgelabz.parking.lot.details.ParkingLot;
 import com.bridgelabz.parking.lot.exception.ParkingLotException;
 
 public class ParkingLotStrategy {
-    public int getVehicleSlot(DriverType driverType) {
-        int slot=-1;
-        slot=driverType.getParkingStrategy().getVehicleSlot();
-        if(slot!=-1)
-            return slot;
-        throw new ParkingLotException("No Such Driver", ParkingLotException.ExceptionType.NO_SUCH_DRIVER);
+
+    public int getVehicleSlot() {
+        for(int i = 0; i< ParkingLot.parkingLotList.size(); i++)
+            if (ParkingLot.parkingLotList.get(i).getVehicle() == null)
+                return i;
+        throw new ParkingLotException("No Slot Available", ParkingLotException.ExceptionType.NO_SLOT_AVAILABLE);
     }
 }

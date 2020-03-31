@@ -3,6 +3,7 @@ package com.bridgelabz.parking.lot.details;
 import java.time.LocalDateTime;
 
 public class SlotDetails {
+
     private Enum driverType;
     private LocalDateTime parkingTime;
     private String attendantName;
