@@ -40,7 +40,7 @@ public class ParkingLot {
     public boolean unParkVehicle(Object vehicle) {
         if(this.parkingLotList.stream().filter(x-> x.getVehicle() == vehicle).findFirst().isPresent())
         {
-            this.parkingLotList.remove(vehicle);
+            this.parkingLotList.set(this.getSlotNumberByVehicle(vehicle),null);
             observers.InformObserversEmptySlotsAvailable();
             this.noOfFullSlots--;
             return true;
