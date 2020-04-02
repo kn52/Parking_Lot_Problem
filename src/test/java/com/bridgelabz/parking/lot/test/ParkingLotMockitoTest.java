@@ -6,6 +6,7 @@ import com.bridgelabz.parking.lot.exception.ParkingLotException;
 import com.bridgelabz.parking.lot.strategy.DriverType;
 import com.bridgelabz.parking.lot.strategy.ParkingLotStrategy;
 import com.bridgelabz.parking.lot.vehicle.Vehicle;
+import com.bridgelabz.parking.lot.vehicle.VehicleType;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,9 +27,9 @@ public class ParkingLotMockitoTest {
         multiLevelParkingLot=new MultiLevelParkingLot();
         parkingLot=new ParkingLot();
         parkingLotStrategy=mock(ParkingLotStrategy.class);
-        vehicle1=new Vehicle();
-        vehicle2=new Vehicle();
-        vehicle3=new Vehicle();
+        vehicle1=new Vehicle(VehicleType.SMALL);
+        vehicle2=new Vehicle(VehicleType.SMALL);
+        vehicle3=new Vehicle(VehicleType.SMALL);
     }
 
     @Test
@@ -38,9 +39,9 @@ public class ParkingLotMockitoTest {
         try{
             multiLevelParkingLot.parkVehicle(vehicle1, DriverType.NORMAL,"asd");
             multiLevelParkingLot.parkVehicle(vehicle2,DriverType.NORMAL,"asd");
-            when(parkingLotStrategy.getVehicleSlot(any(),anyList())).thenReturn(9);
+            when(parkingLotStrategy.getVehicleSlot(any(), any(),anyList())).thenReturn(11);
             int slot=multiLevelParkingLot.getVehicleSlot(vehicle1);
-            Assert.assertEquals(0,slot);
+            Assert.assertEquals(11,slot);
         }catch (ParkingLotException e){
             e.printStackTrace();
         }
@@ -54,8 +55,8 @@ public class ParkingLotMockitoTest {
             multiLevelParkingLot.parkVehicle(vehicle1,DriverType.NORMAL,"asd");
             multiLevelParkingLot.parkVehicle(vehicle2,DriverType.NORMAL,"asd");
             parkingLot.setParkingStrategy(parkingLotStrategy);
-            when(parkingLotStrategy.getVehicleSlot(any(),anyList())).thenReturn(9);
-            int slot=parkingLot.getSlotNumber(DriverType.HANDICAP, parkingLotStrategy);
+            when(parkingLotStrategy.getVehicleSlot(any(), any(),anyList())).thenReturn(9);
+            int slot=parkingLot.getSlotNumber(vehicle3, DriverType.HANDICAP, parkingLotStrategy);
             Assert.assertEquals(9,slot);
         }catch (ParkingLotException e){
             e.printStackTrace();
@@ -69,10 +70,10 @@ public class ParkingLotMockitoTest {
             multiLevelParkingLot.parkVehicle(vehicle1, DriverType.NORMAL, "asd");
             multiLevelParkingLot.parkVehicle(vehicle2, DriverType.NORMAL, "asd");
             parkingLot.setParkingStrategy(parkingLotStrategy);
-            when(parkingLotStrategy.getVehicleSlot(any(),anyList()))
+            when(parkingLotStrategy.getVehicleSlot(any(), any(),anyList()))
                     .thenThrow(new ParkingLotException("No parking lot found", ParkingLotException.ExceptionType.NO_SLOT_AVAILABLE));
         } catch (Exception e) {
-            parkingLot.getSlotNumber(DriverType.HANDICAP, parkingLotStrategy);
+            parkingLot.getSlotNumber(vehicle3, DriverType.HANDICAP, parkingLotStrategy);
             Assert.assertEquals("No parking lot found", e.getMessage());
         }
     }

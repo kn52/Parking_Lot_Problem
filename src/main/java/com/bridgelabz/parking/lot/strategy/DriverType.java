@@ -1,5 +1,7 @@
 package com.bridgelabz.parking.lot.strategy;
 
+import com.bridgelabz.parking.lot.vehicle.LargeDriver;
+
 public enum DriverType {
 
     HANDICAP {
@@ -12,12 +14,6 @@ public enum DriverType {
         @Override
         public IParkingStrategy getParkingStrategy(){
             return new NormalDriver();
-        }
-    },
-    LARGE{
-        @Override
-        public IParkingStrategy getParkingStrategy(){
-            return new LargeDriver();
         }
     };
     public abstract IParkingStrategy getParkingStrategy();

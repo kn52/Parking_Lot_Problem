@@ -1,12 +1,10 @@
 package com.bridgelabz.parking.lot.strategy;
 
 import com.bridgelabz.parking.lot.details.ParkingLot;
-import com.bridgelabz.parking.lot.details.SlotDetails;
 import com.bridgelabz.parking.lot.exception.ParkingLotException;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class NormalDriver implements IParkingStrategy{
 
@@ -20,11 +18,7 @@ public class NormalDriver implements IParkingStrategy{
     }
 
     @Override
-    public int getVehicleSlot(List<SlotDetails> parkingLotList) {
-        for(int i = parkingLotList.size()-1; i >= 0; i++)
-            if (parkingLotList.get(i).getVehicle() == null){
-                return i;
-            }
-        throw new ParkingLotException("No Slot Available", ParkingLotException.ExceptionType.NO_SLOT_AVAILABLE);
+    public int getVehicleSlot(List<Integer> emptySlotList) {
+        return emptySlotList.get(emptySlotList.size()-1);
     }
 }

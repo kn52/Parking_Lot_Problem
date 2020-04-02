@@ -7,6 +7,7 @@ import com.bridgelabz.parking.lot.observer.AirportSecurity;
 import com.bridgelabz.parking.lot.observer.ParkingLotOwner;
 import com.bridgelabz.parking.lot.strategy.DriverType;
 import com.bridgelabz.parking.lot.vehicle.Vehicle;
+import com.bridgelabz.parking.lot.vehicle.VehicleType;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,12 +27,23 @@ public class ParkingLotTest {
     public void setUp() {
         parkingLot =new ParkingLot();
         multiLevelParkingLot=new MultiLevelParkingLot();
-        vehicle1=new Vehicle();
-        vehicle2=new Vehicle();
-        vehicle3=new Vehicle();
-        vehicle4=new Vehicle();
-        vehicle5=new Vehicle();
-        vehicle6=new Vehicle();
+        vehicle1=new Vehicle(VehicleType.SMALL);
+        vehicle2=new Vehicle(VehicleType.SMALL);
+        vehicle3=new Vehicle(VehicleType.SMALL);
+        vehicle4=new Vehicle(VehicleType.SMALL);
+        vehicle5=new Vehicle(VehicleType.LARGE);
+        vehicle6=new Vehicle(VehicleType.SMALL);
+    }
+
+    @Test
+    public void WhengivenVehicle_ShouldReturn_True(){
+        try{
+            parkingLot.parkVehicle(vehicle1, DriverType.NORMAL,"asd");
+            boolean isParked= parkingLot.isVehicleParked(vehicle1);
+            Assert.assertTrue(isParked);
+        }catch (ParkingLotException e){
+            e.printStackTrace();
+        }
     }
 
     @Test
@@ -92,6 +104,7 @@ public class ParkingLotTest {
         }
     }
 
+
     @Test
     public void WhengivenParkingLot_IsFull_AgainAvailable_Should_InformOwner_ReturnFalse() {
         ParkingLotOwner owner=new ParkingLotOwner();
@@ -117,7 +130,7 @@ public class ParkingLotTest {
         parkingLot.parkVehicle(vehicle1,DriverType.NORMAL,"asd");
         try {
             int slotNumber= parkingLot.getSlotNumberByVehicle(vehicle1);
-            Assert.assertEquals(0,slotNumber);
+            Assert.assertEquals(1,slotNumber);
         } catch (ParkingLotException e) { e.printStackTrace();  }
     }
 
@@ -127,6 +140,7 @@ public class ParkingLotTest {
         parkingLot.registerObserver(owner);
         owner.setOwnerSlot(0);
         parkingLot.parkVehicle(vehicle1,DriverType.NORMAL,"asd");
+        parkingLot.parkVehicle(vehicle2,DriverType.NORMAL,"asd");
         try {
             boolean slotStatus=owner.getOwnerSlotStatus();
             Assert.assertTrue(slotStatus);
@@ -184,9 +198,9 @@ public class ParkingLotTest {
         multiLevelParkingLot.parkVehicle(vehicle2, DriverType.NORMAL,"asd");
         multiLevelParkingLot.parkVehicle(vehicle3, DriverType.HANDICAP,"asd");
         multiLevelParkingLot.parkVehicle(vehicle4, DriverType.NORMAL,"asd");
-        multiLevelParkingLot.parkVehicle(vehicle5, DriverType.LARGE,"asd");
-        multiLevelParkingLot.parkVehicle(vehicle6, DriverType.NORMAL,"asd");
 
+        multiLevelParkingLot.parkVehicle(vehicle6, DriverType.NORMAL,"asd");
+        multiLevelParkingLot.parkVehicle(vehicle5, DriverType.NORMAL,"asd");
         try {
             boolean isParked= multiLevelParkingLot.isVehiclePark(vehicle5);
             Assert.assertTrue(isParked);

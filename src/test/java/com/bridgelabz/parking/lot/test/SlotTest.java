@@ -5,6 +5,7 @@ import com.bridgelabz.parking.lot.details.ParkingLot;
 import com.bridgelabz.parking.lot.details.SlotDetails;
 import com.bridgelabz.parking.lot.details.MultiLevelParkingLot;
 import com.bridgelabz.parking.lot.vehicle.Vehicle;
+import com.bridgelabz.parking.lot.vehicle.VehicleType;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +18,7 @@ public class SlotTest {
     public void setUp() throws Exception {
        slot=new SlotDetails();
        pt=new MultiLevelParkingLot();
-       vehicle=new Vehicle();
+       vehicle=new Vehicle(VehicleType.SMALL);
     }
 
     @Test
@@ -37,11 +38,11 @@ public class SlotTest {
         pt.addLot(p1);
         pt.addLot(p2);
         pt.parkVehicle(vehicle, DriverType.NORMAL,"asd");
-        pt.parkVehicle(new Vehicle(), DriverType.NORMAL,"asd");
-        pt.parkVehicle(new Vehicle(), DriverType.NORMAL,"asd");
-        pt.parkVehicle(new Vehicle(), DriverType.NORMAL,"asd");
-        pt.parkVehicle(new Vehicle(), DriverType.NORMAL,"asd");
-        pt.parkVehicle(new Vehicle(), DriverType.NORMAL,"asd");
-        pt.parkVehicle(new Vehicle(), DriverType.NORMAL,"asd");
+        pt.parkVehicle(new Vehicle(VehicleType.SMALL), DriverType.NORMAL,"asd");
+        pt.parkVehicle(new Vehicle(VehicleType.SMALL), DriverType.NORMAL,"asd");
+        pt.parkVehicle(new Vehicle(VehicleType.SMALL), DriverType.NORMAL,"asd");
+        pt.parkVehicle(new Vehicle(VehicleType.SMALL), DriverType.NORMAL,"asd");
+        pt.parkVehicle(new Vehicle(VehicleType.SMALL), DriverType.NORMAL,"asd");
+        pt.parkVehicle(new Vehicle(VehicleType.SMALL), DriverType.NORMAL,"asd");
     }
 }

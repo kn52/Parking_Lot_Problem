@@ -19,12 +19,14 @@ public class ParkingLot {
     private ParkingLotInformer observers;
     private int PARKING_LOT_SIZE = 2;
     private ParkingLotStrategy parkingStrategy;
+    private Vehicle vehicle;
 
     public ParkingLot() {
         this.noOfFullSlots = 0;
         this.observers=new ParkingLotInformer();
         this.parkingLotList = new ArrayList<>();
         this.parkingStrategy = new ParkingLotStrategy();
+        this.vehicle=new Vehicle();
         this.initializeParkingLot();
     }
 
@@ -32,7 +34,7 @@ public class ParkingLot {
         this.getEmptySlots();
         if(this.isVehicleParked(vehicle))
             throw new ParkingLotException("Already Parked", ParkingLotException.ExceptionType.ALREADY_PARKED);
-        int slotnumber=this.getSlotNumber(type,parkingStrategy);
+        int slotnumber=this.getSlotNumber(vehicle,type,parkingStrategy);
         SlotDetails slot=new SlotDetails(vehicle,type,slotnumber,name);
         this.parkingLotList.set(slotnumber,slot);
         this.noOfFullSlots++;
@@ -59,8 +61,8 @@ public class ParkingLot {
         IntStream.range(0,size).forEach(lot->parkingLotList.add(new SlotDetails(null)));
     }
 
-    public int getSlotNumber(DriverType type, ParkingLotStrategy parkingStrategy) {
-        int slotnumber=parkingStrategy.getVehicleSlot(type,this.parkingLotList);
+    public int getSlotNumber(Vehicle vehicle, DriverType type, ParkingLotStrategy parkingStrategy) {
+        int slotnumber=parkingStrategy.getVehicleSlot(vehicle,type,this.parkingLotList);
         if(slotnumber == ParkingLotOwner.slotNumber)
             observers.InformOwner();
         return slotnumber;
