@@ -17,7 +17,7 @@ public enum DriverType {
     LARGE{
         @Override
         public IParkingStrategy getParkingStrategy(){
-            return new LargeVehicleDriver();
+            return new LargeDriver();
         }
     };
     public abstract IParkingStrategy getParkingStrategy();

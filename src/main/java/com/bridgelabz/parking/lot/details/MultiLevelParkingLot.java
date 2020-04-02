@@ -2,6 +2,7 @@ package com.bridgelabz.parking.lot.details;
 
 import com.bridgelabz.parking.lot.exception.ParkingLotException;
 import com.bridgelabz.parking.lot.strategy.DriverType;
+import com.bridgelabz.parking.lot.vehicle.Vehicle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ public class MultiLevelParkingLot {
         return false;
     }
 
-    public void parkVehicle(Object vehicle, DriverType driverType, String name) throws ParkingLotException {
+    public void parkVehicle(Vehicle vehicle, DriverType driverType, String name) throws ParkingLotException {
         ParkingLot parkingLot=this.getParkingLot(driverType);
         parkingLot.parkVehicle(vehicle, driverType, name);
     }
@@ -39,7 +40,7 @@ public class MultiLevelParkingLot {
         return driverType.getParkingStrategy().getParkingLot(this.parkingLots);
     }
 
-    public boolean isVehiclePark(Object vehicle) {
+    public boolean isVehiclePark(Vehicle vehicle) {
         for (int i = 0; i < this.parkingLots.size(); i++) {
             if (this.parkingLots.get(i).isVehicleParked(vehicle)) {
                 return true;
@@ -48,7 +49,7 @@ public class MultiLevelParkingLot {
         return false;
     }
 
-    public boolean unParkVehicle(Object vehicle) throws ParkingLotException {
+    public boolean unParkVehicle(Vehicle vehicle) throws ParkingLotException {
         for (int parkingLot = 0; parkingLot < this.parkingLots.size(); parkingLot++) {
             if (this.parkingLots.get(parkingLot).unParkVehicle(vehicle)) {
                 return true;
@@ -61,7 +62,7 @@ public class MultiLevelParkingLot {
         this.lotCapacity=lotcapacity;
     }
 
-    public int getvehicleSlot(Object vehicle) {
+    public int getVehicleSlot(Vehicle vehicle) {
         int slot=-1;
         for (int i=0;i<parkingLots.size();i++){
             slot=this.parkingLots.get(i).getSlotNumberByVehicle(vehicle);

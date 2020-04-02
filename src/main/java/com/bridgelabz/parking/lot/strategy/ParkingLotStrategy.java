@@ -1,17 +1,18 @@
 package com.bridgelabz.parking.lot.strategy;
 
-import com.bridgelabz.parking.lot.details.ParkingLot;
-import com.bridgelabz.parking.lot.exception.ParkingLotException;
+import com.bridgelabz.parking.lot.details.SlotDetails;
 
 import java.util.List;
 
 public class ParkingLotStrategy {
-
-    public int getVehicleSlot() {
-        for(int i = 0; i< ParkingLot.parkingLotList.size(); i++)
-            if (ParkingLot.parkingLotList.get(i).getVehicle() == null){
-                return i;
-            }
-        throw new ParkingLotException("No Slot Available", ParkingLotException.ExceptionType.NO_SLOT_AVAILABLE);
+    public int getVehicleSlot(DriverType driverType,List<SlotDetails> parkingLotList) {
+        IParkingStrategy iParkingStrategy= driverType.getParkingStrategy();
+        int slotNumber=iParkingStrategy.getVehicleSlot(parkingLotList);
+        return slotNumber;
+//        for(int i = 0; i< parkingLotList.size(); i++)
+//            if (parkingLotList.get(i).getVehicle() == null){
+//                return i;
+//            }
+//        throw new ParkingLotException("No Slot Available", ParkingLotException.ExceptionType.NO_SLOT_AVAILABLE);
     }
 }

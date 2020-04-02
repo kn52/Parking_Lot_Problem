@@ -1,5 +1,7 @@
 package com.bridgelabz.parking.lot.details;
 
+import com.bridgelabz.parking.lot.vehicle.Vehicle;
+
 import java.time.LocalDateTime;
 
 public class SlotDetails {
@@ -8,13 +10,13 @@ public class SlotDetails {
     private LocalDateTime parkingTime;
     private String attendantName;
     private int slot;
-    private Object vehicle;
+    private Vehicle vehicle;
 
-    public SlotDetails(Object vehicle) {
+    public SlotDetails(Vehicle vehicle) {
         this.vehicle=vehicle;
     }
 
-    public SlotDetails(Object vehicle, Enum driverType, int slot, String attendantName) {
+    public SlotDetails(Vehicle vehicle, Enum driverType, int slot, String attendantName) {
         this.vehicle=vehicle;
         this.driverType = driverType;
         this.slot = slot;
@@ -24,7 +26,7 @@ public class SlotDetails {
 
     public SlotDetails() { }
 
-    public Object getVehicle() {
+    public Vehicle getVehicle() {
         return vehicle;
     }
 
@@ -36,13 +38,13 @@ public class SlotDetails {
         this.slot=slot;
     }
 
-    public void setVehicleSlot(Object vehicle, int slot, String attendant) {
+    public void setVehicleSlot(Vehicle vehicle, int slot, String attendant) {
         this.vehicle=vehicle;
         this.slot=slot;
         this.attendantName =attendant;
     }
 
-    public int getSlot(Object vehicle) {
+    public int getSlot(Vehicle vehicle) {
         if(this.vehicle.equals(vehicle))
             return slot;
         return 0;

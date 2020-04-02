@@ -6,6 +6,7 @@ import com.bridgelabz.parking.lot.observer.IParkingLotObserver;
 import com.bridgelabz.parking.lot.observer.ParkingLotOwner;
 import com.bridgelabz.parking.lot.strategy.DriverType;
 import com.bridgelabz.parking.lot.strategy.ParkingLotStrategy;
+import com.bridgelabz.parking.lot.vehicle.Vehicle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,31 +14,31 @@ import java.util.stream.IntStream;
 
 public class ParkingLot {
 
-    public static List<SlotDetails> parkingLotList;
+    private List<SlotDetails> parkingLotList;
     private int noOfFullSlots;
     private ParkingLotInformer observers;
-    private int PARKING_LOT_SIZE =1;
+    private int PARKING_LOT_SIZE = 2;
     private ParkingLotStrategy parkingStrategy;
 
     public ParkingLot() {
-        this.noOfFullSlots =0;
-        observers=new ParkingLotInformer();
-        this.parkingLotList =new ArrayList<>();
-        parkingStrategy=new ParkingLotStrategy();
-        this.initializeParkingLot(this.PARKING_LOT_SIZE);
+        this.noOfFullSlots = 0;
+        this.observers=new ParkingLotInformer();
+        this.parkingLotList = new ArrayList<>();
+        this.parkingStrategy = new ParkingLotStrategy();
+        this.initializeParkingLot();
     }
 
-    public void parkVehicle(Object vehicle, DriverType type, String name) {
+    public void parkVehicle(Vehicle vehicle, DriverType type, String name) {
         this.getEmptySlots();
         if(this.isVehicleParked(vehicle))
             throw new ParkingLotException("Already Parked", ParkingLotException.ExceptionType.ALREADY_PARKED);
-        int slotnumber=this.getSlotNumber(parkingStrategy);
+        int slotnumber=this.getSlotNumber(type,parkingStrategy);
         SlotDetails slot=new SlotDetails(vehicle,type,slotnumber,name);
         this.parkingLotList.set(slotnumber,slot);
         this.noOfFullSlots++;
     }
 
-    public boolean unParkVehicle(Object vehicle) {
+    public boolean unParkVehicle(Vehicle vehicle) {
         if(this.parkingLotList.stream().filter(x-> x.getVehicle() == vehicle).findFirst().isPresent())
         {
             this.parkingLotList.set(this.getSlotNumberByVehicle(vehicle),null);
@@ -48,16 +49,18 @@ public class ParkingLot {
         return false;
     }
 
-    public boolean isVehicleParked(Object vehicle) {
-        return this.parkingLotList.stream().filter(x-> x.getVehicle() == vehicle).findFirst().isPresent();
+    public boolean isVehicleParked(Vehicle vehicle) {
+        boolean value=parkingLotList.stream().filter(x-> x.getVehicle() == vehicle).findFirst().isPresent();
+        return value;
     }
 
-    private void initializeParkingLot(int size) {
-        IntStream.range(0,size).forEach(lot->this.parkingLotList.add(new SlotDetails(null)));
+    private void initializeParkingLot() {
+        int size=this.PARKING_LOT_SIZE;
+        IntStream.range(0,size).forEach(lot->parkingLotList.add(new SlotDetails(null)));
     }
 
-    public int getSlotNumber(ParkingLotStrategy parkingStrategy) {
-        int slotnumber=parkingStrategy.getVehicleSlot();
+    public int getSlotNumber(DriverType type, ParkingLotStrategy parkingStrategy) {
+        int slotnumber=parkingStrategy.getVehicleSlot(type,this.parkingLotList);
         if(slotnumber == ParkingLotOwner.slotNumber)
             observers.InformOwner();
         return slotnumber;
@@ -69,13 +72,13 @@ public class ParkingLot {
 
     public void setCapacity(int capacity) {
         this.PARKING_LOT_SIZE = capacity;
-        this.initializeParkingLot(this.PARKING_LOT_SIZE);
+        this.initializeParkingLot();
     }
     public int getTotalCapacity() {
         return this.PARKING_LOT_SIZE;
     }
 
-    public int getSlotNumberByVehicle(Object vehicle) {
+    public int getSlotNumberByVehicle(Vehicle vehicle) {
         return this.parkingLotList.stream().filter(x-> x.getVehicle() == vehicle).findFirst().get().getVehicleSlot();
     }
 
@@ -88,4 +91,5 @@ public class ParkingLot {
     public void setParkingStrategy(ParkingLotStrategy parkingLotStrategy) {
         this.parkingStrategy=parkingLotStrategy;
     }
+
 }
