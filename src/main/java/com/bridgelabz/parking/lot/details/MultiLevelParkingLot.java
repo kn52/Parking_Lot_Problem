@@ -3,8 +3,10 @@ package com.bridgelabz.parking.lot.details;
 import com.bridgelabz.parking.lot.exception.ParkingLotException;
 import com.bridgelabz.parking.lot.strategy.DriverType;
 import com.bridgelabz.parking.lot.vehicle.Vehicle;
+import com.bridgelabz.parking.lot.vehicle.VehicleDetails;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class MultiLevelParkingLot {
@@ -76,5 +78,13 @@ public class MultiLevelParkingLot {
             slotNumbers.addAll(this.parkingLots.get(i).getSlotNumberByColor());
         }
         return slotNumbers;
+    }
+
+    public List<VehicleDetails> getVehicleDetails() {
+        List<VehicleDetails> vehicleDetail=new ArrayList<>();
+        for(int i=0;i<parkingLots.size();i++){
+            vehicleDetail.addAll(this.parkingLots.get(i).getVehicleDetails());
+        }
+        return vehicleDetail;
     }
 }

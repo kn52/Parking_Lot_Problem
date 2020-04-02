@@ -30,6 +30,10 @@ public class SlotDetails {
         return vehicle;
     }
 
+    public String getAttendantName() {
+        return attendantName;
+    }
+
     public int getVehicleSlot() {
         return slot;
     }

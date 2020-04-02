@@ -7,10 +7,13 @@ import com.bridgelabz.parking.lot.observer.AirportSecurity;
 import com.bridgelabz.parking.lot.observer.ParkingLotOwner;
 import com.bridgelabz.parking.lot.strategy.DriverType;
 import com.bridgelabz.parking.lot.vehicle.Vehicle;
+import com.bridgelabz.parking.lot.vehicle.VehicleDetails;
 import com.bridgelabz.parking.lot.vehicle.VehicleType;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.List;
 
 public class ParkingLotTest {
 
@@ -32,15 +35,15 @@ public class ParkingLotTest {
         parkingLot =new ParkingLot();
         multiLevelParkingLot=new MultiLevelParkingLot();
         vehicle1=new Vehicle("BLACK",VehicleType.SMALL,1274,"BMW");
-        vehicle2=new Vehicle("WHITE",VehicleType.LARGE,3425,"TOYOTA");
-        vehicle3=new Vehicle("WHITE",VehicleType.SMALL,7454,"TOYOTA");
-        vehicle4=new Vehicle("BLACK",VehicleType.SMALL,9769,"TOYOTA");
+        vehicle2=new Vehicle("BLUE",VehicleType.LARGE,3425,"TOYOTA");
+        vehicle3=new Vehicle("WHITE",VehicleType.LARGE,7454,"TOYOTA");
+        vehicle4=new Vehicle("BLUE",VehicleType.SMALL,9769,"TOYOTA");
         vehicle5=new Vehicle("BLUE",VehicleType.LARGE,7064,"BMW");
         vehicle6=new Vehicle("WHITE",VehicleType.SMALL,2534,"TOYOTA");
         vehicle7=new Vehicle("WHITE",VehicleType.SMALL,8064,"BMW");
         vehicle8=new Vehicle("BLUE",VehicleType.SMALL,0011,"BMW");
-        vehicle9=new Vehicle("BLUE",VehicleType.LARGE,1079,"BMW");
-        vehicle10=new Vehicle("WHITE",VehicleType.SMALL,7324,"TOYOTA");
+        vehicle9=new Vehicle("WHITE",VehicleType.LARGE,1079,"BMW");
+        vehicle10=new Vehicle("BLUE",VehicleType.SMALL,7324,"TOYOTA");
     }
 
     @Test
@@ -216,7 +219,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void givenVehicleIs__ShouldBe_Return_TotalNumberOfSlots (){
+    public void givenVehicleIsParked_ShouldReturn_NumberOfSlots (){
         multiLevelParkingLot.setCapacity(2);
         ParkingLot parkingLot1=new ParkingLot();
         ParkingLot parkingLot2=new ParkingLot();
@@ -235,7 +238,35 @@ public class ParkingLotTest {
         try {
             int slotNumberList=0;
             slotNumberList=multiLevelParkingLot.getLocationOfWhiteVehicle().size();
-            Assert.assertEquals(4,slotNumberList);
+            Assert.assertEquals(2,slotNumberList);
+        } catch (ParkingLotException e) { e.printStackTrace(); }
+    }
+
+    @Test
+    public void givenVehicleIsParked_ShouldReturn_VehicleInformation (){
+        multiLevelParkingLot.setCapacity(2);
+        ParkingLot parkingLot1=new ParkingLot();
+        ParkingLot parkingLot2=new ParkingLot();
+        parkingLot1.setCapacity(7);
+        multiLevelParkingLot.addLot(parkingLot1);
+
+        parkingLot2.setCapacity(8);
+        multiLevelParkingLot.addLot(parkingLot2);
+
+        multiLevelParkingLot.parkVehicle(vehicle1, DriverType.HANDICAP,"asd");
+        multiLevelParkingLot.parkVehicle(vehicle2, DriverType.NORMAL,"asd");
+        multiLevelParkingLot.parkVehicle(vehicle3, DriverType.HANDICAP,"asd");
+        multiLevelParkingLot.parkVehicle(vehicle4, DriverType.NORMAL,"asd");
+        multiLevelParkingLot.parkVehicle(vehicle5, DriverType.NORMAL,"asd");
+        multiLevelParkingLot.parkVehicle(vehicle6, DriverType.NORMAL,"asd");
+        multiLevelParkingLot.parkVehicle(vehicle7, DriverType.HANDICAP,"asd");
+        multiLevelParkingLot.parkVehicle(vehicle8, DriverType.NORMAL,"asd");
+        multiLevelParkingLot.parkVehicle(vehicle9, DriverType.HANDICAP,"asd");
+        multiLevelParkingLot.parkVehicle(vehicle10, DriverType.NORMAL,"asd");
+        try {
+            int vehicleDetailsSize=0;
+            vehicleDetailsSize=multiLevelParkingLot.getVehicleDetails().size();
+            Assert.assertEquals(3,vehicleDetailsSize);
         } catch (ParkingLotException e) { e.printStackTrace(); }
     }
 }
