@@ -5,6 +5,7 @@ import com.bridgelabz.parking.lot.strategy.DriverType;
 import com.bridgelabz.parking.lot.vehicle.Vehicle;
 import com.bridgelabz.parking.lot.vehicle.VehicleDetails;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -97,10 +98,11 @@ public class MultiLevelParkingLot {
     }
 
 
-
-
-
-
-
-
+    public List<Vehicle> getVehicleDetailsByTime(LocalDateTime localDateTime) {
+        List<Vehicle> vehicleDetail=new ArrayList<>();
+        for(int i=0;i<parkingLots.size();i++){
+            vehicleDetail.addAll(this.parkingLots.get(i).getVehicleDetailsByTime(localDateTime));
+        }
+        return vehicleDetail;
+    }
 }

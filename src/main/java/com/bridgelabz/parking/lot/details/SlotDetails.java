@@ -34,6 +34,10 @@ public class SlotDetails {
         return attendantName;
     }
 
+    public LocalDateTime getParkingTime() {
+        return parkingTime;
+    }
+
     public int getVehicleSlot() {
         return slot;
     }

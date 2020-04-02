@@ -10,6 +10,7 @@ import com.bridgelabz.parking.lot.vehicle.Vehicle;
 import com.bridgelabz.parking.lot.vehicle.VehicleDetails;
 import com.bridgelabz.parking.lot.vehicle.VehicleType;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -122,6 +123,16 @@ public class ParkingLot {
             SlotDetails v=this.parkingLotList.get(i);
             if( v.getVehicle()!= null && v.getVehicle().getVehicleModel().equals(vehicleModel))
                 vehicleList.add(v.getVehicleSlot());
+        }
+        return vehicleList;
+    }
+
+    public List<Vehicle> getVehicleDetailsByTime(LocalDateTime localDateTime) {
+        List<Vehicle> vehicleList=new ArrayList<>();
+        for(int i=0;i<this.PARKING_LOT_SIZE;i++){
+            SlotDetails v=this.parkingLotList.get(i);
+            if( v.getVehicle()!= null && localDateTime.getMinute()-v.getParkingTime().getMinute()<30)
+                vehicleList.add(v.getVehicle());
         }
         return vehicleList;
     }
