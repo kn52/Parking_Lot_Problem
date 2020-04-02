@@ -143,4 +143,14 @@ public class ParkingLot {
         List<Integer> handicapSlotNumbers=new ArrayList<>(Arrays.asList(1,2,3,4));
         return handicapSlotNumbers;
     }
+
+    public List<Vehicle> getAllVehicleDetails() {
+        List<Vehicle> vehicleList=new ArrayList<>();
+        for(int i=0;i<this.PARKING_LOT_SIZE;i++){
+            SlotDetails v=this.parkingLotList.get(i);
+            if( v.getVehicle()!= null)
+                vehicleList.add(v.getVehicle());
+        }
+        return vehicleList;
+    }
 }

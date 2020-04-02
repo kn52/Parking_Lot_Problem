@@ -113,4 +113,12 @@ public class MultiLevelParkingLot {
         }
         return vehicleDetail;
     }
+
+    public List<Vehicle> getAllVehicleDetails() {
+        List<Vehicle> vehicleDetail=new ArrayList<>();
+        for(int i=0;i<parkingLots.size();i++){
+            vehicleDetail.addAll(this.parkingLots.get(i).getAllVehicleDetails());
+        }
+        return vehicleDetail;
+    }
 }
