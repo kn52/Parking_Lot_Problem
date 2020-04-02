@@ -218,7 +218,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void givenVehicleIsParked_ShouldReturn_NumberOfSlots (){
+    public void givenVehicleIsParked_ShouldReturn_NumberOfSlotsByColor (){
         multiLevelParkingLot.setCapacity(2);
         ParkingLot parkingLot1=new ParkingLot();
         ParkingLot parkingLot2=new ParkingLot();
@@ -242,7 +242,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void givenVehicleIsParked_ShouldReturn_VehicleInformation (){
+    public void givenVehicleIsParked_ShouldReturn_VehicleInformationByModelAndColor (){
         multiLevelParkingLot.setCapacity(2);
         ParkingLot parkingLot1=new ParkingLot();
         ParkingLot parkingLot2=new ParkingLot();

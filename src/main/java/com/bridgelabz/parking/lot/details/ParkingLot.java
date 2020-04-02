@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class ParkingLot {
@@ -100,13 +101,10 @@ public class ParkingLot {
     }
 
     public List<Integer> getVehicleDetailsByVehicleColor(String vehicleColor) {
-        List<Integer> vehicleList=new ArrayList<>();
-        for(int i=0;i<this.PARKING_LOT_SIZE;i++){
-            SlotDetails v=this.parkingLotList.get(i);
-            if( v.getVehicle()!= null && v.getVehicle().getVehicleColor().equals(vehicleColor))
-                vehicleList.add(v.getVehicleSlot());
-        }
-        return vehicleList;
+        List<Integer> vehicleList=this.parkingLotList.stream()
+                .filter(lots->lots.getVehicle() != null && lots.getVehicle().getVehicleColor().equals(vehicleColor))
+                .map(lots->lots.getVehicleSlot()).collect(Collectors.toList());
+           return vehicleList;
     }
 
     public List<VehicleDetails> getVehicleDetailsByVehicleModelAndColor(String vehicleModel, String vehicleColor) {
