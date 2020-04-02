@@ -115,13 +115,10 @@ public class ParkingLot {
         return details;
     }
 
-    public List<Integer> getVehicleDetailsByModel(String vehicleModel) {
-        List<Integer> vehicleList=new ArrayList<>();
-        for(int i=0;i<this.PARKING_LOT_SIZE;i++){
-            SlotDetails v=this.parkingLotList.get(i);
-            if( v.getVehicle()!= null && v.getVehicle().getVehicleModel().equals(vehicleModel))
-                vehicleList.add(v.getVehicleSlot());
-        }
+    public List<Integer> getVehicleDetailsByVehicleModel(String vehicleModel) {
+        List<Integer> vehicleList=this.parkingLotList.stream()
+                .filter(lots->lots.getVehicle() != null && lots.getVehicle().getVehicleModel().equals(vehicleModel))
+                .map(lots->lots.getVehicleSlot()).collect(Collectors.toList());
         return vehicleList;
     }
 
