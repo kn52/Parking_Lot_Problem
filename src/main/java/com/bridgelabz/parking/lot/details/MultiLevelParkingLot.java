@@ -96,25 +96,22 @@ public class MultiLevelParkingLot {
 
     public List<Vehicle> getVehicleDetailsByTime(LocalDateTime localDateTime) {
         List<Vehicle> vehicleDetail=new ArrayList<>();
-        for(int i=0;i<parkingLots.size();i++){
-            vehicleDetail.addAll(this.parkingLots.get(i).getVehicleDetailsByTime(localDateTime));
-        }
+        this.parkingLots.stream()
+                .forEach(lots->vehicleDetail.addAll(lots.getVehicleDetailsByTime(localDateTime)));
         return vehicleDetail;
     }
 
     public List<Integer> getVehicleHandiCapSlotDetails() {
         List<Integer> vehicleDetail=new ArrayList<>();
-        for(int i=0;i<parkingLots.size();i++){
-            vehicleDetail.addAll(this.parkingLots.get(i).getVehicleHandiCapSlotDetails());
-        }
+        this.parkingLots.stream()
+                .forEach(lots->vehicleDetail.addAll(lots.getVehicleHandiCapSlotDetails()));
         return vehicleDetail;
     }
 
     public List<Vehicle> getAllVehicleDetails() {
         List<Vehicle> vehicleDetail=new ArrayList<>();
-        for(int i=0;i<parkingLots.size();i++){
-            vehicleDetail.addAll(this.parkingLots.get(i).getAllVehicleDetails());
-        }
+        this.parkingLots.stream()
+                .forEach(lots->vehicleDetail.addAll(lots.getAllVehicleDetails()));
         return vehicleDetail;
     }
 }
