@@ -95,24 +95,22 @@ public class ParkingLot {
         this.parkingStrategy=parkingLotStrategy;
     }
 
-    public List<Integer> getSlotNumberByColor() {
+    public List<Integer> getVehicleDetailsByVehicleColor(String vehicleColor) {
         List<Integer> indexList=new ArrayList<>();
         for(int i=0;i<this.PARKING_LOT_SIZE;i++){
             SlotDetails v=this.parkingLotList.get(i);
-            if( v.getVehicle()!= null && v.getVehicle().getVehicleColor().equals("WHITE")){
+            if( v.getVehicle()!= null && v.getVehicle().getVehicleColor().equals(vehicleColor))
                 indexList.add(v.getVehicleSlot());
-            }
         }
         return indexList;
     }
 
-    public List<VehicleDetails> getVehicleDetails() {
+    public List<VehicleDetails> getVehicleDetailsByVehicleModelAndColor(String vehicleModel, String vehicleColor) {
         List<VehicleDetails> details=new ArrayList<>();
         for(int i=0;i<this.PARKING_LOT_SIZE;i++) {
             SlotDetails v = this.parkingLotList.get(i);
-            if (v.getVehicle()!=null && v.getVehicle().getVehicleModel().equals("TOYOTA") && v.getVehicle().getVehicleColor().equals("BLUE")) {
+            if (v.getVehicle()!=null && v.getVehicle().getVehicleModel().equals(vehicleModel) && v.getVehicle().getVehicleColor().equals(vehicleColor))
                 details.add(new VehicleDetails(v.getVehicleSlot(), v.getVehicle().getVehiclePlateNumber(), v.getAttendantName()));
-            }
         }
         return details;
     }

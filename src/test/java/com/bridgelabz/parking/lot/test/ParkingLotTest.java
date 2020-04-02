@@ -7,13 +7,10 @@ import com.bridgelabz.parking.lot.observer.AirportSecurity;
 import com.bridgelabz.parking.lot.observer.ParkingLotOwner;
 import com.bridgelabz.parking.lot.strategy.DriverType;
 import com.bridgelabz.parking.lot.vehicle.Vehicle;
-import com.bridgelabz.parking.lot.vehicle.VehicleDetails;
 import com.bridgelabz.parking.lot.vehicle.VehicleType;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.List;
 
 public class ParkingLotTest {
 
@@ -237,7 +234,7 @@ public class ParkingLotTest {
         multiLevelParkingLot.parkVehicle(vehicle5, DriverType.NORMAL,"asd");
         try {
             int slotNumberList=0;
-            slotNumberList=multiLevelParkingLot.getLocationOfWhiteVehicle().size();
+            slotNumberList=multiLevelParkingLot.getVehicleDetailsByVehicleColor("WHITE").size();
             Assert.assertEquals(2,slotNumberList);
         } catch (ParkingLotException e) { e.printStackTrace(); }
     }
@@ -265,8 +262,9 @@ public class ParkingLotTest {
         multiLevelParkingLot.parkVehicle(vehicle10, DriverType.NORMAL,"asd");
         try {
             int vehicleDetailsSize=0;
-            vehicleDetailsSize=multiLevelParkingLot.getVehicleDetails().size();
+            vehicleDetailsSize=multiLevelParkingLot.getVehicleDetailsByVehicleModelAndColor("TOYOTA","BLUE").size();
             Assert.assertEquals(3,vehicleDetailsSize);
         } catch (ParkingLotException e) { e.printStackTrace(); }
     }
+
 }
