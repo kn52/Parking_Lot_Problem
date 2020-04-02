@@ -108,16 +108,14 @@ public class ParkingLot {
     }
 
     public List<VehicleDetails> getVehicleDetailsByVehicleModelAndColor(String vehicleModel, String vehicleColor) {
-        List<VehicleDetails> details=new ArrayList<>();
-        for(int i=0;i<this.PARKING_LOT_SIZE;i++) {
-            SlotDetails v = this.parkingLotList.get(i);
-            if (v.getVehicle()!=null && v.getVehicle().getVehicleModel().equals(vehicleModel) && v.getVehicle().getVehicleColor().equals(vehicleColor))
-                details.add(new VehicleDetails(v.getVehicleSlot(), v.getVehicle().getVehiclePlateNumber(), v.getAttendantName()));
-        }
+        List<VehicleDetails> details=this.parkingLotList.stream().filter(lots->lots.getVehicle() != null)
+                .filter(lots->lots.getVehicle().getVehicleModel().equals(vehicleModel) && lots.getVehicle().getVehicleColor().equals(vehicleColor))
+                .map(lots->new VehicleDetails(lots.getVehicleSlot(),lots.getVehicle().getVehiclePlateNumber(),lots.getAttendantName()))
+                .collect(Collectors.toList());
         return details;
     }
 
-    public List<Integer> getVehicleDetailsByModelColor(String vehicleModel) {
+    public List<Integer> getVehicleDetailsByModel(String vehicleModel) {
         List<Integer> vehicleList=new ArrayList<>();
         for(int i=0;i<this.PARKING_LOT_SIZE;i++){
             SlotDetails v=this.parkingLotList.get(i);

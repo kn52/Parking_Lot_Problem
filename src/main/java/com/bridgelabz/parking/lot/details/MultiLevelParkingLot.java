@@ -82,16 +82,15 @@ public class MultiLevelParkingLot {
 
     public List<VehicleDetails> getVehicleDetailsByVehicleModelAndColor(String vehicleModel,String vehicleColor) {
         List<VehicleDetails> vehicleDetail=new ArrayList<>();
-        for(int i=0;i<parkingLots.size();i++){
-            vehicleDetail.addAll(this.parkingLots.get(i).getVehicleDetailsByVehicleModelAndColor(vehicleModel,vehicleColor));
-        }
+        this.parkingLots.stream()
+                .forEach(lots->vehicleDetail.addAll(lots.getVehicleDetailsByVehicleModelAndColor(vehicleModel,vehicleColor)));
         return vehicleDetail;
     }
 
     public List<Integer> getVehicleDetailsByVehicleModel(String vehicleModel) {
         List<Integer> vehicleDetail=new ArrayList<>();
         for(int i=0;i<parkingLots.size();i++){
-            vehicleDetail.addAll(this.parkingLots.get(i).getVehicleDetailsByModelColor(vehicleModel));
+            vehicleDetail.addAll(this.parkingLots.get(i).getVehicleDetailsByModel(vehicleModel));
         }
         return vehicleDetail;
     }
