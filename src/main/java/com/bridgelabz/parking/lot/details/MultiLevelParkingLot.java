@@ -94,7 +94,6 @@ public class MultiLevelParkingLot {
         return vehicleDetail;
     }
 
-
     public List<Vehicle> getVehicleDetailsByTime(LocalDateTime localDateTime) {
         List<Vehicle> vehicleDetail=new ArrayList<>();
         for(int i=0;i<parkingLots.size();i++){

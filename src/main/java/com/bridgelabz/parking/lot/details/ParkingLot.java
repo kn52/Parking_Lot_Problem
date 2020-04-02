@@ -123,12 +123,9 @@ public class ParkingLot {
     }
 
     public List<Vehicle> getVehicleDetailsByTime(LocalDateTime localDateTime) {
-        List<Vehicle> vehicleList=new ArrayList<>();
-        for(int i=0;i<this.PARKING_LOT_SIZE;i++){
-            SlotDetails v=this.parkingLotList.get(i);
-            if( v.getVehicle()!= null && localDateTime.getMinute()-v.getParkingTime().getMinute()<30)
-                vehicleList.add(v.getVehicle());
-        }
+        List<Vehicle> vehicleList=this.parkingLotList.stream()
+                .filter(lots->lots.getVehicle()!= null && localDateTime.getMinute()-lots.getParkingTime().getMinute()<30)
+                .map(lots->lots.getVehicle()).collect(Collectors.toList());
         return vehicleList;
     }
 
