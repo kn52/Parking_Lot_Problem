@@ -11,6 +11,7 @@ import com.bridgelabz.parking.lot.vehicle.VehicleDetails;
 import com.bridgelabz.parking.lot.vehicle.VehicleType;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -96,13 +97,13 @@ public class ParkingLot {
     }
 
     public List<Integer> getVehicleDetailsByVehicleColor(String vehicleColor) {
-        List<Integer> indexList=new ArrayList<>();
+        List<Integer> vehicleList=new ArrayList<>();
         for(int i=0;i<this.PARKING_LOT_SIZE;i++){
             SlotDetails v=this.parkingLotList.get(i);
             if( v.getVehicle()!= null && v.getVehicle().getVehicleColor().equals(vehicleColor))
-                indexList.add(v.getVehicleSlot());
+                vehicleList.add(v.getVehicleSlot());
         }
-        return indexList;
+        return vehicleList;
     }
 
     public List<VehicleDetails> getVehicleDetailsByVehicleModelAndColor(String vehicleModel, String vehicleColor) {
@@ -113,5 +114,15 @@ public class ParkingLot {
                 details.add(new VehicleDetails(v.getVehicleSlot(), v.getVehicle().getVehiclePlateNumber(), v.getAttendantName()));
         }
         return details;
+    }
+
+    public List<Integer> getVehicleDetailsByModelColor(String vehicleModel) {
+        List<Integer> vehicleList=new ArrayList<>();
+        for(int i=0;i<this.PARKING_LOT_SIZE;i++){
+            SlotDetails v=this.parkingLotList.get(i);
+            if( v.getVehicle()!= null && v.getVehicle().getVehicleModel().equals(vehicleModel))
+                vehicleList.add(v.getVehicleSlot());
+        }
+        return vehicleList;
     }
 }
