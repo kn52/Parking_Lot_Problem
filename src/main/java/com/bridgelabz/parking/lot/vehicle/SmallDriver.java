@@ -14,9 +14,6 @@ public class SmallDriver implements IVehicleStrategy{
         List<Integer> emptySlots=new ArrayList();
         IntStream.range(0,parkingLotList.size())
             .filter(lots->parkingLotList.get(lots).getVehicle() == null).forEach(lots->emptySlots.add(lots));
-//        for(int i = 0; i< parkingLotList.size(); i++)
-//            if (parkingLotList.get(i).getVehicle() == null)
-//            { emptySlots.add(i);}
 
         if(emptySlots.size()>0)
             return emptySlots;

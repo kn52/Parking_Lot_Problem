@@ -12,6 +12,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 public class ParkingLotTest {
 
     private ParkingLot parkingLot;
@@ -27,12 +29,12 @@ public class ParkingLotTest {
     public void setUp() {
         parkingLot =new ParkingLot();
         multiLevelParkingLot=new MultiLevelParkingLot();
-        vehicle1=new Vehicle(VehicleType.SMALL);
-        vehicle2=new Vehicle(VehicleType.SMALL);
-        vehicle3=new Vehicle(VehicleType.SMALL);
-        vehicle4=new Vehicle(VehicleType.SMALL);
-        vehicle5=new Vehicle(VehicleType.LARGE);
-        vehicle6=new Vehicle(VehicleType.SMALL);
+        vehicle1=new Vehicle("BLACK",VehicleType.SMALL);
+        vehicle2=new Vehicle("WHITE",VehicleType.SMALL);
+        vehicle3=new Vehicle("WHITE",VehicleType.SMALL);
+        vehicle4=new Vehicle("BLACK",VehicleType.SMALL);
+        vehicle5=new Vehicle("WHITE",VehicleType.LARGE);
+        vehicle6=new Vehicle("WHITE",VehicleType.SMALL);
     }
 
     @Test
@@ -204,6 +206,30 @@ public class ParkingLotTest {
         try {
             boolean isParked= multiLevelParkingLot.isVehiclePark(vehicle5);
             Assert.assertTrue(isParked);
-        } catch (ParkingLotException e) {  }
+        } catch (ParkingLotException e) { e.printStackTrace(); }
+    }
+
+    @Test
+    public void givenVehicleIs__ShouldBe_Return_TotalNumberOfSlots (){
+        multiLevelParkingLot.setCapacity(2);
+        ParkingLot parkingLot1=new ParkingLot();
+        ParkingLot parkingLot2=new ParkingLot();
+        parkingLot1.setCapacity(4);
+        multiLevelParkingLot.addLot(parkingLot1);
+
+        parkingLot2.setCapacity(2);
+        multiLevelParkingLot.addLot(parkingLot2);
+
+        multiLevelParkingLot.parkVehicle(vehicle1, DriverType.HANDICAP,"asd");
+        multiLevelParkingLot.parkVehicle(vehicle2, DriverType.NORMAL,"asd");
+        multiLevelParkingLot.parkVehicle(vehicle3, DriverType.HANDICAP,"asd");
+        multiLevelParkingLot.parkVehicle(vehicle4, DriverType.NORMAL,"asd");
+        multiLevelParkingLot.parkVehicle(vehicle6, DriverType.NORMAL,"asd");
+        multiLevelParkingLot.parkVehicle(vehicle5, DriverType.NORMAL,"asd");
+        try {
+            int slotNumberList=0;
+            slotNumberList=multiLevelParkingLot.getLocationOfWhiteVehicle().size();
+            Assert.assertEquals(4,slotNumberList);
+        } catch (ParkingLotException e) { e.printStackTrace(); }
     }
 }

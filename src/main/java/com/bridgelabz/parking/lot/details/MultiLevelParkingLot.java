@@ -69,4 +69,12 @@ public class MultiLevelParkingLot {
         }
         return slot;
     }
+
+    public List<Integer> getLocationOfWhiteVehicle() {
+        List<Integer> slotNumbers=new ArrayList<>();
+        for(int i=0;i<parkingLots.size();i++){
+            slotNumbers.addAll(this.parkingLots.get(i).getSlotNumberByColor());
+        }
+        return slotNumbers;
+    }
 }

@@ -18,7 +18,7 @@ public class SlotTest {
     public void setUp() throws Exception {
        slot=new SlotDetails();
        pt=new MultiLevelParkingLot();
-       vehicle=new Vehicle(VehicleType.SMALL);
+       vehicle=new Vehicle("BLACK",VehicleType.SMALL);
     }
 
     @Test
@@ -38,11 +38,11 @@ public class SlotTest {
         pt.addLot(p1);
         pt.addLot(p2);
         pt.parkVehicle(vehicle, DriverType.NORMAL,"asd");
-        pt.parkVehicle(new Vehicle(VehicleType.SMALL), DriverType.NORMAL,"asd");
-        pt.parkVehicle(new Vehicle(VehicleType.SMALL), DriverType.NORMAL,"asd");
-        pt.parkVehicle(new Vehicle(VehicleType.SMALL), DriverType.NORMAL,"asd");
-        pt.parkVehicle(new Vehicle(VehicleType.SMALL), DriverType.NORMAL,"asd");
-        pt.parkVehicle(new Vehicle(VehicleType.SMALL), DriverType.NORMAL,"asd");
-        pt.parkVehicle(new Vehicle(VehicleType.SMALL), DriverType.NORMAL,"asd");
+        pt.parkVehicle(new Vehicle("BLACK",VehicleType.SMALL), DriverType.NORMAL,"asd");
+        pt.parkVehicle(new Vehicle("BLACK",VehicleType.SMALL), DriverType.NORMAL,"asd");
+        pt.parkVehicle(new Vehicle("BLACK",VehicleType.SMALL), DriverType.NORMAL,"asd");
+        pt.parkVehicle(new Vehicle("BLACK",VehicleType.SMALL), DriverType.NORMAL,"asd");
+        pt.parkVehicle(new Vehicle("BLACK",VehicleType.SMALL), DriverType.NORMAL,"asd");
+        pt.parkVehicle(new Vehicle("BLACK",VehicleType.SMALL), DriverType.NORMAL,"asd");
     }
 }

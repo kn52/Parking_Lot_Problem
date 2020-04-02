@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ParkingLotStrategy {
     public int getVehicleSlot(Vehicle vehicle, DriverType driverType, List<SlotDetails> parkingLotList) {
-        VehicleType vehicleType=new Vehicle().getVehicleType(vehicle);
+        VehicleType vehicleType=vehicle.getVehicleType();
         IVehicleStrategy iVehicleStrategy=vehicleType.getVehicleStrategy();
         List<Integer> emptySlotList = iVehicleStrategy.getSlotList(parkingLotList);
 

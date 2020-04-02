@@ -7,6 +7,7 @@ import com.bridgelabz.parking.lot.observer.ParkingLotOwner;
 import com.bridgelabz.parking.lot.strategy.DriverType;
 import com.bridgelabz.parking.lot.strategy.ParkingLotStrategy;
 import com.bridgelabz.parking.lot.vehicle.Vehicle;
+import com.bridgelabz.parking.lot.vehicle.VehicleType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ public class ParkingLot {
         this.observers=new ParkingLotInformer();
         this.parkingLotList = new ArrayList<>();
         this.parkingStrategy = new ParkingLotStrategy();
-        this.vehicle=new Vehicle();
+        this.vehicle=new Vehicle("BLACK", VehicleType.SMALL);
         this.initializeParkingLot();
     }
 
@@ -58,6 +59,7 @@ public class ParkingLot {
 
     private void initializeParkingLot() {
         int size=this.PARKING_LOT_SIZE;
+        this.parkingLotList.clear();
         IntStream.range(0,size).forEach(lot->parkingLotList.add(new SlotDetails(null)));
     }
 
@@ -94,4 +96,14 @@ public class ParkingLot {
         this.parkingStrategy=parkingLotStrategy;
     }
 
+    public List<Integer> getSlotNumberByColor() {
+        List<Integer> indexList=new ArrayList<>();
+        for(int i=0;i<this.PARKING_LOT_SIZE;i++){
+            SlotDetails v=this.parkingLotList.get(i);
+            if( v.getVehicle()!= null && v.getVehicle().getVehicleColor().equals("WHITE")){
+                indexList.add(v.getVehicleSlot());
+            }
+        }
+        return indexList;
+    }
 }
