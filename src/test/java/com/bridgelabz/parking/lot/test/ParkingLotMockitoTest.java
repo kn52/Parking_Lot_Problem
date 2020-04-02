@@ -27,9 +27,9 @@ public class ParkingLotMockitoTest {
         multiLevelParkingLot=new MultiLevelParkingLot();
         parkingLot=new ParkingLot();
         parkingLotStrategy=mock(ParkingLotStrategy.class);
-        vehicle1=new Vehicle("BLACK",VehicleType.SMALL);
-        vehicle2=new Vehicle("BLACK",VehicleType.SMALL);
-        vehicle3=new Vehicle("BLACK",VehicleType.SMALL);
+        vehicle1=new Vehicle("BLACK",VehicleType.SMALL,4563,"TOYOTA");
+        vehicle2=new Vehicle("BLACK",VehicleType.SMALL,7854,"BMW");
+        vehicle3=new Vehicle("BLACK",VehicleType.SMALL,7953,"TOYOTA");
     }
 
     @Test

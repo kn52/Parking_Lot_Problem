@@ -1,19 +1,31 @@
 package com.bridgelabz.parking.lot.vehicle;
 
 public class Vehicle {
-    private String color;
+    private String VehicleColor;
     private VehicleType vehicleType;
+    private int vehiclePlateNumber;
+    private String vehicleModel;
 
-    public Vehicle(String  color,VehicleType vehicleType) {
-        this.color=color;
-        this.vehicleType=vehicleType;
-    }
-
-    public VehicleType getVehicleType() {
-        return this.vehicleType;
+    public Vehicle(String vehicleColor, VehicleType vehicleType, int vehiclePlateNumber, String vehicleModel) {
+        VehicleColor = vehicleColor;
+        this.vehicleType = vehicleType;
+        this.vehiclePlateNumber = vehiclePlateNumber;
+        this.vehicleModel = vehicleModel;
     }
 
     public String getVehicleColor() {
-        return this.color;
+        return VehicleColor;
+    }
+
+    public VehicleType getVehicleType() {
+        return vehicleType;
+    }
+
+    public int getVehiclePlateNumber() {
+        return vehiclePlateNumber;
+    }
+
+    public String getVehicleModel() {
+        return vehicleModel;
     }
 }

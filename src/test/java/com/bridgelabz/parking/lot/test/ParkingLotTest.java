@@ -12,8 +12,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
-
 public class ParkingLotTest {
 
     private ParkingLot parkingLot;
@@ -24,17 +22,25 @@ public class ParkingLotTest {
     Vehicle vehicle4;
     Vehicle vehicle5;
     Vehicle vehicle6;
+    Vehicle vehicle7;
+    Vehicle vehicle8;
+    Vehicle vehicle9;
+    Vehicle vehicle10;
 
     @Before
     public void setUp() {
         parkingLot =new ParkingLot();
         multiLevelParkingLot=new MultiLevelParkingLot();
-        vehicle1=new Vehicle("BLACK",VehicleType.SMALL);
-        vehicle2=new Vehicle("WHITE",VehicleType.SMALL);
-        vehicle3=new Vehicle("WHITE",VehicleType.SMALL);
-        vehicle4=new Vehicle("BLACK",VehicleType.SMALL);
-        vehicle5=new Vehicle("WHITE",VehicleType.LARGE);
-        vehicle6=new Vehicle("WHITE",VehicleType.SMALL);
+        vehicle1=new Vehicle("BLACK",VehicleType.SMALL,1274,"BMW");
+        vehicle2=new Vehicle("WHITE",VehicleType.LARGE,3425,"TOYOTA");
+        vehicle3=new Vehicle("WHITE",VehicleType.SMALL,7454,"TOYOTA");
+        vehicle4=new Vehicle("BLACK",VehicleType.SMALL,9769,"TOYOTA");
+        vehicle5=new Vehicle("BLUE",VehicleType.LARGE,7064,"BMW");
+        vehicle6=new Vehicle("WHITE",VehicleType.SMALL,2534,"TOYOTA");
+        vehicle7=new Vehicle("WHITE",VehicleType.SMALL,8064,"BMW");
+        vehicle8=new Vehicle("BLUE",VehicleType.SMALL,0011,"BMW");
+        vehicle9=new Vehicle("BLUE",VehicleType.LARGE,1079,"BMW");
+        vehicle10=new Vehicle("WHITE",VehicleType.SMALL,7324,"TOYOTA");
     }
 
     @Test
