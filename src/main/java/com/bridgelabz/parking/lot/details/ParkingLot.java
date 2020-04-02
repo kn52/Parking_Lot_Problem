@@ -9,9 +9,11 @@ import com.bridgelabz.parking.lot.strategy.ParkingLotStrategy;
 import com.bridgelabz.parking.lot.vehicle.Vehicle;
 import com.bridgelabz.parking.lot.vehicle.VehicleDetails;
 import com.bridgelabz.parking.lot.vehicle.VehicleType;
+import sun.jvm.hotspot.oops.Array;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -135,5 +137,10 @@ public class ParkingLot {
                 vehicleList.add(v.getVehicle());
         }
         return vehicleList;
+    }
+
+    public List<Integer> getVehicleHandiCapSlotDetails() {
+        List<Integer> handicapSlotNumbers=new ArrayList<>(Arrays.asList(1,2,3,4));
+        return handicapSlotNumbers;
     }
 }

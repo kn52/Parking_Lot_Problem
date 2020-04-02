@@ -328,4 +328,34 @@ public class ParkingLotTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void givenVehicleIsParked_ShouldReturn_HandicapVehicleLotDetails() {
+        multiLevelParkingLot.setCapacity(2);
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        parkingLot1.setCapacity(7);
+        multiLevelParkingLot.addLot(parkingLot1);
+
+        parkingLot2.setCapacity(8);
+        multiLevelParkingLot.addLot(parkingLot2);
+
+        multiLevelParkingLot.parkVehicle(vehicle1, DriverType.HANDICAP, "asd");
+        multiLevelParkingLot.parkVehicle(vehicle2, DriverType.NORMAL, "asd");
+        multiLevelParkingLot.parkVehicle(vehicle3, DriverType.HANDICAP, "asd");
+        multiLevelParkingLot.parkVehicle(vehicle4, DriverType.NORMAL, "asd");
+        multiLevelParkingLot.parkVehicle(vehicle5, DriverType.NORMAL, "asd");
+        multiLevelParkingLot.parkVehicle(vehicle6, DriverType.NORMAL, "asd");
+        multiLevelParkingLot.parkVehicle(vehicle7, DriverType.HANDICAP, "asd");
+        multiLevelParkingLot.parkVehicle(vehicle8, DriverType.NORMAL, "asd");
+        multiLevelParkingLot.parkVehicle(vehicle9, DriverType.HANDICAP, "asd");
+        multiLevelParkingLot.parkVehicle(vehicle10, DriverType.NORMAL, "asd");
+        try {
+            int vehicleDetailsSize = 0;
+            vehicleDetailsSize = multiLevelParkingLot.getVehicleHandiCapSlotDetails().size();
+            Assert.assertEquals(8, vehicleDetailsSize);
+        } catch (ParkingLotException e) {
+            e.printStackTrace();
+        }
+    }
 }
