@@ -86,10 +86,10 @@ public class MultiLevelParkingLot {
         return vehicleDetail;
     }
 
-    public List<Integer> getVehicleDetailsByVehicleModel(String vehicleModel) {
-        List<Integer> vehicleDetail=new ArrayList<>();
+    public List<List<Integer>> getVehicleDetailsByVehicleModel(String vehicleModel) {
+        List<List<Integer>> vehicleDetail=new ArrayList<>();
         this.parkingLots.stream()
-                .forEach(lots->vehicleDetail.addAll(lots.getVehicleDetailsByVehicleModel(vehicleModel)));
+                .forEach(lots->vehicleDetail.add(lots.getVehicleDetailsByVehicleModel(vehicleModel)));
         return vehicleDetail;
     }
 
