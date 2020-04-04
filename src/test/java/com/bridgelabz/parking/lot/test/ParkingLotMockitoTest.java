@@ -37,6 +37,19 @@ public class ParkingLotMockitoTest {
     }
 
     @Test
+    public void whengivenVehicle_Parked_ShouldReturnFalse() {
+        ParkingLot parkingLot1=mock(ParkingLot.class);
+        try{
+            multiLevelParkingLot.parkVehicle(vehicle1, DriverType.NORMAL,"asd");
+            when(parkingLot1.isVehicleParked(any())).thenReturn(false);
+            boolean isParked=multiLevelParkingLot.isVehiclePark(vehicle1);
+            Assert.assertFalse(isParked);
+        }catch (ParkingLotException e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
     public void whengivenDriver_IsHandicap_ShouldReturn_Eleven() {
         ParkingLot parkingLot1=mock(ParkingLot.class);
         parkingLot1.setCapacity(10);
@@ -124,7 +137,7 @@ public class ParkingLotMockitoTest {
             when(parkingLot1.getAllVehicleDetails()).thenReturn(list);
             List<Vehicle> vehicleDetailsSize = multiLevelParkingLot.getAllVehicleDetails();
             Assert.assertEquals(list.size(), vehicleDetailsSize.size());
-            Assert.assertEquals(list.get(1), vehicleDetailsSize.get(1));
+            Assert.assertEquals(list.get(2), vehicleDetailsSize.get(2));
         } catch (ParkingLotException e) {
             e.printStackTrace();
         }
