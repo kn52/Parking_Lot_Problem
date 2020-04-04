@@ -7,6 +7,7 @@ import com.bridgelabz.parking.lot.observer.AirportSecurity;
 import com.bridgelabz.parking.lot.observer.ParkingLotOwner;
 import com.bridgelabz.parking.lot.strategy.DriverType;
 import com.bridgelabz.parking.lot.vehicle.Vehicle;
+import com.bridgelabz.parking.lot.vehicle.VehicleDetails;
 import com.bridgelabz.parking.lot.vehicle.VehicleType;
 import org.junit.Assert;
 import org.junit.Before;
@@ -266,9 +267,11 @@ public class ParkingLotTest {
         multiLevelParkingLot.parkVehicle(vehicle9, DriverType.HANDICAP,"asd");
         multiLevelParkingLot.parkVehicle(vehicle10, DriverType.NORMAL,"asd");
         try {
-            int vehicleDetailsSize=0;
-            vehicleDetailsSize=multiLevelParkingLot.getVehicleDetailsByVehicleModelAndColor("TOYOTA","BLUE").size();
-            Assert.assertEquals(3,vehicleDetailsSize);
+            List<VehicleDetails> list1=parkingLot1.getVehicleDetailsByVehicleModelAndColor("TOYOTA","BLUE");
+            List<VehicleDetails> list2=parkingLot2.getVehicleDetailsByVehicleModelAndColor("TOYOTA","BLUE");
+            List<VehicleDetails> vehicleDetails=multiLevelParkingLot.getVehicleDetailsByVehicleModelAndColor("TOYOTA","BLUE");
+            Assert.assertEquals(list1.get(0).getVehicleSlot(),vehicleDetails.get(0).getVehicleSlot());
+            Assert.assertEquals(list2.get(0).getVehicleSlot(),vehicleDetails.get(1).getVehicleSlot());
         } catch (ParkingLotException e) { e.printStackTrace(); }
     }
 

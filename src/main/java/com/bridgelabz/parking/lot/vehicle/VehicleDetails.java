@@ -9,4 +9,16 @@ public class VehicleDetails {
         this.vehiclePlateNumber=vehiclePlateNumber;
         this.attendantName=attendantName;
     }
+
+    public int getVehicleSlot() {
+        return vehicleSlot;
+    }
+
+    public int getVehiclePlateNumber() {
+        return vehiclePlateNumber;
+    }
+
+    public String getAttendantName() {
+        return attendantName;
+    }
 }
