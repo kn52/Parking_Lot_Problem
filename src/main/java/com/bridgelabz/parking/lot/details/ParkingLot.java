@@ -128,7 +128,9 @@ public class ParkingLot {
     }
 
     public List<Integer> getVehicleHandiCapSlotDetails() {
-        List<Integer> handicapSlotNumbers=new ArrayList<>(Arrays.asList(1,2,3,4));
+        List<Integer> handicapSlotNumbers=this.parkingLotList.stream().filter(lots->lots.getVehicle() != null)
+                .filter(lots->lots.getDriverType() == DriverType.HANDICAP && lots.getVehicle().getVehicleType().equals("SMALL"))
+                .map(lots->lots.getVehicleSlot()).collect(Collectors.toList());
         return handicapSlotNumbers;
     }
 

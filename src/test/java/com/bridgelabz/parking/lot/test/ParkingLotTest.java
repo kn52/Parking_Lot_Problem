@@ -359,9 +359,11 @@ public class ParkingLotTest {
         multiLevelParkingLot.parkVehicle(vehicle9, DriverType.HANDICAP, "asd");
         multiLevelParkingLot.parkVehicle(vehicle10, DriverType.NORMAL, "asd");
         try {
-            int vehicleDetailsSize = 0;
-            vehicleDetailsSize = multiLevelParkingLot.getVehicleHandiCapSlotDetails().size();
-            Assert.assertEquals(8, vehicleDetailsSize);
+            List<Integer> list1=parkingLot1.getVehicleHandiCapSlotDetails();
+            List<Integer> list2=parkingLot1.getVehicleHandiCapSlotDetails();
+            List<List<Integer>> vehicleDetails = multiLevelParkingLot.getVehicleHandiCapSlotDetails();
+            Assert.assertEquals(list1, vehicleDetails.get(0));
+            Assert.assertEquals(list2, vehicleDetails.get(1));
         } catch (ParkingLotException e) {
             e.printStackTrace();
         }
@@ -389,9 +391,8 @@ public class ParkingLotTest {
         multiLevelParkingLot.parkVehicle(vehicle9, DriverType.HANDICAP, "asd");
         multiLevelParkingLot.parkVehicle(vehicle10, DriverType.NORMAL, "asd");
         try {
-            int vehicleDetailsSize = 0;
-            vehicleDetailsSize = multiLevelParkingLot.getAllVehicleDetails().size();
-            Assert.assertEquals(10, vehicleDetailsSize);
+            List<Vehicle> vehicleDetails= multiLevelParkingLot.getAllVehicleDetails();
+            Assert.assertEquals(1274, vehicleDetails.get(0).getVehiclePlateNumber());
         } catch (ParkingLotException e) {
             e.printStackTrace();
         }

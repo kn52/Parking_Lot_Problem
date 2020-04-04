@@ -42,6 +42,10 @@ public class SlotDetails {
         return slot;
     }
 
+    public Enum getDriverType() {
+        return driverType;
+    }
+
     public void setSlot(int slot) {
         this.slot=slot;
     }
