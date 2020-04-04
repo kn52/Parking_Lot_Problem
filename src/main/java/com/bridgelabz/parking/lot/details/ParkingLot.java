@@ -8,13 +8,10 @@ import com.bridgelabz.parking.lot.strategy.DriverType;
 import com.bridgelabz.parking.lot.strategy.ParkingLotStrategy;
 import com.bridgelabz.parking.lot.vehicle.Vehicle;
 import com.bridgelabz.parking.lot.vehicle.VehicleDetails;
-import com.bridgelabz.parking.lot.vehicle.VehicleType;
-import sun.jvm.hotspot.oops.Array;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -124,7 +121,8 @@ public class ParkingLot {
 
     public List<Vehicle> getVehicleDetailsByTime(LocalDateTime localDateTime) {
         List<Vehicle> vehicleList=this.parkingLotList.stream()
-                .filter(lots->lots.getVehicle()!= null && localDateTime.getMinute()-lots.getParkingTime().getMinute()<30)
+                .filter(lots->lots.getVehicle()!= null)
+                .filter(lots->localDateTime.getHour()-lots.getParkingTime().getHour()<1 && localDateTime.getMinute()-lots.getParkingTime().getMinute()<30)
                 .map(lots->lots.getVehicle()).collect(Collectors.toList());
         return vehicleList;
     }

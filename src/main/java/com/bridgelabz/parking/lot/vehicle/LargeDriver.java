@@ -16,7 +16,7 @@ public class LargeDriver implements IVehicleStrategy {
             if (parkingLotList.get(i).getVehicle() == null && parkingLotList.get(i+1).getVehicle() == null && parkingLotList.get(i+2).getVehicle() == null)
                 emptySlots.add(i+1);
         if(emptySlots.size()==0)
-            this.getEmptySlotList(parkingLotList);
+            emptySlots=this.getEmptySlotList(parkingLotList);
         if(emptySlots.size()>0)
             return emptySlots;
         throw new ParkingLotException("No Slot Available", ParkingLotException.ExceptionType.NO_SLOT_AVAILABLE);
