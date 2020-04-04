@@ -7,7 +7,6 @@ import com.bridgelabz.parking.lot.vehicle.VehicleDetails;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class MultiLevelParkingLot {
@@ -73,10 +72,10 @@ public class MultiLevelParkingLot {
         return slot;
     }
 
-    public List<Integer> getVehicleDetailsByVehicleColor(String vehicleColor) {
-        List<Integer> vehicleDetail=new ArrayList<>();
+    public List<List<Integer>> getVehicleDetailsByVehicleColor(String vehicleColor) {
+        List<List<Integer>> vehicleDetail=new ArrayList<>();
         this.parkingLots.stream()
-                .forEach(lots->vehicleDetail.addAll(lots.getVehicleDetailsByVehicleColor(vehicleColor)));
+                .forEach(lots->vehicleDetail.add(lots.getVehicleDetailsByVehicleColor(vehicleColor)));
         return vehicleDetail;
     }
 

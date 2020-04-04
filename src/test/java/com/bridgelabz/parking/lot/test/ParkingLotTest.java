@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class ParkingLotTest {
 
@@ -235,9 +236,11 @@ public class ParkingLotTest {
         multiLevelParkingLot.parkVehicle(vehicle6, DriverType.NORMAL,"asd");
         multiLevelParkingLot.parkVehicle(vehicle5, DriverType.NORMAL,"asd");
         try {
-            int vehicleDetailsSize=0;
-            vehicleDetailsSize=multiLevelParkingLot.getVehicleDetailsByVehicleColor("WHITE").size();
-            Assert.assertEquals(2,vehicleDetailsSize);
+            List<Integer> list1=parkingLot1.getVehicleDetailsByVehicleColor("WHITE");
+            List<Integer> list2=parkingLot2.getVehicleDetailsByVehicleColor("WHITE");
+            List<List<Integer>> vehicleDetails=multiLevelParkingLot.getVehicleDetailsByVehicleColor("WHITE");
+            Assert.assertEquals(list1,vehicleDetails.get(0));
+            Assert.assertEquals(list2,vehicleDetails.get(1));
         } catch (ParkingLotException e) { e.printStackTrace(); }
     }
 

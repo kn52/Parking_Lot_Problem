@@ -103,7 +103,7 @@ public class ParkingLotMockitoTest {
         List<Integer>  list=new ArrayList(Arrays.asList(1,2,3,4,1));
         try {
             when(parkingLot1.getVehicleDetailsByVehicleColor(anyString())).thenReturn(list);
-            List<Integer> vehicleDetailsSize = multiLevelParkingLot.getVehicleDetailsByVehicleColor("WHITE");
+            List<List<Integer>> vehicleDetailsSize = multiLevelParkingLot.getVehicleDetailsByVehicleColor("WHITE");
             Assert.assertEquals(list.size(), vehicleDetailsSize.size());
         } catch (ParkingLotException e) {
             e.printStackTrace();
