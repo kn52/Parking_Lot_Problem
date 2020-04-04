@@ -118,7 +118,7 @@ public class ParkingLotMockitoTest {
         try {
             when(parkingLot1.getVehicleDetailsByVehicleColor(anyString()))
                     .thenThrow(IllegalArgumentException.class);
-            List<Integer> vehicleDetailsSize = multiLevelParkingLot.getVehicleDetailsByVehicleColor("WHITE");
+            multiLevelParkingLot.getVehicleDetailsByVehicleColor("WHITE");
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }

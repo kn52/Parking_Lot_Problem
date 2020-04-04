@@ -388,4 +388,63 @@ public class ParkingLotTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void givenVehicleunParked_ShouldReturn_True() {
+        multiLevelParkingLot.setCapacity(2);
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        parkingLot1.setCapacity(7);
+        multiLevelParkingLot.addLot(parkingLot1);
+
+        parkingLot2.setCapacity(8);
+        multiLevelParkingLot.addLot(parkingLot2);
+
+        multiLevelParkingLot.parkVehicle(vehicle1, DriverType.HANDICAP, "asd");
+        multiLevelParkingLot.parkVehicle(vehicle2, DriverType.NORMAL, "asd");
+        multiLevelParkingLot.parkVehicle(vehicle3, DriverType.HANDICAP, "asd");
+        multiLevelParkingLot.parkVehicle(vehicle4, DriverType.NORMAL, "asd");
+        multiLevelParkingLot.parkVehicle(vehicle5, DriverType.NORMAL, "asd");
+        multiLevelParkingLot.parkVehicle(vehicle6, DriverType.NORMAL, "asd");
+        multiLevelParkingLot.parkVehicle(vehicle7, DriverType.HANDICAP, "asd");
+        multiLevelParkingLot.parkVehicle(vehicle8, DriverType.NORMAL, "asd");
+        multiLevelParkingLot.parkVehicle(vehicle9, DriverType.HANDICAP, "asd");
+        multiLevelParkingLot.parkVehicle(vehicle10, DriverType.NORMAL, "asd");
+        try {
+            boolean isParked=multiLevelParkingLot.unParkVehicle(vehicle6);
+            Assert.assertEquals(true,isParked);
+        } catch (ParkingLotException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void gienVehicleunParked_ShouldReturn_False() {
+        multiLevelParkingLot.setCapacity(2);
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        parkingLot1.setCapacity(7);
+        multiLevelParkingLot.addLot(parkingLot1);
+
+        parkingLot2.setCapacity(8);
+        multiLevelParkingLot.addLot(parkingLot2);
+
+        multiLevelParkingLot.parkVehicle(vehicle1, DriverType.HANDICAP, "asd");
+        multiLevelParkingLot.parkVehicle(vehicle2, DriverType.NORMAL, "asd");
+        multiLevelParkingLot.parkVehicle(vehicle3, DriverType.HANDICAP, "asd");
+        multiLevelParkingLot.parkVehicle(vehicle4, DriverType.NORMAL, "asd");
+        multiLevelParkingLot.parkVehicle(vehicle5, DriverType.NORMAL, "asd");
+        multiLevelParkingLot.parkVehicle(vehicle6, DriverType.NORMAL, "asd");
+        multiLevelParkingLot.parkVehicle(vehicle7, DriverType.HANDICAP, "asd");
+        multiLevelParkingLot.parkVehicle(vehicle8, DriverType.NORMAL, "asd");
+        multiLevelParkingLot.parkVehicle(vehicle9, DriverType.HANDICAP, "asd");
+        multiLevelParkingLot.parkVehicle(vehicle10, DriverType.NORMAL, "asd");
+        try {
+            multiLevelParkingLot.unParkVehicle(vehicle1);
+            boolean isParked=multiLevelParkingLot.isVehiclePark(vehicle1);
+            Assert.assertFalse(isParked);
+        } catch (ParkingLotException e) {
+            e.printStackTrace();
+        }
+    }
 }

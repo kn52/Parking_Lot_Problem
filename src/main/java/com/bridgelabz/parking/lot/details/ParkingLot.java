@@ -43,9 +43,9 @@ public class ParkingLot {
     }
 
     public boolean unParkVehicle(Vehicle vehicle) {
-        if(this.parkingLotList.stream().filter(x-> x.getVehicle() == vehicle).findFirst().isPresent())
+        if(this.parkingLotList.stream().filter(x->x.getVehicle() == vehicle).findFirst().isPresent())
         {
-            this.parkingLotList.set(this.getSlotNumberByVehicle(vehicle),null);
+            this.parkingLotList.set(this.getSlotNumberByVehicle(vehicle),new SlotDetails(null));
             observers.InformObserversEmptySlotsAvailable();
             this.noOfFullSlots--;
             return true;
@@ -54,7 +54,7 @@ public class ParkingLot {
     }
 
     public boolean isVehicleParked(Vehicle vehicle) {
-        boolean value=parkingLotList.stream().filter(x-> x.getVehicle() == vehicle).findFirst().isPresent();
+        boolean value=parkingLotList.stream().filter(x->x.getVehicle() == vehicle).findFirst().isPresent();
         return value;
     }
 
