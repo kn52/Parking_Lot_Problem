@@ -1,5 +1,7 @@
 package com.bridgelabz.parking.lot.vehicledetails;
 
+import com.bridgelabz.parking.lot.parkinglotdetails.SlotDetails;
+
 public class VehicleDetails {
     private int vehicleSlot;
     private int vehiclePlateNumber;
@@ -8,6 +10,12 @@ public class VehicleDetails {
         this.vehicleSlot=vehicleSlot;
         this.vehiclePlateNumber=vehiclePlateNumber;
         this.attendantName=attendantName;
+    }
+
+    public VehicleDetails(SlotDetails slot) {
+        this.vehicleSlot=slot.getVehicleSlot();
+        this.vehiclePlateNumber=slot.getVehicle().getVehiclePlateNumber();
+        this.attendantName=slot.getAttendantName();
     }
 
     public int getVehicleSlot() {

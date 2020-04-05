@@ -5,15 +5,10 @@ import com.bridgelabz.parking.lot.parkinglotdetails.ParkingLot;
 import com.bridgelabz.parking.lot.parkinglotexception.ParkingLotException;
 import com.bridgelabz.parking.lot.parkingstrategy.DriverType;
 import com.bridgelabz.parking.lot.parkingstrategy.ParkingLotStrategy;
-import com.bridgelabz.parking.lot.vehicledetails.Vehicle;
-import com.bridgelabz.parking.lot.vehicledetails.VehicleType;
+import com.bridgelabz.parking.lot.vehicledetails.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import static org.mockito.Mockito.*;
 
@@ -31,9 +26,10 @@ public class ParkingLotMockitoTest {
         multiLevelParkingLot=new MultiLevelParkingLot();
         parkingLot=new ParkingLot();
         parkingLotStrategy=mock(ParkingLotStrategy.class);
-        vehicle1=new Vehicle("BLACK",VehicleType.SMALL,1274,"BMW");
-        vehicle2=new Vehicle("BLUE",VehicleType.LARGE,3425,"TOYOTA");
-        vehicle3=new Vehicle("WHITE",VehicleType.LARGE,7454,"TOYOTA");
+        vehicle1=new Vehicle(VehicleColor.WHITE,VehicleType.SMALL,1274, VehicleModel.BMW);
+        vehicle2=new Vehicle(VehicleColor.BLUE,VehicleType.LARGE,3425,VehicleModel.TOYOTA);
+        vehicle3=new Vehicle(VehicleColor.WHITE,VehicleType.LARGE,7454,VehicleModel.TOYOTA);
+
     }
 
     @Test
@@ -96,50 +92,4 @@ public class ParkingLotMockitoTest {
         }
     }
 
-    @Test
-    public void givenVehicleIsParked_ShouldReturn_getVehicleDetailsByVehicleColor() {
-        ParkingLot parkingLot1 = mock(ParkingLot.class);
-        multiLevelParkingLot.addLot(parkingLot1);
-        List<Integer>  list=new ArrayList(Arrays.asList(1,2,3,4,1));
-        try {
-            when(parkingLot1.getVehicleDetailsByVehicleColor(anyString())).thenReturn(list);
-            List<List<Integer>> vehicleDetailsSize = multiLevelParkingLot.getVehicleDetailsByVehicleColor("WHITE");
-            Assert.assertEquals(list.size(), vehicleDetailsSize.size());
-        } catch (ParkingLotException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    public void givenVehicleIsParked_getVehicleDetailsByVehicleColor_ThrowException() {
-        ParkingLot parkingLot1 = mock(ParkingLot.class);
-        multiLevelParkingLot.addLot(parkingLot1);
-        List<Integer>  list=new ArrayList(Arrays.asList(1,2,3,4,1));
-        try {
-            when(parkingLot1.getVehicleDetailsByVehicleColor(anyString()))
-                    .thenThrow(IllegalArgumentException.class);
-            multiLevelParkingLot.getVehicleDetailsByVehicleColor("WHITE");
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    public void givenVehicleIsParked_ShouldReturn_AllVehicleDetails() {
-        ParkingLot parkingLot1 = mock(ParkingLot.class);
-        multiLevelParkingLot.addLot(parkingLot1);
-        Vehicle vehicle7=new Vehicle("WHITE",VehicleType.SMALL,8064,"BMW");
-        Vehicle vehicle8=new Vehicle("BLUE",VehicleType.SMALL,0011,"BMW");
-        Vehicle vehicle9=new Vehicle("WHITE",VehicleType.LARGE,1079,"BMW");
-        Vehicle vehicle10=new Vehicle("BLUE",VehicleType.SMALL,7324,"TOYOTA");
-        List<Vehicle>  list=new ArrayList(Arrays.asList(vehicle7,vehicle8,vehicle9,vehicle10));
-        try {
-            when(parkingLot1.getAllVehicleDetails()).thenReturn(list);
-            List<Vehicle> vehicleDetailsSize = multiLevelParkingLot.getAllVehicleDetails();
-            Assert.assertEquals(list.size(), vehicleDetailsSize.size());
-            Assert.assertEquals(list.get(2), vehicleDetailsSize.get(2));
-        } catch (ParkingLotException e) {
-            e.printStackTrace();
-        }
-    }
 }

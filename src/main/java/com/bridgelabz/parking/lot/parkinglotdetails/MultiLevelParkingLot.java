@@ -2,6 +2,7 @@ package com.bridgelabz.parking.lot.parkinglotdetails;
 
 import com.bridgelabz.parking.lot.parkinglotexception.ParkingLotException;
 import com.bridgelabz.parking.lot.parkingstrategy.DriverType;
+import com.bridgelabz.parking.lot.vehicledetails.IPredicate;
 import com.bridgelabz.parking.lot.vehicledetails.Vehicle;
 import com.bridgelabz.parking.lot.vehicledetails.VehicleDetails;
 
@@ -43,25 +44,17 @@ public class MultiLevelParkingLot {
     }
 
     public boolean isVehiclePark(Vehicle vehicle) {
-        for (int i = 0; i < this.parkingLots.size(); i++) {
-            if (this.parkingLots.get(i).isVehicleParked(vehicle)) {
+        for (int i = 0; i < this.parkingLots.size(); i++)
+            if (this.parkingLots.get(i).isVehicleParked(vehicle))
                 return true;
-            }
-        }
         return false;
     }
 
     public boolean unParkVehicle(Vehicle vehicle) throws ParkingLotException {
-        for (int parkingLot = 0; parkingLot < this.parkingLots.size(); parkingLot++) {
-            if (this.parkingLots.get(parkingLot).unParkVehicle(vehicle)) {
+        for (int parkingLot = 0; parkingLot < this.parkingLots.size(); parkingLot++)
+            if (this.parkingLots.get(parkingLot).unParkVehicle(vehicle))
                 return true;
-            }
-        }
         throw new ParkingLotException("No such vehicle found", ParkingLotException.ExceptionType.NO_SUCH_VEHICLE);
-    }
-
-    public void setCapacity(int lotcapacity) {
-        this.lotCapacity=lotcapacity;
     }
 
     public int getVehicleSlot(Vehicle vehicle) {
@@ -72,27 +65,6 @@ public class MultiLevelParkingLot {
         return slot;
     }
 
-    public List<List<Integer>> getVehicleDetailsByVehicleColor(String vehicleColor) {
-        List<List<Integer>> vehicleDetail=new ArrayList<>();
-        this.parkingLots.stream()
-                .forEach(lots->vehicleDetail.add(lots.getVehicleDetailsByVehicleColor(vehicleColor)));
-        return vehicleDetail;
-    }
-
-    public List<VehicleDetails> getVehicleDetailsByVehicleModelAndColor(String vehicleModel,String vehicleColor) {
-        List<VehicleDetails> vehicleDetail=new ArrayList<>();
-        this.parkingLots.stream()
-                .forEach(lots->vehicleDetail.addAll(lots.getVehicleDetailsByVehicleModelAndColor(vehicleModel,vehicleColor)));
-        return vehicleDetail;
-    }
-
-    public List<List<Integer>> getVehicleDetailsByVehicleModel(String vehicleModel) {
-        List<List<Integer>> vehicleDetail=new ArrayList<>();
-        this.parkingLots.stream()
-                .forEach(lots->vehicleDetail.add(lots.getVehicleDetailsByVehicleModel(vehicleModel)));
-        return vehicleDetail;
-    }
-
     public List<Vehicle> getVehicleDetailsByTime(LocalDateTime localDateTime) {
         List<Vehicle> vehicleDetail=new ArrayList<>();
         this.parkingLots.stream()
@@ -100,17 +72,16 @@ public class MultiLevelParkingLot {
         return vehicleDetail;
     }
 
-    public List<List<Integer>> getVehicleHandiCapSlotDetails() {
-        List<List<Integer>> vehicleDetail=new ArrayList<>();
-        this.parkingLots.stream()
-                .forEach(lots->vehicleDetail.add(lots.getVehicleHandiCapSlotDetails()));
+    public List<VehicleDetails> getVehicleDetails(IPredicate ... pre ) {
+
+        List<VehicleDetails> vehicleDetail=new ArrayList<>();
+        this.parkingLots.stream().forEach(lots->vehicleDetail.addAll(lots.getVehicleDetails(pre)));
         return vehicleDetail;
     }
 
-    public List<Vehicle> getAllVehicleDetails() {
-        List<Vehicle> vehicleDetail=new ArrayList<>();
-        this.parkingLots.stream()
-                .forEach(lots->vehicleDetail.addAll(lots.getAllVehicleDetails()));
+    public List<List<Integer>> getVehicleSlotDetails(IPredicate ...vehicleColor) {
+        List<List<Integer>> vehicleDetail=new ArrayList<>();
+        this.parkingLots.stream().forEach(lots->vehicleDetail.add(lots.getSlotDetails(vehicleColor)));
         return vehicleDetail;
     }
 }

@@ -6,12 +6,15 @@ import com.bridgelabz.parking.lot.parkinglotobservers.IParkingLotObserver;
 import com.bridgelabz.parking.lot.parkinglotobservers.ParkingLotOwner;
 import com.bridgelabz.parking.lot.parkingstrategy.DriverType;
 import com.bridgelabz.parking.lot.parkingstrategy.ParkingLotStrategy;
+import com.bridgelabz.parking.lot.vehicledetails.IPredicate;
 import com.bridgelabz.parking.lot.vehicledetails.Vehicle;
+import com.bridgelabz.parking.lot.vehicledetails.VehicleColor;
 import com.bridgelabz.parking.lot.vehicledetails.VehicleDetails;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -96,28 +99,6 @@ public class ParkingLot {
         this.parkingStrategy=parkingLotStrategy;
     }
 
-    public List<Integer> getVehicleDetailsByVehicleColor(String vehicleColor) {
-        List<Integer> vehicleList=this.parkingLotList.stream()
-                .filter(lots->lots.getVehicle() != null && lots.getVehicle().getVehicleColor().equals(vehicleColor))
-                .map(lots->lots.getVehicleSlot()).collect(Collectors.toList());
-           return vehicleList;
-    }
-
-    public List<VehicleDetails> getVehicleDetailsByVehicleModelAndColor(String vehicleModel, String vehicleColor) {
-        List<VehicleDetails> details=this.parkingLotList.stream().filter(lots->lots.getVehicle() != null)
-                .filter(lots->lots.getVehicle().getVehicleModel().equals(vehicleModel) && lots.getVehicle().getVehicleColor().equals(vehicleColor))
-                .map(lots->new VehicleDetails(lots.getVehicleSlot(),lots.getVehicle().getVehiclePlateNumber(),lots.getAttendantName()))
-                .collect(Collectors.toList());
-        return details;
-    }
-
-    public List<Integer> getVehicleDetailsByVehicleModel(String vehicleModel) {
-        List<Integer> vehicleList=this.parkingLotList.stream()
-                .filter(lots->lots.getVehicle() != null && lots.getVehicle().getVehicleModel().equals(vehicleModel))
-                .map(lots->lots.getVehicleSlot()).collect(Collectors.toList());
-        return vehicleList;
-    }
-
     public List<Vehicle> getVehicleDetailsByTime(LocalDateTime localDateTime) {
         List<Vehicle> vehicleList=this.parkingLotList.stream()
                 .filter(lots->lots.getVehicle()!= null)
@@ -126,16 +107,31 @@ public class ParkingLot {
         return vehicleList;
     }
 
-    public List<Integer> getVehicleHandiCapSlotDetails() {
-        List<Integer> handicapSlotNumbers=this.parkingLotList.stream().filter(lots->lots.getVehicle() != null)
-                .filter(lots->lots.getDriverType() == DriverType.HANDICAP && lots.getVehicle().getVehicleType().equals("SMALL"))
-                .map(lots->lots.getVehicleSlot()).collect(Collectors.toList());
-        return handicapSlotNumbers;
+    public List<SlotDetails> getVehicleDetailsBy(IPredicate... ipredicates) {
+        Predicate<SlotDetails> predicate = ipredicates[0].getPredicate();
+        if (ipredicates.length>1) {
+            for(int i=1;i<ipredicates.length;i++)
+                predicate = predicate.and(ipredicates[i].getPredicate());
+        }
+        List<SlotDetails> slotsList = new ArrayList<>();
+        this.parkingLotList.stream()
+                .filter(slot->slot.getVehicle() != null)
+                .filter(predicate)
+                .forEach(slot -> slotsList.add(slot));
+        return slotsList;
     }
 
-    public List<Vehicle> getAllVehicleDetails() {
-        List<Vehicle> vehicleList=this.parkingLotList.stream().filter(lots->lots.getVehicle()!= null)
-                .map(lots->lots.getVehicle()).collect(Collectors.toList());
+    public List<VehicleDetails> getVehicleDetails(IPredicate ... pre) {
+        List<VehicleDetails> vehicleList=new ArrayList<>();
+        getVehicleDetailsBy(pre).stream()
+                .forEach(slot -> vehicleList.add(new VehicleDetails(slot)));
         return vehicleList;
+    }
+
+    public List<Integer> getSlotDetails(IPredicate... pre) {
+        List<Integer> slotsList = new ArrayList<>();
+        getVehicleDetailsBy(pre).stream()
+                .forEach(slot -> slotsList.add(slot.getVehicleSlot()));
+        return slotsList;
     }
 }

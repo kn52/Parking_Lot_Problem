@@ -5,6 +5,8 @@ import com.bridgelabz.parking.lot.parkinglotdetails.ParkingLot;
 import com.bridgelabz.parking.lot.parkinglotdetails.SlotDetails;
 import com.bridgelabz.parking.lot.parkinglotdetails.MultiLevelParkingLot;
 import com.bridgelabz.parking.lot.vehicledetails.Vehicle;
+import com.bridgelabz.parking.lot.vehicledetails.VehicleColor;
+import com.bridgelabz.parking.lot.vehicledetails.VehicleModel;
 import com.bridgelabz.parking.lot.vehicledetails.VehicleType;
 import org.junit.Assert;
 import org.junit.Before;
@@ -18,7 +20,7 @@ public class SlotTest {
     public void setUp() throws Exception {
        slot=new SlotDetails();
        pt=new MultiLevelParkingLot();
-       vehicle=new Vehicle("BLACK",VehicleType.SMALL,1223,"BMW");
+       vehicle=new Vehicle(VehicleColor.BLUE,VehicleType.SMALL,1223,VehicleModel.BMW);
     }
 
     @Test
@@ -30,7 +32,6 @@ public class SlotTest {
 
     @Test
     public void testMethod() {
-        pt.setCapacity(2);
         ParkingLot p1=new ParkingLot();
         ParkingLot p2=new ParkingLot();
         p1.setCapacity(10);
@@ -38,11 +39,11 @@ public class SlotTest {
         pt.addLot(p1);
         pt.addLot(p2);
         pt.parkVehicle(vehicle, DriverType.NORMAL,"asd");
-        pt.parkVehicle(new Vehicle("BLACK",VehicleType.SMALL,3456,"TOYOTA"), DriverType.NORMAL,"asd");
-        pt.parkVehicle(new Vehicle("BLACK",VehicleType.SMALL,1123,"BMW"), DriverType.NORMAL,"asd");
-        pt.parkVehicle(new Vehicle("BLACK",VehicleType.SMALL,8363,"BMW"), DriverType.NORMAL,"asd");
-        pt.parkVehicle(new Vehicle("BLACK",VehicleType.SMALL,3456,"TOYOTA"), DriverType.NORMAL,"asd");
-        pt.parkVehicle(new Vehicle("BLACK",VehicleType.SMALL,6753,"TOYOTA"), DriverType.NORMAL,"asd");
-        pt.parkVehicle(new Vehicle("BLACK",VehicleType.SMALL,5743,"BMW"), DriverType.NORMAL,"asd");
+        pt.parkVehicle(new Vehicle(VehicleColor.BLUE,VehicleType.SMALL,3456,VehicleModel.TOYOTA), DriverType.NORMAL,"asd");
+        pt.parkVehicle(new Vehicle(VehicleColor.BLUE,VehicleType.SMALL,1123,VehicleModel.BMW), DriverType.NORMAL,"asd");
+        pt.parkVehicle(new Vehicle(VehicleColor.BLUE,VehicleType.SMALL,8363,VehicleModel.BMW), DriverType.NORMAL,"asd");
+        pt.parkVehicle(new Vehicle(VehicleColor.BLUE,VehicleType.SMALL,3456,VehicleModel.TOYOTA), DriverType.NORMAL,"asd");
+        pt.parkVehicle(new Vehicle(VehicleColor.BLUE,VehicleType.SMALL,6753,VehicleModel.TOYOTA), DriverType.NORMAL,"asd");
+        pt.parkVehicle(new Vehicle(VehicleColor.BLUE,VehicleType.SMALL,5743, VehicleModel.BMW), DriverType.NORMAL,"asd");
     }
 }

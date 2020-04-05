@@ -13,12 +13,6 @@ public enum DriverType {
         public IParkingStrategy getParkingStrategy(){
             return new NormalDriver();
         }
-    },
-    OTHER{
-        @Override
-        public IParkingStrategy getParkingStrategy(){
-            return new OtherDriver();
-        }
     };
     public abstract IParkingStrategy getParkingStrategy();
 }

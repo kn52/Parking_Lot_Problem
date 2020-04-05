@@ -1,20 +1,20 @@
 package com.bridgelabz.parking.lot.vehicledetails;
 
 public class Vehicle {
-    private String VehicleColor;
+    private VehicleColor vehicleColor;
     private VehicleType vehicleType;
     private int vehiclePlateNumber;
-    private String vehicleModel;
+    private VehicleModel vehicleModel;
 
-    public Vehicle(String vehicleColor, VehicleType vehicleType, int vehiclePlateNumber, String vehicleModel) {
-        VehicleColor = vehicleColor;
+    public Vehicle(VehicleColor vehicleColor, VehicleType vehicleType, int vehiclePlateNumber, VehicleModel vehicleModel) {
+        this.vehicleColor = vehicleColor;
         this.vehicleType = vehicleType;
         this.vehiclePlateNumber = vehiclePlateNumber;
         this.vehicleModel = vehicleModel;
     }
 
-    public String getVehicleColor() {
-        return VehicleColor;
+    public VehicleColor getVehicleColor() {
+        return vehicleColor;
     }
 
     public VehicleType getVehicleType() {
@@ -25,7 +25,7 @@ public class Vehicle {
         return vehiclePlateNumber;
     }
 
-    public String getVehicleModel() {
+    public VehicleModel getVehicleModel() {
         return vehicleModel;
     }
 }

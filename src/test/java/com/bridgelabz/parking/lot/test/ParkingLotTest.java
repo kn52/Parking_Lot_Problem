@@ -6,9 +6,7 @@ import com.bridgelabz.parking.lot.parkinglotexception.ParkingLotException;
 import com.bridgelabz.parking.lot.parkinglotobservers.AirportSecurity;
 import com.bridgelabz.parking.lot.parkinglotobservers.ParkingLotOwner;
 import com.bridgelabz.parking.lot.parkingstrategy.DriverType;
-import com.bridgelabz.parking.lot.vehicledetails.Vehicle;
-import com.bridgelabz.parking.lot.vehicledetails.VehicleDetails;
-import com.bridgelabz.parking.lot.vehicledetails.VehicleType;
+import com.bridgelabz.parking.lot.vehicledetails.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,16 +33,16 @@ public class ParkingLotTest {
     public void setUp() {
         parkingLot =new ParkingLot();
         multiLevelParkingLot=new MultiLevelParkingLot();
-        vehicle1=new Vehicle("BLACK",VehicleType.SMALL,1274,"BMW");
-        vehicle2=new Vehicle("BLUE",VehicleType.LARGE,3425,"TOYOTA");
-        vehicle3=new Vehicle("WHITE",VehicleType.LARGE,7454,"TOYOTA");
-        vehicle4=new Vehicle("BLUE",VehicleType.SMALL,9769,"TOYOTA");
-        vehicle5=new Vehicle("BLUE",VehicleType.LARGE,7064,"BMW");
-        vehicle6=new Vehicle("WHITE",VehicleType.SMALL,2534,"TOYOTA");
-        vehicle7=new Vehicle("WHITE",VehicleType.SMALL,8064,"BMW");
-        vehicle8=new Vehicle("BLUE",VehicleType.SMALL,0011,"BMW");
-        vehicle9=new Vehicle("WHITE",VehicleType.LARGE,1079,"BMW");
-        vehicle0 =new Vehicle("BLUE",VehicleType.SMALL,7324,"TOYOTA");
+        vehicle1=new Vehicle(VehicleColor.WHITE,VehicleType.SMALL,1274, VehicleModel.BMW);
+        vehicle2=new Vehicle(VehicleColor.BLUE,VehicleType.LARGE,3425,VehicleModel.TOYOTA);
+        vehicle3=new Vehicle(VehicleColor.WHITE,VehicleType.LARGE,7454,VehicleModel.TOYOTA);
+        vehicle4=new Vehicle(VehicleColor.BLUE,VehicleType.SMALL,9769,VehicleModel.TOYOTA);
+        vehicle5=new Vehicle(VehicleColor.BLUE,VehicleType.LARGE,7064,VehicleModel.BMW);
+        vehicle6=new Vehicle(VehicleColor.WHITE,VehicleType.SMALL,2534,VehicleModel.TOYOTA);
+        vehicle7=new Vehicle(VehicleColor.WHITE,VehicleType.SMALL,8064,VehicleModel.BMW);
+        vehicle8=new Vehicle(VehicleColor.BLUE,VehicleType.SMALL,0011,VehicleModel.BMW);
+        vehicle9=new Vehicle(VehicleColor.WHITE,VehicleType.LARGE,1079,VehicleModel.BMW);
+        vehicle0 =new Vehicle(VehicleColor.BLUE,VehicleType.SMALL,7324,VehicleModel.TOYOTA);
     }
 
     @Test
@@ -171,7 +169,6 @@ public class ParkingLotTest {
 
     @Test
     public void givenVehicleWithHandicappedDriver_ShouldParkVehicleAtNearestFreeSpace() {
-        multiLevelParkingLot.setCapacity(2);
         ParkingLot parkingLot1=new ParkingLot();
         ParkingLot parkingLot2=new ParkingLot();
 
@@ -196,7 +193,6 @@ public class ParkingLotTest {
 
     @Test
     public void givenVehicleIs_Large_ShouldBe_ParkedAt_LargestSpaceLot() {
-        multiLevelParkingLot.setCapacity(2);
         ParkingLot parkingLot1=new ParkingLot();
         ParkingLot parkingLot2=new ParkingLot();
 
@@ -220,8 +216,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void givenVehicleIsParked_ShouldReturn_NumberOfSlotsByColor (){
-        multiLevelParkingLot.setCapacity(2);
+    public void givenVehleIsParked_ShouldReturn_NumberOfSlotsByColor (){
         ParkingLot parkingLot1=new ParkingLot();
         ParkingLot parkingLot2=new ParkingLot();
         parkingLot1.setCapacity(4);
@@ -237,9 +232,9 @@ public class ParkingLotTest {
         multiLevelParkingLot.parkVehicle(vehicle6, DriverType.NORMAL,"asd");
         multiLevelParkingLot.parkVehicle(vehicle5, DriverType.NORMAL,"asd");
         try {
-            List<Integer> list1=parkingLot1.getVehicleDetailsByVehicleColor("WHITE");
-            List<Integer> list2=parkingLot2.getVehicleDetailsByVehicleColor("WHITE");
-            List<List<Integer>> vehicleDetails=multiLevelParkingLot.getVehicleDetailsByVehicleColor("WHITE");
+            List<Integer> list1=parkingLot1.getSlotDetails(VehicleColor.WHITE);
+            List<Integer> list2=parkingLot2.getSlotDetails(VehicleColor.WHITE);
+            List<List<Integer>> vehicleDetails=multiLevelParkingLot.getVehicleSlotDetails(VehicleColor.WHITE);
             Assert.assertEquals(list1,vehicleDetails.get(0));
             Assert.assertEquals(list2,vehicleDetails.get(1));
         } catch (ParkingLotException e) { e.printStackTrace(); }
@@ -247,7 +242,6 @@ public class ParkingLotTest {
 
     @Test
     public void givenVehicleIsParked_ShouldReturn_VehicleInformationByModelAndColor (){
-        multiLevelParkingLot.setCapacity(2);
         ParkingLot parkingLot1=new ParkingLot();
         ParkingLot parkingLot2=new ParkingLot();
         parkingLot1.setCapacity(7);
@@ -267,17 +261,15 @@ public class ParkingLotTest {
         multiLevelParkingLot.parkVehicle(vehicle9, DriverType.HANDICAP,"asd");
         multiLevelParkingLot.parkVehicle(vehicle0, DriverType.NORMAL,"asd");
         try {
-            List<VehicleDetails> list1=parkingLot1.getVehicleDetailsByVehicleModelAndColor("TOYOTA","BLUE");
-            List<VehicleDetails> list2=parkingLot2.getVehicleDetailsByVehicleModelAndColor("TOYOTA","BLUE");
-            List<VehicleDetails> vehicleDetails=multiLevelParkingLot.getVehicleDetailsByVehicleModelAndColor("TOYOTA","BLUE");
+            List<VehicleDetails> list1=parkingLot1.getVehicleDetails(VehicleModel.TOYOTA,VehicleColor.WHITE);
+            List<VehicleDetails> vehicleDetails=multiLevelParkingLot.getVehicleDetails(VehicleModel.TOYOTA,VehicleColor.WHITE);
+            System.out.println(vehicleDetails.get(0));
             Assert.assertEquals(list1.get(0).getVehicleSlot(),vehicleDetails.get(0).getVehicleSlot());
-            Assert.assertEquals(list2.get(0).getVehicleSlot(),vehicleDetails.get(1).getVehicleSlot());
         } catch (ParkingLotException e) { e.printStackTrace(); }
     }
 
     @Test
     public void givenVehicleIsParked_ShouldReturn_SlotsOfBMW() {
-        multiLevelParkingLot.setCapacity(2);
         ParkingLot parkingLot1 = new ParkingLot();
         ParkingLot parkingLot2 = new ParkingLot();
         parkingLot1.setCapacity(7);
@@ -297,9 +289,9 @@ public class ParkingLotTest {
         multiLevelParkingLot.parkVehicle(vehicle9, DriverType.HANDICAP, "asd");
         multiLevelParkingLot.parkVehicle(vehicle0, DriverType.NORMAL, "asd");
         try {
-            List<Integer> list1=parkingLot1.getVehicleDetailsByVehicleModel("BMW");
-            List<Integer> list2=parkingLot2.getVehicleDetailsByVehicleModel("BMW");
-            List<List<Integer>> vehicleDetails=multiLevelParkingLot.getVehicleDetailsByVehicleModel("BMW");
+            List<Integer> list1=parkingLot1.getSlotDetails(VehicleModel.BMW);
+            List<Integer> list2=parkingLot2.getSlotDetails(VehicleModel.BMW);
+            List<List<Integer>> vehicleDetails=multiLevelParkingLot.getVehicleSlotDetails(VehicleModel.BMW);
             Assert.assertEquals(list1,vehicleDetails.get(0));
             Assert.assertEquals(list2,vehicleDetails.get(1));
         } catch (ParkingLotException e) {
@@ -309,7 +301,6 @@ public class ParkingLotTest {
 
     @Test
     public void givenVehicleIsParked_ShouldReturn_VehicleDetailsOnTime() {
-        multiLevelParkingLot.setCapacity(2);
         ParkingLot parkingLot1 = new ParkingLot();
         ParkingLot parkingLot2 = new ParkingLot();
         parkingLot1.setCapacity(7);
@@ -339,7 +330,6 @@ public class ParkingLotTest {
 
     @Test
     public void givenVehicleIsParked_ShouldReturn_HandicapVehicleLotDetails() {
-        multiLevelParkingLot.setCapacity(2);
         ParkingLot parkingLot1 = new ParkingLot();
         ParkingLot parkingLot2 = new ParkingLot();
         parkingLot1.setCapacity(7);
@@ -359,9 +349,11 @@ public class ParkingLotTest {
         multiLevelParkingLot.parkVehicle(vehicle9, DriverType.HANDICAP, "asd");
         multiLevelParkingLot.parkVehicle(vehicle0, DriverType.NORMAL, "asd");
         try {
-            List<Integer> list1=parkingLot1.getVehicleHandiCapSlotDetails();
-            List<Integer> list2=parkingLot1.getVehicleHandiCapSlotDetails();
-            List<List<Integer>> vehicleDetails = multiLevelParkingLot.getVehicleHandiCapSlotDetails();
+            List<Integer> list1=parkingLot1.getSlotDetails(VehicleDriver.HANDICAP_SMALL);
+            List<Integer> list2=parkingLot2.getSlotDetails(VehicleDriver.HANDICAP_SMALL);
+            System.out.println(list1);
+            System.out.println(list2);
+            List<List<Integer>> vehicleDetails = multiLevelParkingLot.getVehicleSlotDetails(VehicleDriver.HANDICAP_SMALL);
             Assert.assertEquals(list1, vehicleDetails.get(0));
             Assert.assertEquals(list2, vehicleDetails.get(1));
         } catch (ParkingLotException e) {
@@ -371,7 +363,6 @@ public class ParkingLotTest {
 
     @Test
     public void givenVehicleIsParked_ShouldReturn_AllVehicleLotDetails() {
-        multiLevelParkingLot.setCapacity(2);
         ParkingLot parkingLot1 = new ParkingLot();
         ParkingLot parkingLot2 = new ParkingLot();
         parkingLot1.setCapacity(7);
@@ -391,7 +382,7 @@ public class ParkingLotTest {
         multiLevelParkingLot.parkVehicle(vehicle9, DriverType.HANDICAP, "asd");
         multiLevelParkingLot.parkVehicle(vehicle0, DriverType.NORMAL, "asd");
         try {
-            List<Vehicle> vehicleDetails= multiLevelParkingLot.getAllVehicleDetails();
+            List<VehicleDetails> vehicleDetails= multiLevelParkingLot.getVehicleDetails(VehicleModel.OTHER);
             Assert.assertEquals(1274, vehicleDetails.get(0).getVehiclePlateNumber());
         } catch (ParkingLotException e) {
             e.printStackTrace();
@@ -400,7 +391,6 @@ public class ParkingLotTest {
 
     @Test
     public void givenVehicleunParked_ShouldReturn_True() {
-        multiLevelParkingLot.setCapacity(2);
         ParkingLot parkingLot1 = new ParkingLot();
         ParkingLot parkingLot2 = new ParkingLot();
         parkingLot1.setCapacity(7);
@@ -429,7 +419,6 @@ public class ParkingLotTest {
 
     @Test
     public void gienVehicleunParked_ShouldReturn_False() {
-        multiLevelParkingLot.setCapacity(2);
         ParkingLot parkingLot1 = new ParkingLot();
         ParkingLot parkingLot2 = new ParkingLot();
         parkingLot1.setCapacity(7);
