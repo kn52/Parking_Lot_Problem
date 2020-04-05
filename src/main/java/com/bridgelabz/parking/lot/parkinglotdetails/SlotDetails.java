@@ -1,6 +1,6 @@
-package com.bridgelabz.parking.lot.details;
+package com.bridgelabz.parking.lot.parkinglotdetails;
 
-import com.bridgelabz.parking.lot.vehicle.Vehicle;
+import com.bridgelabz.parking.lot.vehicledetails.Vehicle;
 
 import java.time.LocalDateTime;
 

@@ -1,10 +1,10 @@
-package com.bridgelabz.parking.lot.strategy;
+package com.bridgelabz.parking.lot.parkingstrategy;
 
-import com.bridgelabz.parking.lot.details.SlotDetails;
-import com.bridgelabz.parking.lot.exception.ParkingLotException;
-import com.bridgelabz.parking.lot.vehicle.IVehicleStrategy;
-import com.bridgelabz.parking.lot.vehicle.Vehicle;
-import com.bridgelabz.parking.lot.vehicle.VehicleType;
+import com.bridgelabz.parking.lot.parkinglotdetails.SlotDetails;
+import com.bridgelabz.parking.lot.parkinglotexception.ParkingLotException;
+import com.bridgelabz.parking.lot.vehicledetails.IVehicleStrategy;
+import com.bridgelabz.parking.lot.vehicledetails.Vehicle;
+import com.bridgelabz.parking.lot.vehicledetails.VehicleType;
 
 import java.util.List;
 

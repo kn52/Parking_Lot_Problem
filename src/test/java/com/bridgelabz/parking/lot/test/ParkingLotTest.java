@@ -1,14 +1,14 @@
 package com.bridgelabz.parking.lot.test;
 
-import com.bridgelabz.parking.lot.details.MultiLevelParkingLot;
-import com.bridgelabz.parking.lot.details.ParkingLot;
-import com.bridgelabz.parking.lot.exception.ParkingLotException;
-import com.bridgelabz.parking.lot.observer.AirportSecurity;
-import com.bridgelabz.parking.lot.observer.ParkingLotOwner;
-import com.bridgelabz.parking.lot.strategy.DriverType;
-import com.bridgelabz.parking.lot.vehicle.Vehicle;
-import com.bridgelabz.parking.lot.vehicle.VehicleDetails;
-import com.bridgelabz.parking.lot.vehicle.VehicleType;
+import com.bridgelabz.parking.lot.parkinglotdetails.MultiLevelParkingLot;
+import com.bridgelabz.parking.lot.parkinglotdetails.ParkingLot;
+import com.bridgelabz.parking.lot.parkinglotexception.ParkingLotException;
+import com.bridgelabz.parking.lot.parkinglotobservers.AirportSecurity;
+import com.bridgelabz.parking.lot.parkinglotobservers.ParkingLotOwner;
+import com.bridgelabz.parking.lot.parkingstrategy.DriverType;
+import com.bridgelabz.parking.lot.vehicledetails.Vehicle;
+import com.bridgelabz.parking.lot.vehicledetails.VehicleDetails;
+import com.bridgelabz.parking.lot.vehicledetails.VehicleType;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,6 +20,7 @@ public class ParkingLotTest {
 
     private ParkingLot parkingLot;
     MultiLevelParkingLot multiLevelParkingLot;
+    Vehicle vehicle0;
     Vehicle vehicle1;
     Vehicle vehicle2;
     Vehicle vehicle3;
@@ -29,7 +30,6 @@ public class ParkingLotTest {
     Vehicle vehicle7;
     Vehicle vehicle8;
     Vehicle vehicle9;
-    Vehicle vehicle10;
 
     @Before
     public void setUp() {
@@ -44,7 +44,7 @@ public class ParkingLotTest {
         vehicle7=new Vehicle("WHITE",VehicleType.SMALL,8064,"BMW");
         vehicle8=new Vehicle("BLUE",VehicleType.SMALL,0011,"BMW");
         vehicle9=new Vehicle("WHITE",VehicleType.LARGE,1079,"BMW");
-        vehicle10=new Vehicle("BLUE",VehicleType.SMALL,7324,"TOYOTA");
+        vehicle0 =new Vehicle("BLUE",VehicleType.SMALL,7324,"TOYOTA");
     }
 
     @Test
@@ -265,7 +265,7 @@ public class ParkingLotTest {
         multiLevelParkingLot.parkVehicle(vehicle7, DriverType.HANDICAP,"asd");
         multiLevelParkingLot.parkVehicle(vehicle8, DriverType.NORMAL,"asd");
         multiLevelParkingLot.parkVehicle(vehicle9, DriverType.HANDICAP,"asd");
-        multiLevelParkingLot.parkVehicle(vehicle10, DriverType.NORMAL,"asd");
+        multiLevelParkingLot.parkVehicle(vehicle0, DriverType.NORMAL,"asd");
         try {
             List<VehicleDetails> list1=parkingLot1.getVehicleDetailsByVehicleModelAndColor("TOYOTA","BLUE");
             List<VehicleDetails> list2=parkingLot2.getVehicleDetailsByVehicleModelAndColor("TOYOTA","BLUE");
@@ -295,7 +295,7 @@ public class ParkingLotTest {
         multiLevelParkingLot.parkVehicle(vehicle7, DriverType.HANDICAP, "asd");
         multiLevelParkingLot.parkVehicle(vehicle8, DriverType.NORMAL, "asd");
         multiLevelParkingLot.parkVehicle(vehicle9, DriverType.HANDICAP, "asd");
-        multiLevelParkingLot.parkVehicle(vehicle10, DriverType.NORMAL, "asd");
+        multiLevelParkingLot.parkVehicle(vehicle0, DriverType.NORMAL, "asd");
         try {
             List<Integer> list1=parkingLot1.getVehicleDetailsByVehicleModel("BMW");
             List<Integer> list2=parkingLot2.getVehicleDetailsByVehicleModel("BMW");
@@ -327,7 +327,7 @@ public class ParkingLotTest {
         multiLevelParkingLot.parkVehicle(vehicle7, DriverType.HANDICAP, "asd");
         multiLevelParkingLot.parkVehicle(vehicle8, DriverType.NORMAL, "asd");
         multiLevelParkingLot.parkVehicle(vehicle9, DriverType.HANDICAP, "asd");
-        multiLevelParkingLot.parkVehicle(vehicle10, DriverType.NORMAL, "asd");
+        multiLevelParkingLot.parkVehicle(vehicle0, DriverType.NORMAL, "asd");
         try {
             int vehicleDetailsSize = 0;
             vehicleDetailsSize = multiLevelParkingLot.getVehicleDetailsByTime(LocalDateTime.now()).size();
@@ -357,7 +357,7 @@ public class ParkingLotTest {
         multiLevelParkingLot.parkVehicle(vehicle7, DriverType.HANDICAP, "asd");
         multiLevelParkingLot.parkVehicle(vehicle8, DriverType.NORMAL, "asd");
         multiLevelParkingLot.parkVehicle(vehicle9, DriverType.HANDICAP, "asd");
-        multiLevelParkingLot.parkVehicle(vehicle10, DriverType.NORMAL, "asd");
+        multiLevelParkingLot.parkVehicle(vehicle0, DriverType.NORMAL, "asd");
         try {
             List<Integer> list1=parkingLot1.getVehicleHandiCapSlotDetails();
             List<Integer> list2=parkingLot1.getVehicleHandiCapSlotDetails();
@@ -389,7 +389,7 @@ public class ParkingLotTest {
         multiLevelParkingLot.parkVehicle(vehicle7, DriverType.HANDICAP, "asd");
         multiLevelParkingLot.parkVehicle(vehicle8, DriverType.NORMAL, "asd");
         multiLevelParkingLot.parkVehicle(vehicle9, DriverType.HANDICAP, "asd");
-        multiLevelParkingLot.parkVehicle(vehicle10, DriverType.NORMAL, "asd");
+        multiLevelParkingLot.parkVehicle(vehicle0, DriverType.NORMAL, "asd");
         try {
             List<Vehicle> vehicleDetails= multiLevelParkingLot.getAllVehicleDetails();
             Assert.assertEquals(1274, vehicleDetails.get(0).getVehiclePlateNumber());
@@ -418,7 +418,7 @@ public class ParkingLotTest {
         multiLevelParkingLot.parkVehicle(vehicle7, DriverType.HANDICAP, "asd");
         multiLevelParkingLot.parkVehicle(vehicle8, DriverType.NORMAL, "asd");
         multiLevelParkingLot.parkVehicle(vehicle9, DriverType.HANDICAP, "asd");
-        multiLevelParkingLot.parkVehicle(vehicle10, DriverType.NORMAL, "asd");
+        multiLevelParkingLot.parkVehicle(vehicle0, DriverType.NORMAL, "asd");
         try {
             boolean isParked=multiLevelParkingLot.unParkVehicle(vehicle6);
             Assert.assertEquals(true,isParked);
@@ -447,7 +447,7 @@ public class ParkingLotTest {
         multiLevelParkingLot.parkVehicle(vehicle7, DriverType.HANDICAP, "asd");
         multiLevelParkingLot.parkVehicle(vehicle8, DriverType.NORMAL, "asd");
         multiLevelParkingLot.parkVehicle(vehicle9, DriverType.HANDICAP, "asd");
-        multiLevelParkingLot.parkVehicle(vehicle10, DriverType.NORMAL, "asd");
+        multiLevelParkingLot.parkVehicle(vehicle0, DriverType.NORMAL, "asd");
         try {
             multiLevelParkingLot.unParkVehicle(vehicle1);
             boolean isParked=multiLevelParkingLot.isVehiclePark(vehicle1);

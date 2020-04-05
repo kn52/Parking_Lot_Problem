@@ -1,9 +1,9 @@
-package com.bridgelabz.parking.lot.details;
+package com.bridgelabz.parking.lot.parkinglotdetails;
 
-import com.bridgelabz.parking.lot.exception.ParkingLotException;
-import com.bridgelabz.parking.lot.strategy.DriverType;
-import com.bridgelabz.parking.lot.vehicle.Vehicle;
-import com.bridgelabz.parking.lot.vehicle.VehicleDetails;
+import com.bridgelabz.parking.lot.parkinglotexception.ParkingLotException;
+import com.bridgelabz.parking.lot.parkingstrategy.DriverType;
+import com.bridgelabz.parking.lot.vehicledetails.Vehicle;
+import com.bridgelabz.parking.lot.vehicledetails.VehicleDetails;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

@@ -1,11 +1,11 @@
 package com.bridgelabz.parking.lot.test;
 
-import com.bridgelabz.parking.lot.strategy.DriverType;
-import com.bridgelabz.parking.lot.details.ParkingLot;
-import com.bridgelabz.parking.lot.details.SlotDetails;
-import com.bridgelabz.parking.lot.details.MultiLevelParkingLot;
-import com.bridgelabz.parking.lot.vehicle.Vehicle;
-import com.bridgelabz.parking.lot.vehicle.VehicleType;
+import com.bridgelabz.parking.lot.parkingstrategy.DriverType;
+import com.bridgelabz.parking.lot.parkinglotdetails.ParkingLot;
+import com.bridgelabz.parking.lot.parkinglotdetails.SlotDetails;
+import com.bridgelabz.parking.lot.parkinglotdetails.MultiLevelParkingLot;
+import com.bridgelabz.parking.lot.vehicledetails.Vehicle;
+import com.bridgelabz.parking.lot.vehicledetails.VehicleType;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

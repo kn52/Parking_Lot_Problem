@@ -1,7 +1,7 @@
-package com.bridgelabz.parking.lot.vehicle;
+package com.bridgelabz.parking.lot.vehicledetails;
 
-import com.bridgelabz.parking.lot.details.SlotDetails;
-import com.bridgelabz.parking.lot.exception.ParkingLotException;
+import com.bridgelabz.parking.lot.parkinglotdetails.SlotDetails;
+import com.bridgelabz.parking.lot.parkinglotexception.ParkingLotException;
 
 import java.util.ArrayList;
 import java.util.List;

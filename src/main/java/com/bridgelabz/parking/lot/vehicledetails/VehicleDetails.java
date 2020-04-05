@@ -1,4 +1,4 @@
-package com.bridgelabz.parking.lot.vehicle;
+package com.bridgelabz.parking.lot.vehicledetails;
 
 public class VehicleDetails {
     private int vehicleSlot;

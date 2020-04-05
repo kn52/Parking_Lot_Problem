@@ -1,6 +1,6 @@
-package com.bridgelabz.parking.lot.strategy;
+package com.bridgelabz.parking.lot.parkingstrategy;
 
-import com.bridgelabz.parking.lot.details.ParkingLot;
+import com.bridgelabz.parking.lot.parkinglotdetails.ParkingLot;
 
 import java.util.List;
 

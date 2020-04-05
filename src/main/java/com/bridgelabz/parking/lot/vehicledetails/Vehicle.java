@@ -1,6 +1,4 @@
-package com.bridgelabz.parking.lot.vehicle;
-
-import java.util.Objects;
+package com.bridgelabz.parking.lot.vehicledetails;
 
 public class Vehicle {
     private String VehicleColor;
