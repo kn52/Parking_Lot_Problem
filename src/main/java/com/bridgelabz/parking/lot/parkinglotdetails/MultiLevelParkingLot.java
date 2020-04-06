@@ -1,6 +1,7 @@
 package com.bridgelabz.parking.lot.parkinglotdetails;
 
 import com.bridgelabz.parking.lot.parkinglotexception.ParkingLotException;
+import com.bridgelabz.parking.lot.parkinglotobservers.ParkingLotInformer;
 import com.bridgelabz.parking.lot.parkingstrategy.DriverType;
 import com.bridgelabz.parking.lot.vehicledetails.IPredicate;
 import com.bridgelabz.parking.lot.vehicledetails.Vehicle;
@@ -40,7 +41,10 @@ public class MultiLevelParkingLot {
     }
 
     private ParkingLot getParkingLot(DriverType driverType) {
-        return driverType.getParkingStrategy().getParkingLot(this.parkingLots);
+        ParkingLot lot= driverType.getParkingLot(this.parkingLots);
+        if(lot == null)
+            new ParkingLotInformer().InformObserversNoEmptySlotsAvailable();
+        return lot;
     }
 
     public boolean isVehiclePark(Vehicle vehicle) {
@@ -79,9 +83,9 @@ public class MultiLevelParkingLot {
         return vehicleDetail;
     }
 
-    public List<List<Integer>> getVehicleSlotDetails(IPredicate ...vehicleColor) {
+    public List<List<Integer>> getVehicleSlotDetails(IPredicate... pre) {
         List<List<Integer>> vehicleDetail=new ArrayList<>();
-        this.parkingLots.stream().forEach(lots->vehicleDetail.add(lots.getSlotDetails(vehicleColor)));
+        this.parkingLots.stream().forEach(lots->vehicleDetail.add(lots.getSlotDetails(pre)));
         return vehicleDetail;
     }
 }

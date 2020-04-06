@@ -7,4 +7,5 @@ import java.util.List;
 public interface IParkingStrategy {
     ParkingLot getParkingLot(List<ParkingLot> parkingLots);
     int getVehicleSlot(List<Integer> emptySlotList);
+
 }

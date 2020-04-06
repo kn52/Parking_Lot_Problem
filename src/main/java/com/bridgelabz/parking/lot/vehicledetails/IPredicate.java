@@ -3,5 +3,5 @@ import com.bridgelabz.parking.lot.parkinglotdetails.SlotDetails;
 
 import java.util.function.Predicate;
 public interface IPredicate {
-    Predicate<SlotDetails> getPredicate();
+    Predicate<SlotDetails> getPredicate(IPredicate ipredicate);
 }

@@ -8,7 +8,6 @@ import com.bridgelabz.parking.lot.parkingstrategy.DriverType;
 import com.bridgelabz.parking.lot.parkingstrategy.ParkingLotStrategy;
 import com.bridgelabz.parking.lot.vehicledetails.IPredicate;
 import com.bridgelabz.parking.lot.vehicledetails.Vehicle;
-import com.bridgelabz.parking.lot.vehicledetails.VehicleColor;
 import com.bridgelabz.parking.lot.vehicledetails.VehicleDetails;
 
 import java.time.LocalDateTime;
@@ -90,8 +89,6 @@ public class ParkingLot {
     }
 
     public int getEmptySlots() {
-        if((this.PARKING_LOT_SIZE-this.noOfFullSlots)==0)
-            observers.InformObserversNoEmptySlotsAvailable();
         return this.PARKING_LOT_SIZE-this.noOfFullSlots;
     }
 
@@ -108,11 +105,9 @@ public class ParkingLot {
     }
 
     public List<SlotDetails> getVehicleDetailsBy(IPredicate... ipredicates) {
-        Predicate<SlotDetails> predicate = ipredicates[0].getPredicate();
-        if (ipredicates.length>1) {
-            for(int i=1;i<ipredicates.length;i++)
-                predicate = predicate.and(ipredicates[i].getPredicate());
-        }
+        Predicate<SlotDetails> predicate = ipredicates[0].getPredicate(ipredicates[0]);
+        IntStream.range(1,ipredicates.length)
+                    .forEach(p-> predicate.or(ipredicates[p].getPredicate(ipredicates[p])));
         List<SlotDetails> slotsList = new ArrayList<>();
         this.parkingLotList.stream()
                 .filter(slot->slot.getVehicle() != null)

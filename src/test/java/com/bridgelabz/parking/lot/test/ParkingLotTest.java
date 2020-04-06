@@ -140,7 +140,7 @@ public class ParkingLotTest {
         parkingLot.parkVehicle(vehicle1,DriverType.NORMAL,"asd");
         try {
             int slotNumber= parkingLot.getSlotNumberByVehicle(vehicle1);
-            Assert.assertEquals(1,slotNumber);
+            Assert.assertEquals(0,slotNumber);
         } catch (ParkingLotException e) { e.printStackTrace();  }
     }
 
@@ -349,11 +349,9 @@ public class ParkingLotTest {
         multiLevelParkingLot.parkVehicle(vehicle9, DriverType.HANDICAP, "asd");
         multiLevelParkingLot.parkVehicle(vehicle0, DriverType.NORMAL, "asd");
         try {
-            List<Integer> list1=parkingLot1.getSlotDetails(VehicleDriver.HANDICAP_SMALL);
-            List<Integer> list2=parkingLot2.getSlotDetails(VehicleDriver.HANDICAP_SMALL);
-            System.out.println(list1);
-            System.out.println(list2);
-            List<List<Integer>> vehicleDetails = multiLevelParkingLot.getVehicleSlotDetails(VehicleDriver.HANDICAP_SMALL);
+            List<Integer> list1=parkingLot1.getSlotDetails(DriverType.HANDICAP,VehicleType.SMALL);
+            List<Integer> list2=parkingLot2.getSlotDetails(DriverType.HANDICAP,VehicleType.SMALL);
+            List<List<Integer>> vehicleDetails = multiLevelParkingLot.getVehicleSlotDetails(DriverType.HANDICAP,VehicleType.SMALL);
             Assert.assertEquals(list1, vehicleDetails.get(0));
             Assert.assertEquals(list2, vehicleDetails.get(1));
         } catch (ParkingLotException e) {
@@ -382,8 +380,8 @@ public class ParkingLotTest {
         multiLevelParkingLot.parkVehicle(vehicle9, DriverType.HANDICAP, "asd");
         multiLevelParkingLot.parkVehicle(vehicle0, DriverType.NORMAL, "asd");
         try {
-            List<VehicleDetails> vehicleDetails= multiLevelParkingLot.getVehicleDetails(VehicleModel.OTHER);
-            Assert.assertEquals(1274, vehicleDetails.get(0).getVehiclePlateNumber());
+            List<VehicleDetails> vehicleDetails = multiLevelParkingLot.getVehicleDetails(VehicleModel.TOYOTA,VehicleModel.BMW);
+            Assert.assertEquals(9769, vehicleDetails.get(0).getVehiclePlateNumber());
         } catch (ParkingLotException e) {
             e.printStackTrace();
         }
